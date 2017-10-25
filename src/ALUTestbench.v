@@ -133,11 +133,73 @@ module ALUTestbench();
             #1;
             checkOutput(opcode, funct, add_rshift_type);
 
-        end
+	end
         ///////////////////////////////
         // Hard coded tests go here
         ///////////////////////////////
 
+        // R-type hard-coded tests
+
+       // AND function
+       opcode = `OPC_ARI_RTYPE;
+       funct = FNC_AND;
+       A = 4'hFFFE;
+       B = 4'h0001;
+       REFout = 4'h0000;
+       add_rshift_type = 1'b0;
+       #1;
+       checkOutput(opcode, funct, add_rshift_type);
+
+       // OR function
+       opcode = `OPC_ARI_RTYPE;
+       funct = FNC_OR;
+       A = 4'hFFFF;
+       B = 4'h7641;
+       REFout = 4'hFFFF;
+       add_rshift_type = 1'b0;
+       #1;
+       checkOutput(opcode, funct, add_rshift_type);
+
+       // XOR function
+       opcode = `OPC_ARI_RTYPE;
+       funct = FNC_XOR;
+       A = 4'hFFFF;
+       B = 4'hE5C1;
+       REFout = 4'h1C5E;
+       add_rshift_type = 1'b0;
+       #1;
+       checkOutput(opcode, funct, add_rshift_type);
+
+       // SLL function
+       opcode = `OPC_ARI_RTYPE;
+       funct = FNC_SLL;
+       A = 4'hFFFF;
+       B = 4'h0001;
+       REFout = 4'hFFFE;
+       add_rshift_type = 1'b0;
+       #1;
+       checkOutput(opcode, funct, add_rshift_type);
+
+       // SLT function
+       opcode = `OPC_ARI_RTYPE;
+       funct = FNC_SLT;
+       A = 4'h0FFF;
+       B = 4'h00FF;
+       REFout = 4'h0000;
+       add_rshift_type = 1'b0;
+       #1;
+       checkOutput(opcode, funct, add_rshift_type);
+
+       // SLTU function
+       opcode = `OPC_ARI_RTYPE;
+       funct = FNC_SLTU;
+       A = 4'hFFFF;
+       B = 4'h0000;
+       REFout = 4'h0000;
+       add_rshift_type = 1'b0;
+       #1;
+       checkOutput(opcode, funct, add_rshift_type);
+       
         $display("\n\nALL TESTS PASSED!");
         $vcdplusoff;
         $finish();
