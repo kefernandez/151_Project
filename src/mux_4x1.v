@@ -10,3 +10,4 @@ module mux_4x1(
       else if (sel ==2'b10) Out <= C;
       else Out <= D;
    end
+endmodule

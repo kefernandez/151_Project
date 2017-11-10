@@ -10,3 +10,4 @@ module mux_2x1(
       if(sel) Out <= B;
       else Out <= A;
    end
+endmodule
