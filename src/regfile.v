@@ -105,7 +105,7 @@ module regfile(input clk,
 	       assign
 
 	       // set x0 output to zero always
-	       x0_out = 32'h0000;
+	       x0_out = 4'h0000;
 	       
 	       // Register 1 output
 	       case (RAddr1_RF)

@@ -1,16 +1,16 @@
 module control (input clk,
 		
-		/////////
-		// Inputs
-		/////////
+		//////////////
+		// Input ports
+		//////////////
 
 		input [6:0] last_opcode,
 		input [2:0] last_funct3,
 		input take_branch, // this input signal is delayed by one cycle
 
-		//////////
-		// Outputs
-		//////////
+		///////////////
+		// Output ports
+		///////////////
 
 		output PC_Mux,
 		output WrEn_RF,
@@ -31,9 +31,9 @@ module control (input clk,
                 reg [6:0] opcode;
    		reg [2:0] funct3;
 		
-		////////////////
-		// Control logic
-		////////////////
+		/////////////////
+		// Internal logic
+		/////////////////
 
        		// delay incoming opcode and funct3 blocks to match take_branch
 		always @ (posedge clk) begin
