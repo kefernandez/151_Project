@@ -1,13 +1,12 @@
-module control (
+module control (input clk,
+		
 		/////////
 		// Inputs
 		/////////
-		
-		input [6:0] opcode,
-		input [2:0] funct3,
-		//input [6:0] funct7,  // this is only needed if ALU control is implemented here
-		input [31:0] ALU_result,
-		input equal,
+
+		input [6:0] last_opcode,
+		input [2:0] last_funct3,
+		input take_branch, // this input signal is delayed by one cycle
 
 		//////////
 		// Outputs
@@ -23,12 +22,29 @@ module control (
 		output [1:0] RByteEn_DM,
 		output [1:0] WByteEn_DM,
 		output [1:0] DM_Mux,
-		output SE2_Ctrl
+		output SE2_Ctrl)
 
+		//////////////////
+		// Internal wiring
+		//////////////////
+                
+                reg [6:0] opcode;
+   		reg [2:0] funct3;
+		
+		////////////////
+		// Control logic
+		////////////////
+
+       		// delay incoming opcode and funct3 blocks to match take_branch
+		always @ (posedge clk) begin
+		   opcode <= last_opcode;
+		   funct3 <= last_funct3;
+		end
+		
 		assign
 
 		// PC mux control
-		PC_mux = ( opcode == 7'b0010111 || opcode[6:4] == 3'b110 ); // this needs to incorporate ALU_result and equal for branching decision
+		PC_mux = ( opcode == 7'b0010111 || opcode == 7'b110x111 || ( opcode == 7'b1100011 && take_branch ) );
 		// Register file write enable
 		WrEn_RF = ( opcode != 7'b1100011 && opcode != 7'b0100011 );
 		// Data cache write enable
