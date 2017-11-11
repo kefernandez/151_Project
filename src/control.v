@@ -58,6 +58,7 @@ module control (input clk,
 		     0: assign WByteEn_DM = 4'b0001;
 		     1: assign WByteEn_DM = 4'b0011;
 		     2: assign WByteEn_DM = 4'b1111;
+		   endcase
 		end
 		// Write Data mux control
 		opcode == 7'b0110111 ? assign WD_Mux[0] = 1'b1 : assign WD_Mux[0] = 1'b0;

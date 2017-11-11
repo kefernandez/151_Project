@@ -140,6 +140,7 @@ module regfile(input clk,
 	       29: assign RD1_RF = x29_out;
 	       30: assign RD1_RF = x30_out;
 	       31: assign RD1_RF = x31_out;
+	       endcase
 
 	       // Register 2 output
 	       case (RAddr2_RF)
@@ -175,6 +176,7 @@ module regfile(input clk,
 	       29: assign RD2_RF = x29_out;
 	       30: assign RD2_RF = x30_out;
 	       31: assign RD2_RF = x31_out;
+	       endcase
 
 	       // Register inputs
 	       always @ (posedge clk) begin
