@@ -21,7 +21,7 @@ module control (input clk,
 		output [1:0] RByteEn_DM,
 		output [3:0] WByteEn_DM,
 		output [1:0] DM_Mux,
-		output SE2_Ctrl)
+		output SE2_Ctrl);
 
 		//////////////////
 		// Internal wiring
