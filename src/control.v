@@ -18,9 +18,8 @@ module control (input clk,
 		output [1:0] ALU_Mux,
 		output [1:0] Branch_Mux,
 		output CSRW_Mux,
-		output WrEn_DM,
 		output [1:0] RByteEn_DM,
-		output [1:0] WByteEn_DM,
+		output [3:0] WByteEn_DM,
 		output [1:0] DM_Mux,
 		output SE2_Ctrl)
 
@@ -47,8 +46,6 @@ module control (input clk,
 		PC_mux = ( opcode == 7'b0010111 || opcode == 7'b110x111 || ( opcode == 7'b1100011 && take_branch ) );
 		// Register file write enable
 		WrEn_RF = ( opcode != 7'b1100011 && opcode != 7'b0100011 );
-		// Data cache write enable
-		WrEn_DM = ( opcode == 7'b0100011 );
 		// CSRW/I instruction mux control
 		CSRW_Mux = ( opcode == 7'b1110011 && funct3[2] == 1'b1 );
 		// Sign extension 2 control
@@ -56,7 +53,12 @@ module control (input clk,
 		// Read byte enable data cache control
 		RByteEn_DM = funct3[1:0];
 		// Write byte enable data cache control
-		WByteEn_DM = funct3[1:0];
+   		if ( opcode == 7'b0100011 ) begin
+		   case (funct3)
+		     0: WByteEn_DM = 4'b0001;
+		     1: WByteEn_DM = 4'b0011;
+		     2: WByteEn_DM = 4'b1111;
+		end
 		// Write Data mux control
 		opcode == 7'b0110111 ? WD_Mux[0] = 1'b1 : WD_Mux[0] = 1'b0;
 		opcode == 7'b0010111 ? WD_Mux[1] = 1'b1 : WD_Mux[1] = 1'b0;
