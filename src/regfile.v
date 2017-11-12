@@ -178,40 +178,40 @@ module regfile(input clk,
 	       31: RD2_RF = x31_out;
 	       endcase
 
-	       // Register inputs
-	      // always @ (posedge clk) begin
-	       //(WrEn & WAddr == 0) ? x0_in = WD_RF : x0_in = x0_out; // this line seems unnecessary
-	       (WrEn & WAddr == 1) ? x1_in = WD_RF : x1_in <= x1_out;
-	       (WrEn & WAddr == 2) ? x2_in = WD_RF : x2_in <= x2_out;
-	       (WrEn & WAddr == 3) ? x3_in = WD_RF : x3_in <= x3_out;
-	       (WrEn & WAddr == 4) ? x4_in = WD_RF : x4_in <= x4_out;
-	       (WrEn & WAddr == 5) ? x5_in = WD_RF : x5_in <= x5_out;
-	       (WrEn & WAddr == 6) ? x6_in = WD_RF : x6_in <= x6_out;
-	       (WrEn & WAddr == 7) ? x7_in = WD_RF : x7_in <= x7_out;
-	       (WrEn & WAddr == 8) ? x8_in = WD_RF : x8_in <= x8_out;
-	       (WrEn & WAddr == 9) ? x9_in = WD_RF : x9_in <= x9_out;
-	       (WrEn & WAddr == 10) ? x10_in = WD_RF : x10_in <= x10_out;
-	       (WrEn & WAddr == 11) ? x11_in = WD_RF : x11_in <= x11_out;
-	       (WrEn & WAddr == 12) ? x12_in = WD_RF : x12_in <= x12_out;
-	       (WrEn & WAddr == 13) ? x13_in = WD_RF : x13_in <= x13_out;
-	       (WrEn & WAddr == 14) ? x14_in = WD_RF : x14_in <= x14_out;
-	       (WrEn & WAddr == 15) ? x15_in = WD_RF : x15_in <= x15_out;
-	       (WrEn & WAddr == 16) ? x16_in = WD_RF : x16_in <= x16_out;
-	       (WrEn & WAddr == 17) ? x17_in = WD_RF : x17_in <= x17_out;
-	       (WrEn & WAddr == 18) ? x18_in = WD_RF : x18_in <= x18_out;
-	       (WrEn & WAddr == 19) ? x19_in = WD_RF : x19_in <= x19_out;
-	       (WrEn & WAddr == 20) ? x20_in = WD_RF : x20_in <= x20_out;
-	       (WrEn & WAddr == 21) ? x21_in = WD_RF : x21_in <= x21_out;
-	       (WrEn & WAddr == 22) ? x22_in = WD_RF : x22_in <= x22_out;
-	       (WrEn & WAddr == 23) ? x23_in = WD_RF : x23_in <= x23_out;
-	       (WrEn & WAddr == 24) ? x24_in = WD_RF : x24_in <= x24_out;
-	       (WrEn & WAddr == 25) ? x25_in = WD_RF : x25_in <= x25_out;
-	       (WrEn & WAddr == 26) ? x26_in = WD_RF : x26_in <= x26_out;
-	       (WrEn & WAddr == 27) ? x27_in = WD_RF : x27_in <= x27_out;
-	       (WrEn & WAddr == 28) ? x28_in = WD_RF : x28_in <= x28_out;
-	       (WrEn & WAddr == 29) ? x29_in = WD_RF : x29_in <= x29_out;
-	       (WrEn & WAddr == 30) ? x30_in = WD_RF : x30_in <= x30_out;
-	       (WrEn & WAddr == 31) ? x31_in = WD_RF : x31_in <= x31_out;
+		// Register inputs
+		// always @ (posedge clk) begin
+		//(WrEn_RF & WAddr_RF == 0) ? x0_in = WD_RF : x0_in = x0_out; // this line seems unnecessary
+	       (WrEn_RF && WAddr_RF == 1) ? x1_in = WD_RF : x1_in <= x1_out;
+	       (WrEn_RF && WAddr_RF == 2) ? x2_in = WD_RF : x2_in <= x2_out;
+	       (WrEn_RF && WAddr_RF == 3) ? x3_in = WD_RF : x3_in <= x3_out;
+	       (WrEn_RF && WAddr_RF == 4) ? x4_in = WD_RF : x4_in <= x4_out;
+	       (WrEn_RF && WAddr_RF == 5) ? x5_in = WD_RF : x5_in <= x5_out;
+	       (WrEn_RF && WAddr_RF == 6) ? x6_in = WD_RF : x6_in <= x6_out;
+	       (WrEn_RF && WAddr_RF == 7) ? x7_in = WD_RF : x7_in <= x7_out;
+	       (WrEn_RF && WAddr_RF == 8) ? x8_in = WD_RF : x8_in <= x8_out;
+	       (WrEn_RF && WAddr_RF == 9) ? x9_in = WD_RF : x9_in <= x9_out;
+	       (WrEn_RF && WAddr_RF == 10) ? x10_in = WD_RF : x10_in <= x10_out;
+	       (WrEn_RF && WAddr_RF == 11) ? x11_in = WD_RF : x11_in <= x11_out;
+	       (WrEn_RF && WAddr_RF == 12) ? x12_in = WD_RF : x12_in <= x12_out;
+	       (WrEn_RF && WAddr_RF == 13) ? x13_in = WD_RF : x13_in <= x13_out;
+	       (WrEn_RF && WAddr_RF == 14) ? x14_in = WD_RF : x14_in <= x14_out;
+	       (WrEn_RF && WAddr_RF == 15) ? x15_in = WD_RF : x15_in <= x15_out;
+	       (WrEn_RF && WAddr_RF == 16) ? x16_in = WD_RF : x16_in <= x16_out;
+	       (WrEn_RF && WAddr_RF == 17) ? x17_in = WD_RF : x17_in <= x17_out;
+	       (WrEn_RF && WAddr_RF == 18) ? x18_in = WD_RF : x18_in <= x18_out;
+	       (WrEn_RF && WAddr_RF == 19) ? x19_in = WD_RF : x19_in <= x19_out;
+	       (WrEn_RF && WAddr_RF == 20) ? x20_in = WD_RF : x20_in <= x20_out;
+	       (WrEn_RF && WAddr_RF == 21) ? x21_in = WD_RF : x21_in <= x21_out;
+	       (WrEn_RF && WAddr_RF == 22) ? x22_in = WD_RF : x22_in <= x22_out;
+	       (WrEn_RF && WAddr_RF == 23) ? x23_in = WD_RF : x23_in <= x23_out;
+	       (WrEn_RF && WAddr_RF == 24) ? x24_in = WD_RF : x24_in <= x24_out;
+	       (WrEn_RF && WAddr_RF == 25) ? x25_in = WD_RF : x25_in <= x25_out;
+	       (WrEn_RF && WAddr_RF == 26) ? x26_in = WD_RF : x26_in <= x26_out;
+	       (WrEn_RF && WAddr_RF == 27) ? x27_in = WD_RF : x27_in <= x27_out;
+	       (WrEn_RF && WAddr_RF == 28) ? x28_in = WD_RF : x28_in <= x28_out;
+	       (WrEn_RF && WAddr_RF == 29) ? x29_in = WD_RF : x29_in <= x29_out;
+	       (WrEn_RF && WAddr_RF == 30) ? x30_in = WD_RF : x30_in <= x30_out;
+	       (WrEn_RF && WAddr_RF == 31) ? x31_in = WD_RF : x31_in <= x31_out;
 	       end
 	       
 endmodule
