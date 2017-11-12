@@ -20,8 +20,8 @@ module regfile(input clk,
 	       ///////////////
 
 	       // Output data
-	       output [31:0] RD1_RF,
-	       output [31:0] RD2_RF);
+	       output reg [31:0] RD1_RF,
+	       output reg [31:0] RD2_RF);
 
 	       //////////////////
 	       // Internal wiring

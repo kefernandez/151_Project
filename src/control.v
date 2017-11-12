@@ -57,6 +57,8 @@ module control (input clk,
 		   ( opcode == 7'b1100111 || opcode == 7'b0000011 || opcode == 7'b1101111 ) ? Branch_Mux[1] <= 1'b1 : Branch_Mux[1] <= 1'b0;*/
 
 		   // Update parameters
+
+		   
 		   WD_0 <= ( opcode == 7'b0110111 );
 		   WD_1 <= ( opcode == 7'b0010111 );
 

@@ -19,64 +19,55 @@ module Riscv141(
    //PC related wires
    wire [31:0] PC, PCplus4_ID;
    wire [31:0] PC_imm, PCplus4_imm_prime_EX;
-   wire [31:0]  PCprime, PCplus4_EX, PCplus4_imm_WB;//reg 	       
+   reg [31:0]  PCprime, PCplus4_EX, PCplus4_imm_WB; 	       
   	       
    //Reg file related wires
-   wire [4:0] RAddr1_ID, RAddr2_ID, WAddr_ID;
+   wire [31:0] RAddr1_ID, RAddr2_ID, WAddr_ID;
    //coming from IM cache - need assign statements
    wire [31:0] write_data_reg_EX, RF_data1_ID, RF_data2_ID;
    //to and from reg file
-   wire [31:0]  RF_data1_EX, RF_data2_EX, RAddr2_EX, write_data_reg_ID; //reg
+   reg [31:0]  RF_data1_EX, RF_data2_EX, RAddr2_EX, write_data_reg_ID;
    
    
 
 
    //csrw wires
    wire [4:0]  csrwi_imm_ID;
-   wire [4:0] csrwi_imm_EX; //reg
+   reg [4:0] csrwi_imm_EX;
    wire [31:0] csrwi_zimm, csrw_result;
-   wire [31:0] tohost;//reg
+   reg [31:0] tohost;
 
  
    //Immediate related wires
-   wire [31:0] SE_imm_br_str;
-   wire [11:0] SE_imm_br_str_piped, SE_imm_load_JALR;
-   wire [19:0] SE_imm_JAL, ZE_imm_LUI_AUI;   
+   wire [31:0] ZE_imm_LUI_AUI, SE_imm_load_JALR, SE_imm_br_str, SE_imm_br_str_piped, SE_imm_JAL;   
    wire [31:0] ZE_data_ID, immediate_load_SE_ID, immediate_branch_store_SE_ID, JAL_SE_ID;
-   wire [31:0] ZE_data_EX, immediate_load_SE_EX, JAL_SE_EX; //reg
+   reg [31:0]  ZE_data_EX, immediate_load_SE_EX, JAL_SE_EX;
    wire [31:0] immediate_branch_store_SE_EX;
    wire [31:0] branch_store_shift,JAL_SE_EX_shift;
      
 	          
    //ALU wires
    wire [31:0] ALU_src2, ALU_result, ALU_res_zLSB;
-   wire [3:0]  ALUop;
-   wire [6:0]  opcode_ID, opcode_EX;
-   wire [2:0]  funct_ID, funct_EX;
-   wire add_rshift_type_ID, add_rshift_type_EX;
-   
+  
    
    //DM wires
-   wire [31:0] DM_data, DM_data_SM,DM_data_ZE, DM_ALU_data_WB, DM_ALU_data_WB;
-   wire [31:0]  DM_write, DM_ALU_data_EX; //reg	        	       
+   wire [31:0] DM_data, DM_data_SM, DM_data_ZM, DM_ALU_data_WB, DM_ALU_data_WB;
+   reg [31:0]  DM_write, DM_ALU_data_EX;	        	       
 	       
    //controls
    wire [6:0]  last_opcode;
-   wire [2:0]  last_funct3;
-   wire  add_rshift_type;
+   wire [2:0]  last_funct3; 
    wire take_branch;
    wire PC_Mux_EX, WrEn_RF_EX;
-   wire [1:0] WD_Mux_EX, ALU_Mux_EX, Branch_Mux_EX; //wire
+   reg [1:0] WD_Mux_EX, ALU_Mux_EX, Branch_Mux_EX;
    wire CSRW_Mux_EX, WrEn_DM_EX, SE2_Ctrl_EX;
-   wire [1:0] RByteEn_DM_EX, DM_Mux_EX;
-   wire [3:0] WByteEn_DM_EX;
+   wire [1:0] RByteEn_DM_EX, WByteEn_DM_EX, DM_Mux_EX;
    
-   wire WrEn_RF_WB; //reg
-   wire [1:0] WD_Mux_WB, RByteEn_DM_WB, DM_Mux_WB; //reg
-   wire [3:0] WByteEn_DM_WB; //reg
-   wire WrEn_DM_WB; //reg
+   reg WrEn_RF_WB;
+   reg [1:0] WD_Mux_WB, RByteEn_DM_WB, WByteEn_DM_WB, DM_Mux_WB;
+   reg WrEn_DM_WB;
   
-   wire PC_Mux_IDplus1;      //reg
+   wire PC_Mux_IDplus1;      
 	  
    wire [0:0] datapath_contents;
    wire [0:0]  dpath_controls_i;
@@ -84,8 +75,8 @@ module Riscv141(
    wire [0:0]  hazard_controls;
 
    assign dcache_we =  WByteEn_DM_WB;
-   assign dcache_re = 1'b1;
-   assign  icache_re = 1'b1;
+   assign dcache_re = 1;
+   assign  icache_re = 1;
    
    assign last_opcode = icache_dout[6:0];
    assign last_funct3 = icache_dout[14:12]; 
@@ -93,7 +84,7 @@ module Riscv141(
 
 
    //PC assignments
-   assign icache_addr = PC;
+   assign i_cache_addr = PC;
 
    
    //Reg file assignments
@@ -108,7 +99,7 @@ module Riscv141(
 
    //immediate assignments
    assign ZE_imm_LUI_AUI = icache_dout[31:12];
-   assign SE_imm_load_JALR = icache_dout[31:20];
+   assign SE_imm_Load_JALR = icache_dout[31:20];
    assign SE_imm_br_str = {icache_dout[31:25],icache_dout[11:7]};
    assign SE_imm_JAL = {icache_dout[31],icache_dout[19:12],icache_dout[20],icache_dout[30:21]};
    //shifted immediate assignments 
@@ -118,11 +109,7 @@ module Riscv141(
    //ALU assignments
    assign ALU_res_zLSB = {ALU_result[31:1],1'b0};
    assign dcache_addr = ALU_result;
-   assign add_rshift_type = dcache_dout[30];
-   assign opcode_ID = icache_dout[6:0];
-   assign funct_ID = icache_dout[14:12];
-   assign add_rshift_type_ID = icache_dout[30];
-   
+
    //DM Assignments
    assign dcache_din = DM_write;
    assign DM_data = dcache_dout;
@@ -165,7 +152,7 @@ module Riscv141(
 
    //2
    sum PC_sum(
-	.in0(PCprime),
+	.in0(PC_prime),
 	.in1(32'b100),
 	.out(PCplus4_ID)
     );
@@ -179,13 +166,13 @@ module Riscv141(
    //4
    sign_extender_load_JALR SE_load_JALR(
         .SE1_in(SE_imm_load_JALR),
-        .SE1_out(immediate_load_SE_ID)
+        .SE1_out(immediate_load_ID)
     );
 
    //5
    sign_extender_br_str SE_branch_store(
         .SE2_in(SE_imm_br_str_piped),
-        .SE2_out(immediate_branch_store_SE_EX),
+        .SE2_out(immediate_branch_store_ID),
 	.SE2_ctrl(SE2_Ctrl_EX)      
     );
    
@@ -209,7 +196,7 @@ module Riscv141(
    mux_3x1 WD_mux(     
 	.in0(DM_ALU_data_EX),
 	.in1(ZE_data_EX),
-        .in2(PCplus4_imm_WB),
+        .in2(PCplus4_imm_EX),
         .sel(WD_Mux_WB),
         .out(write_data_reg_EX)
     ); 
@@ -280,9 +267,9 @@ module Riscv141(
 
    //17
    ALUdec ALUdec1(
-	.opcode(last_opcode), //problem?
-        .funct(last_funct3), //problem?
-	.add_rshift_type(add_rshift_type), //problem?
+	.opcode(opcode),
+        .funct(funct),
+	.add_rshift_type(add_rshift_type),
 	.ALUop(ALUop)
     );
 
@@ -357,13 +344,7 @@ module Riscv141(
 		      .RByteEn_DM_WB(RByteEn_DM_WB),
 		      .WByteEn_DM_WB(WByteEn_DM_WB), 
 		      .DM_Mux_WB(DM_Mux_WB),
-		      .PC_Mux_IDplus1(PC_Mux_IDplus1),
-		      .opcode_EX(opcode_EX),
-		      .opcode_ID(opcode_ID),
-		      .funct_EX(funct_EX),
-		      .funct_ID(funct_ID),
-		      .add_rshift_type_EX(add_rshift_type_EX),
-		      .add_rshift_type_ID(add_rshift_type_ID)
+		      .PC_Mux_IDplus1(PC_Mux_IDplus1)		      
      );
    
 		  

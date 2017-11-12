@@ -1,0 +1,653 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<opml version="1.0">
+	<head>
+		<title>VCS dump file for DVE debugging</title>
+		<vcsVersion>G-2012.09_Full64</vcsVersion>
+		<dateCreated>Fri Oct 27 11:30:10 2017</dateCreated>
+	</head>
+	<body>
+		<!-- VCS compile options -->
+		<vcsCompileOptions text="/share/instsww/synopsys/G-2012.09/amd64/bin/vcs1 -Mcc=gcc -Mcplusplus=g++ -Masflags= -Mcfl= -pipe -O -I/share/instsww/synopsys/G-2012.09/include  -Mldflags= -Wl,-E  -Mout=simv-alu-vlsi -Mamsrun= -Mvcsaceobjs= -Mobjects= /share/instsww/synopsys/G-2012.09/amd64/lib/libvirsim.so /share/instsww/synopsys/G-2012.09/amd64/lib/liberrorinf.so /share/instsww/synopsys/G-2012.09/amd64/lib/libsnpsmalloc.so  -Msaverestoreobj=/share/instsww/synopsys/G-2012.09/amd64/lib/vcs_save_restore_new.o -Mcrt0= -Mcrtn= -Mcsrc= -Msyslibs=-ldl -lm  -full64 -Xnotice -line +lint=all,noVCDE,noONGS,noUI +warn=noTMR -error=PCWM-L -timescale=1ns/10ps -q +v2k +vcs+lic+wait +vcs+initreg+0 +vcs+initmem+0 +define+no_cache_mem -top rocketTestHarness -Xcbug=0x1 +define+INPUT_DELAY=0.24 +define+CLOCK_PERIOD=1.6 -o simv-alu-vlsi -top ALUTestbench -pp_used +vcsd +itf+/share/instsww/synopsys/G-2012.09/amd64/lib/vcsdp.tab +cli+1 -debug=4 +memcbk +rad +vpi -gen_obj +incdir+../src ../src/ALUop.vh ../src/const.vh ../src/Opcode.vh ../src/ALUdec.v ../src/ALUTestbench.v ../src/ALUTestVectorTestbench.v ../src/ALU.v ../src/backup_mem.v ../src/Cache.v ../src/controller.v ../src/datapath.v ../src/Memory141.v ../src/no_cache_mem.v ../src/Riscv141.v ../src/riscv_arbiter.v ../src/riscv_test_harness.v ../src/riscv_top.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/sram.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v "/>
+		<!-- File list for the whole design -->
+		<fileList>
+			<file fid="1" path="/home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v" />
+			<file fid="0" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/Opcode.vh" />
+			<file fid="2" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/const.vh" />
+			<file fid="3" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/ALUTestbench.v" />
+			<file fid="4" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/Riscv141.v" />
+			<file fid="5" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/riscv_arbiter.v" />
+			<file fid="6" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/riscv_top.v" />
+			<file fid="7" path="/home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/sram.v" />
+			<file fid="8" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/ALUTestVectorTestbench.v" />
+			<file fid="9" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/backup_mem.v" />
+			<file fid="10" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/Memory141.v" />
+			<file fid="11" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/riscv_test_harness.v" />
+			<file fid="12" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/ALU.v" />
+			<file fid="13" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/no_cache_mem.v" />
+			<file fid="14" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/ALUdec.v" />
+			<file fid="15" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/datapath.v" />
+			<file fid="16" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/controller.v" />
+			<file fid="17" path="/home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v" />
+			<file fid="18" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/Cache.v" />
+			<file fid="19" path="/home/cc/eecs151/fa17/class/eecs151-aca/project/src/ALUop.vh" />
+		</fileList>
+		<!-- Include file list for the whole design -->
+		<includeFileList>
+			<incfile fid="3" lineno="13" includeID="0" />
+			<incfile fid="12" lineno="13" includeID="0" />
+			<incfile fid="12" lineno="14" includeID="19" />
+			<incfile fid="14" lineno="11" includeID="0" />
+			<incfile fid="14" lineno="12" includeID="19" />
+			<incfile fid="15" lineno="1" includeID="0" />
+			<incfile fid="15" lineno="2" includeID="2" />
+			<incfile fid="16" lineno="1" includeID="0" />
+			<incfile fid="16" lineno="2" includeID="2" />
+		</includeFileList>
+		<!-- Encrypted codes list for the whole design -->
+		<encryptedCodesList>
+		</encryptedCodesList>
+		<!-- Inactive codes list for the whole design -->
+		<inactiveCodesList>
+			<inactiveCodes fid="10" lineno="79:155" />
+			<inactiveCodes fid="11" lineno="113:121 130:130 136:136 151:151 155:175 250:253" />
+		</inactiveCodesList>
+		<!-- Compile options UUM based -->
+		<langKeywords>
+			<v2kFiles fid="0-19" />
+		</langKeywords>
+		<!--  Case insensitive file list -->
+		<caseInsensitiveFiles fid="" />
+		<!-- Macro definition list for the whole design --> 
+		<macroDefinitionList>
+			<macro name="OPC_LUI" module="ALUTestbench" sourceID="3" lineno="100" defID="0" defLine="15" value="1"  vip="false"/>
+			<macro name="OPC_AUIPC" module="ALUTestbench" sourceID="3" lineno="108" defID="0" defLine="16" value="2"  vip="false"/>
+			<macro name="OPC_BRANCH" module="ALUTestbench" sourceID="3" lineno="115" defID="0" defLine="23" value="3"  vip="false"/>
+			<macro name="OPC_LOAD" module="ALUTestbench" sourceID="3" lineno="122" defID="0" defLine="27" value="4"  vip="false"/>
+			<macro name="OPC_STORE" module="ALUTestbench" sourceID="3" lineno="129" defID="0" defLine="26" value="5"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="riscv_arbiter" sourceID="5" lineno="8" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="riscv_arbiter" sourceID="5" lineno="14" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="riscv_arbiter" sourceID="5" lineno="20" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="riscv_arbiter" sourceID="5" lineno="21" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="riscv_arbiter" sourceID="5" lineno="23" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="riscv_top" sourceID="6" lineno="11" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="riscv_top" sourceID="6" lineno="12" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="riscv_top" sourceID="6" lineno="16" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="riscv_top" sourceID="6" lineno="17" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="riscv_top" sourceID="6" lineno="20" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="riscv_top" sourceID="6" lineno="21" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="riscv_top" sourceID="6" lineno="46" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="riscv_top" sourceID="6" lineno="47" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="riscv_top" sourceID="6" lineno="49" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="riscv_top" sourceID="6" lineno="50" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="riscv_top" sourceID="6" lineno="63" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="riscv_top" sourceID="6" lineno="64" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW1024x8" sourceID="7" lineno="25" defID="7" defLine="13" value="9"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW1024x8" sourceID="7" lineno="26" defID="7" defLine="15" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW1024x8" sourceID="7" lineno="27" defID="7" defLine="15" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW1024x8" sourceID="7" lineno="31" defID="7" defLine="15" value="10"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW1024x8_1bit" sourceID="7" lineno="56" defID="7" defLine="13" value="9"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW1024x8_1bit" sourceID="7" lineno="62" defID="7" defLine="14" value="11"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW128x46" sourceID="7" lineno="115" defID="7" defLine="103" value="12"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW128x46" sourceID="7" lineno="116" defID="7" defLine="105" value="13"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW128x46" sourceID="7" lineno="117" defID="7" defLine="105" value="13"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW128x46" sourceID="7" lineno="121" defID="7" defLine="105" value="13"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW128x46_1bit" sourceID="7" lineno="184" defID="7" defLine="103" value="12"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW128x46_1bit" sourceID="7" lineno="190" defID="7" defLine="104" value="8"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW128x48" sourceID="7" lineno="243" defID="7" defLine="231" value="12"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW128x48" sourceID="7" lineno="244" defID="7" defLine="233" value="14"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW128x48" sourceID="7" lineno="245" defID="7" defLine="233" value="14"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW128x48" sourceID="7" lineno="249" defID="7" defLine="233" value="14"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW128x48_1bit" sourceID="7" lineno="314" defID="7" defLine="231" value="12"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW128x48_1bit" sourceID="7" lineno="320" defID="7" defLine="232" value="8"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW128x8" sourceID="7" lineno="373" defID="7" defLine="361" value="12"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW128x8" sourceID="7" lineno="374" defID="7" defLine="363" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW128x8" sourceID="7" lineno="375" defID="7" defLine="363" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW128x8" sourceID="7" lineno="379" defID="7" defLine="363" value="10"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW128x8_1bit" sourceID="7" lineno="404" defID="7" defLine="361" value="12"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW128x8_1bit" sourceID="7" lineno="410" defID="7" defLine="362" value="8"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x128" sourceID="7" lineno="462" defID="7" defLine="453" value="8"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW256x128" sourceID="7" lineno="464" defID="7" defLine="451" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x128" sourceID="7" lineno="465" defID="7" defLine="453" value="8"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x128" sourceID="7" lineno="466" defID="7" defLine="453" value="8"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x128" sourceID="7" lineno="470" defID="7" defLine="453" value="8"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW256x128_1bit" sourceID="7" lineno="615" defID="7" defLine="451" value="10"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW256x128_1bit" sourceID="7" lineno="621" defID="7" defLine="452" value="15"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW256x32" sourceID="7" lineno="674" defID="7" defLine="662" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x32" sourceID="7" lineno="675" defID="7" defLine="664" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x32" sourceID="7" lineno="676" defID="7" defLine="664" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x32" sourceID="7" lineno="680" defID="7" defLine="664" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW256x32_1bit" sourceID="7" lineno="729" defID="7" defLine="662" value="10"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW256x32_1bit" sourceID="7" lineno="735" defID="7" defLine="663" value="15"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW256x46" sourceID="7" lineno="788" defID="7" defLine="776" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x46" sourceID="7" lineno="789" defID="7" defLine="778" value="13"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x46" sourceID="7" lineno="790" defID="7" defLine="778" value="13"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x46" sourceID="7" lineno="794" defID="7" defLine="778" value="13"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW256x46_1bit" sourceID="7" lineno="857" defID="7" defLine="776" value="10"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW256x46_1bit" sourceID="7" lineno="863" defID="7" defLine="777" value="15"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW256x48" sourceID="7" lineno="916" defID="7" defLine="904" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x48" sourceID="7" lineno="917" defID="7" defLine="906" value="14"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x48" sourceID="7" lineno="918" defID="7" defLine="906" value="14"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x48" sourceID="7" lineno="922" defID="7" defLine="906" value="14"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW256x48_1bit" sourceID="7" lineno="987" defID="7" defLine="904" value="10"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW256x48_1bit" sourceID="7" lineno="993" defID="7" defLine="905" value="15"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW256x8" sourceID="7" lineno="1046" defID="7" defLine="1034" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x8" sourceID="7" lineno="1047" defID="7" defLine="1036" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x8" sourceID="7" lineno="1048" defID="7" defLine="1036" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW256x8" sourceID="7" lineno="1052" defID="7" defLine="1036" value="10"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW256x8_1bit" sourceID="7" lineno="1077" defID="7" defLine="1034" value="10"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW256x8_1bit" sourceID="7" lineno="1083" defID="7" defLine="1035" value="15"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW32x50" sourceID="7" lineno="1136" defID="7" defLine="1124" value="7"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW32x50" sourceID="7" lineno="1137" defID="7" defLine="1126" value="17"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW32x50" sourceID="7" lineno="1138" defID="7" defLine="1126" value="17"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW32x50" sourceID="7" lineno="1142" defID="7" defLine="1126" value="17"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW32x50_1bit" sourceID="7" lineno="1209" defID="7" defLine="1124" value="7"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW32x50_1bit" sourceID="7" lineno="1215" defID="7" defLine="1125" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW512x128" sourceID="7" lineno="1268" defID="7" defLine="1256" value="18"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW512x128" sourceID="7" lineno="1269" defID="7" defLine="1258" value="8"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW512x128" sourceID="7" lineno="1270" defID="7" defLine="1258" value="8"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW512x128" sourceID="7" lineno="1274" defID="7" defLine="1258" value="8"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW512x128_1bit" sourceID="7" lineno="1419" defID="7" defLine="1256" value="18"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW512x128_1bit" sourceID="7" lineno="1425" defID="7" defLine="1257" value="19"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW512x32" sourceID="7" lineno="1478" defID="7" defLine="1466" value="18"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW512x32" sourceID="7" lineno="1479" defID="7" defLine="1468" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW512x32" sourceID="7" lineno="1480" defID="7" defLine="1468" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW512x32" sourceID="7" lineno="1484" defID="7" defLine="1468" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW512x32_1bit" sourceID="7" lineno="1533" defID="7" defLine="1466" value="18"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW512x32_1bit" sourceID="7" lineno="1539" defID="7" defLine="1467" value="19"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW512x8" sourceID="7" lineno="1592" defID="7" defLine="1580" value="18"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW512x8" sourceID="7" lineno="1593" defID="7" defLine="1582" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW512x8" sourceID="7" lineno="1594" defID="7" defLine="1582" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW512x8" sourceID="7" lineno="1598" defID="7" defLine="1582" value="10"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW512x8_1bit" sourceID="7" lineno="1623" defID="7" defLine="1580" value="18"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW512x8_1bit" sourceID="7" lineno="1629" defID="7" defLine="1581" value="19"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW64x128" sourceID="7" lineno="1682" defID="7" defLine="1670" value="20"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x128" sourceID="7" lineno="1683" defID="7" defLine="1672" value="8"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x128" sourceID="7" lineno="1684" defID="7" defLine="1672" value="8"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x128" sourceID="7" lineno="1688" defID="7" defLine="1672" value="8"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW64x128_1bit" sourceID="7" lineno="1833" defID="7" defLine="1670" value="20"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW64x128_1bit" sourceID="7" lineno="1839" defID="7" defLine="1671" value="21"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW64x32" sourceID="7" lineno="1892" defID="7" defLine="1880" value="20"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x32" sourceID="7" lineno="1893" defID="7" defLine="1882" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x32" sourceID="7" lineno="1894" defID="7" defLine="1882" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x32" sourceID="7" lineno="1898" defID="7" defLine="1882" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW64x32_1bit" sourceID="7" lineno="1947" defID="7" defLine="1880" value="20"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW64x32_1bit" sourceID="7" lineno="1953" defID="7" defLine="1881" value="21"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW64x34" sourceID="7" lineno="2006" defID="7" defLine="1994" value="20"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x34" sourceID="7" lineno="2007" defID="7" defLine="1996" value="22"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x34" sourceID="7" lineno="2008" defID="7" defLine="1996" value="22"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x34" sourceID="7" lineno="2012" defID="7" defLine="1996" value="22"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW64x34_1bit" sourceID="7" lineno="2063" defID="7" defLine="1994" value="20"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW64x34_1bit" sourceID="7" lineno="2069" defID="7" defLine="1995" value="21"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW64x8" sourceID="7" lineno="2122" defID="7" defLine="2110" value="20"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x8" sourceID="7" lineno="2123" defID="7" defLine="2112" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x8" sourceID="7" lineno="2124" defID="7" defLine="2112" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM1RW64x8" sourceID="7" lineno="2128" defID="7" defLine="2112" value="10"  vip="false"/>
+			<macro name="numAddr" module="SRAM1RW64x8_1bit" sourceID="7" lineno="2153" defID="7" defLine="2110" value="20"  vip="false"/>
+			<macro name="numWords" module="SRAM1RW64x8_1bit" sourceID="7" lineno="2159" defID="7" defLine="2111" value="21"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x16" sourceID="7" lineno="2217" defID="7" defLine="2200" value="12"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x16" sourceID="7" lineno="2218" defID="7" defLine="2200" value="12"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x16" sourceID="7" lineno="2219" defID="7" defLine="2202" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x16" sourceID="7" lineno="2220" defID="7" defLine="2202" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x16" sourceID="7" lineno="2221" defID="7" defLine="2202" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x16" sourceID="7" lineno="2222" defID="7" defLine="2202" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x16" sourceID="7" lineno="2227" defID="7" defLine="2202" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x16" sourceID="7" lineno="2228" defID="7" defLine="2202" value="23"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x16_1bit" sourceID="7" lineno="2263" defID="7" defLine="2200" value="12"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW128x16_1bit" sourceID="7" lineno="2269" defID="7" defLine="2201" value="8"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x32" sourceID="7" lineno="2342" defID="7" defLine="2325" value="12"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x32" sourceID="7" lineno="2343" defID="7" defLine="2325" value="12"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x32" sourceID="7" lineno="2344" defID="7" defLine="2327" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x32" sourceID="7" lineno="2345" defID="7" defLine="2327" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x32" sourceID="7" lineno="2346" defID="7" defLine="2327" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x32" sourceID="7" lineno="2347" defID="7" defLine="2327" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x32" sourceID="7" lineno="2352" defID="7" defLine="2327" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x32" sourceID="7" lineno="2353" defID="7" defLine="2327" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x32_1bit" sourceID="7" lineno="2404" defID="7" defLine="2325" value="12"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW128x32_1bit" sourceID="7" lineno="2410" defID="7" defLine="2326" value="8"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x4" sourceID="7" lineno="2483" defID="7" defLine="2466" value="12"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x4" sourceID="7" lineno="2484" defID="7" defLine="2466" value="12"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x4" sourceID="7" lineno="2485" defID="7" defLine="2468" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x4" sourceID="7" lineno="2486" defID="7" defLine="2468" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x4" sourceID="7" lineno="2487" defID="7" defLine="2468" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x4" sourceID="7" lineno="2488" defID="7" defLine="2468" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x4" sourceID="7" lineno="2493" defID="7" defLine="2468" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x4" sourceID="7" lineno="2494" defID="7" defLine="2468" value="24"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x4_1bit" sourceID="7" lineno="2517" defID="7" defLine="2466" value="12"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW128x4_1bit" sourceID="7" lineno="2523" defID="7" defLine="2467" value="8"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x8" sourceID="7" lineno="2596" defID="7" defLine="2579" value="12"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x8" sourceID="7" lineno="2597" defID="7" defLine="2579" value="12"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x8" sourceID="7" lineno="2598" defID="7" defLine="2581" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x8" sourceID="7" lineno="2599" defID="7" defLine="2581" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x8" sourceID="7" lineno="2600" defID="7" defLine="2581" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x8" sourceID="7" lineno="2601" defID="7" defLine="2581" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x8" sourceID="7" lineno="2606" defID="7" defLine="2581" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW128x8" sourceID="7" lineno="2607" defID="7" defLine="2581" value="10"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW128x8_1bit" sourceID="7" lineno="2634" defID="7" defLine="2579" value="12"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW128x8_1bit" sourceID="7" lineno="2640" defID="7" defLine="2580" value="8"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x16" sourceID="7" lineno="2713" defID="7" defLine="2696" value="24"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x16" sourceID="7" lineno="2714" defID="7" defLine="2696" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x16" sourceID="7" lineno="2715" defID="7" defLine="2698" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x16" sourceID="7" lineno="2716" defID="7" defLine="2698" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x16" sourceID="7" lineno="2717" defID="7" defLine="2698" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x16" sourceID="7" lineno="2718" defID="7" defLine="2698" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x16" sourceID="7" lineno="2723" defID="7" defLine="2698" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x16" sourceID="7" lineno="2724" defID="7" defLine="2698" value="23"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x16_1bit" sourceID="7" lineno="2759" defID="7" defLine="2696" value="24"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW16x16_1bit" sourceID="7" lineno="2765" defID="7" defLine="2697" value="23"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x32" sourceID="7" lineno="2838" defID="7" defLine="2821" value="24"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x32" sourceID="7" lineno="2839" defID="7" defLine="2821" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x32" sourceID="7" lineno="2840" defID="7" defLine="2823" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x32" sourceID="7" lineno="2841" defID="7" defLine="2823" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x32" sourceID="7" lineno="2842" defID="7" defLine="2823" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x32" sourceID="7" lineno="2843" defID="7" defLine="2823" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x32" sourceID="7" lineno="2848" defID="7" defLine="2823" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x32" sourceID="7" lineno="2849" defID="7" defLine="2823" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x32_1bit" sourceID="7" lineno="2900" defID="7" defLine="2821" value="24"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW16x32_1bit" sourceID="7" lineno="2906" defID="7" defLine="2822" value="23"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x4" sourceID="7" lineno="2979" defID="7" defLine="2962" value="24"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x4" sourceID="7" lineno="2980" defID="7" defLine="2962" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x4" sourceID="7" lineno="2981" defID="7" defLine="2964" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x4" sourceID="7" lineno="2982" defID="7" defLine="2964" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x4" sourceID="7" lineno="2983" defID="7" defLine="2964" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x4" sourceID="7" lineno="2984" defID="7" defLine="2964" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x4" sourceID="7" lineno="2989" defID="7" defLine="2964" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x4" sourceID="7" lineno="2990" defID="7" defLine="2964" value="24"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x4_1bit" sourceID="7" lineno="3013" defID="7" defLine="2962" value="24"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW16x4_1bit" sourceID="7" lineno="3019" defID="7" defLine="2963" value="23"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x8" sourceID="7" lineno="3092" defID="7" defLine="3075" value="24"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x8" sourceID="7" lineno="3093" defID="7" defLine="3075" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x8" sourceID="7" lineno="3094" defID="7" defLine="3077" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x8" sourceID="7" lineno="3095" defID="7" defLine="3077" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x8" sourceID="7" lineno="3096" defID="7" defLine="3077" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x8" sourceID="7" lineno="3097" defID="7" defLine="3077" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x8" sourceID="7" lineno="3102" defID="7" defLine="3077" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW16x8" sourceID="7" lineno="3103" defID="7" defLine="3077" value="10"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW16x8_1bit" sourceID="7" lineno="3130" defID="7" defLine="3075" value="24"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW16x8_1bit" sourceID="7" lineno="3136" defID="7" defLine="3076" value="23"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x16" sourceID="7" lineno="3209" defID="7" defLine="3192" value="7"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x16" sourceID="7" lineno="3210" defID="7" defLine="3192" value="7"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x16" sourceID="7" lineno="3211" defID="7" defLine="3194" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x16" sourceID="7" lineno="3212" defID="7" defLine="3194" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x16" sourceID="7" lineno="3213" defID="7" defLine="3194" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x16" sourceID="7" lineno="3214" defID="7" defLine="3194" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x16" sourceID="7" lineno="3219" defID="7" defLine="3194" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x16" sourceID="7" lineno="3220" defID="7" defLine="3194" value="23"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x16_1bit" sourceID="7" lineno="3255" defID="7" defLine="3192" value="7"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW32x16_1bit" sourceID="7" lineno="3261" defID="7" defLine="3193" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x22" sourceID="7" lineno="3334" defID="7" defLine="3317" value="7"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x22" sourceID="7" lineno="3335" defID="7" defLine="3317" value="7"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x22" sourceID="7" lineno="3336" defID="7" defLine="3319" value="25"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x22" sourceID="7" lineno="3337" defID="7" defLine="3319" value="25"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x22" sourceID="7" lineno="3338" defID="7" defLine="3319" value="25"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x22" sourceID="7" lineno="3339" defID="7" defLine="3319" value="25"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x22" sourceID="7" lineno="3344" defID="7" defLine="3319" value="25"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x22" sourceID="7" lineno="3345" defID="7" defLine="3319" value="25"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x22_1bit" sourceID="7" lineno="3386" defID="7" defLine="3317" value="7"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW32x22_1bit" sourceID="7" lineno="3392" defID="7" defLine="3318" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x32" sourceID="7" lineno="3465" defID="7" defLine="3448" value="7"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x32" sourceID="7" lineno="3466" defID="7" defLine="3448" value="7"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x32" sourceID="7" lineno="3467" defID="7" defLine="3450" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x32" sourceID="7" lineno="3468" defID="7" defLine="3450" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x32" sourceID="7" lineno="3469" defID="7" defLine="3450" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x32" sourceID="7" lineno="3470" defID="7" defLine="3450" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x32" sourceID="7" lineno="3475" defID="7" defLine="3450" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x32" sourceID="7" lineno="3476" defID="7" defLine="3450" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x32_1bit" sourceID="7" lineno="3527" defID="7" defLine="3448" value="7"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW32x32_1bit" sourceID="7" lineno="3533" defID="7" defLine="3449" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x39" sourceID="7" lineno="3606" defID="7" defLine="3589" value="7"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x39" sourceID="7" lineno="3607" defID="7" defLine="3589" value="7"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x39" sourceID="7" lineno="3608" defID="7" defLine="3591" value="26"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x39" sourceID="7" lineno="3609" defID="7" defLine="3591" value="26"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x39" sourceID="7" lineno="3610" defID="7" defLine="3591" value="26"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x39" sourceID="7" lineno="3611" defID="7" defLine="3591" value="26"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x39" sourceID="7" lineno="3616" defID="7" defLine="3591" value="26"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x39" sourceID="7" lineno="3617" defID="7" defLine="3591" value="26"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x39_1bit" sourceID="7" lineno="3675" defID="7" defLine="3589" value="7"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW32x39_1bit" sourceID="7" lineno="3681" defID="7" defLine="3590" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x4" sourceID="7" lineno="3754" defID="7" defLine="3737" value="7"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x4" sourceID="7" lineno="3755" defID="7" defLine="3737" value="7"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x4" sourceID="7" lineno="3756" defID="7" defLine="3739" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x4" sourceID="7" lineno="3757" defID="7" defLine="3739" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x4" sourceID="7" lineno="3758" defID="7" defLine="3739" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x4" sourceID="7" lineno="3759" defID="7" defLine="3739" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x4" sourceID="7" lineno="3764" defID="7" defLine="3739" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x4" sourceID="7" lineno="3765" defID="7" defLine="3739" value="24"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x4_1bit" sourceID="7" lineno="3788" defID="7" defLine="3737" value="7"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW32x4_1bit" sourceID="7" lineno="3794" defID="7" defLine="3738" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x8" sourceID="7" lineno="3867" defID="7" defLine="3850" value="7"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x8" sourceID="7" lineno="3868" defID="7" defLine="3850" value="7"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x8" sourceID="7" lineno="3869" defID="7" defLine="3852" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x8" sourceID="7" lineno="3870" defID="7" defLine="3852" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x8" sourceID="7" lineno="3871" defID="7" defLine="3852" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x8" sourceID="7" lineno="3872" defID="7" defLine="3852" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x8" sourceID="7" lineno="3877" defID="7" defLine="3852" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW32x8" sourceID="7" lineno="3878" defID="7" defLine="3852" value="10"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW32x8_1bit" sourceID="7" lineno="3905" defID="7" defLine="3850" value="7"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW32x8_1bit" sourceID="7" lineno="3911" defID="7" defLine="3851" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x16" sourceID="7" lineno="3984" defID="7" defLine="3967" value="20"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x16" sourceID="7" lineno="3985" defID="7" defLine="3967" value="20"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x16" sourceID="7" lineno="3986" defID="7" defLine="3969" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x16" sourceID="7" lineno="3987" defID="7" defLine="3969" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x16" sourceID="7" lineno="3988" defID="7" defLine="3969" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x16" sourceID="7" lineno="3989" defID="7" defLine="3969" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x16" sourceID="7" lineno="3994" defID="7" defLine="3969" value="23"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x16" sourceID="7" lineno="3995" defID="7" defLine="3969" value="23"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x16_1bit" sourceID="7" lineno="4030" defID="7" defLine="3967" value="20"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW64x16_1bit" sourceID="7" lineno="4036" defID="7" defLine="3968" value="21"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x32" sourceID="7" lineno="4109" defID="7" defLine="4092" value="20"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x32" sourceID="7" lineno="4110" defID="7" defLine="4092" value="20"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x32" sourceID="7" lineno="4111" defID="7" defLine="4094" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x32" sourceID="7" lineno="4112" defID="7" defLine="4094" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x32" sourceID="7" lineno="4113" defID="7" defLine="4094" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x32" sourceID="7" lineno="4114" defID="7" defLine="4094" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x32" sourceID="7" lineno="4119" defID="7" defLine="4094" value="16"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x32" sourceID="7" lineno="4120" defID="7" defLine="4094" value="16"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x32_1bit" sourceID="7" lineno="4171" defID="7" defLine="4092" value="20"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW64x32_1bit" sourceID="7" lineno="4177" defID="7" defLine="4093" value="21"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x4" sourceID="7" lineno="4250" defID="7" defLine="4233" value="20"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x4" sourceID="7" lineno="4251" defID="7" defLine="4233" value="20"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x4" sourceID="7" lineno="4252" defID="7" defLine="4235" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x4" sourceID="7" lineno="4253" defID="7" defLine="4235" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x4" sourceID="7" lineno="4254" defID="7" defLine="4235" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x4" sourceID="7" lineno="4255" defID="7" defLine="4235" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x4" sourceID="7" lineno="4260" defID="7" defLine="4235" value="24"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x4" sourceID="7" lineno="4261" defID="7" defLine="4235" value="24"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x4_1bit" sourceID="7" lineno="4284" defID="7" defLine="4233" value="20"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW64x4_1bit" sourceID="7" lineno="4290" defID="7" defLine="4234" value="21"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x8" sourceID="7" lineno="4363" defID="7" defLine="4346" value="20"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x8" sourceID="7" lineno="4364" defID="7" defLine="4346" value="20"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x8" sourceID="7" lineno="4365" defID="7" defLine="4348" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x8" sourceID="7" lineno="4366" defID="7" defLine="4348" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x8" sourceID="7" lineno="4367" defID="7" defLine="4348" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x8" sourceID="7" lineno="4368" defID="7" defLine="4348" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x8" sourceID="7" lineno="4373" defID="7" defLine="4348" value="10"  vip="false"/>
+			<macro name="wordLength" module="SRAM2RW64x8" sourceID="7" lineno="4374" defID="7" defLine="4348" value="10"  vip="false"/>
+			<macro name="numAddr" module="SRAM2RW64x8_1bit" sourceID="7" lineno="4401" defID="7" defLine="4346" value="20"  vip="false"/>
+			<macro name="numWords" module="SRAM2RW64x8_1bit" sourceID="7" lineno="4407" defID="7" defLine="4347" value="21"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="BackupMemory" sourceID="9" lineno="44" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="BackupMemory" sourceID="9" lineno="45" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="BackupMemory" sourceID="9" lineno="49" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="BackupMemory" sourceID="9" lineno="50" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="BackupMemory" sourceID="9" lineno="53" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="BackupMemory" sourceID="9" lineno="54" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="ceilLog2" module="BackupMemory" sourceID="9" lineno="60" defID="9" defLine="3" value="27"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="BackupMemory" sourceID="9" lineno="61" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="BackupMemory" sourceID="9" lineno="63" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="BackupMemory" sourceID="9" lineno="65" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="ceilLog2" module="BackupMemory" sourceID="9" lineno="69" defID="9" defLine="3" value="28"  vip="false"/>
+			<macro name="ceilLog2" module="BackupMemory" sourceID="9" lineno="69" defID="9" defLine="3" value="28"  vip="false"/>
+			<macro name="ceilLog2" module="BackupMemory" sourceID="9" lineno="69" defID="9" defLine="3" value="29"  vip="false"/>
+			<macro name="ceilLog2" module="BackupMemory" sourceID="9" lineno="70" defID="9" defLine="3" value="29"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="BackupMemory" sourceID="9" lineno="80" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="" sourceID="9" lineno="84" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="Memory141" sourceID="10" lineno="22" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="Memory141" sourceID="10" lineno="23" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="Memory141" sourceID="10" lineno="27" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="Memory141" sourceID="10" lineno="28" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="Memory141" sourceID="10" lineno="31" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="Memory141" sourceID="10" lineno="32" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="Memory141" sourceID="10" lineno="41" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="Memory141" sourceID="10" lineno="47" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="Memory141" sourceID="10" lineno="50" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="CLOCK_PERIOD" module="rocketTestHarness" sourceID="11" lineno="16" defID="0" defLine="0" value="30"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="rocketTestHarness" sourceID="11" lineno="19" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="rocketTestHarness" sourceID="11" lineno="20" defID="2" defLine="6" value="6"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="11" lineno="21" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="11" lineno="23" defID="0" defLine="0" value="31"  vip="false"/>
+			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="11" lineno="24" defID="0" defLine="0" value="31"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="rocketTestHarness" sourceID="11" lineno="25" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="rocketTestHarness" sourceID="11" lineno="26" defID="2" defLine="5" value="7"  vip="false"/>
+			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="11" lineno="26" defID="0" defLine="0" value="31"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="11" lineno="27" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="11" lineno="28" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="11" lineno="28" defID="0" defLine="0" value="31"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="11" lineno="29" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="11" lineno="93" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="VCDPLUSCLOSE" module="rocketTestHarness" sourceID="11" lineno="208" defID="11" defLine="138" value="32"  vip="false"/>
+			<macro name="VCDPLUSCLOSE" module="rocketTestHarness" sourceID="11" lineno="215" defID="11" defLine="138" value="32"  vip="false"/>
+			<macro name="CPU_INST_BITS" module="no_cache_mem" sourceID="13" lineno="3" defID="2" defLine="10" value="16"  vip="false"/>
+			<macro name="CPU_ADDR_BITS" module="no_cache_mem" sourceID="13" lineno="4" defID="2" defLine="9" value="16"  vip="false"/>
+			<macro name="ceilLog2" module="no_cache_mem" sourceID="13" lineno="4" defID="18" defLine="1" value="33"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="13" lineno="20" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="13" lineno="22" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="ceilLog2" module="no_cache_mem" sourceID="13" lineno="24" defID="18" defLine="1" value="34"  vip="false"/>
+			<macro name="ceilLog2" module="no_cache_mem" sourceID="13" lineno="25" defID="18" defLine="1" value="34"  vip="false"/>
+			<macro name="ceilLog2" module="no_cache_mem" sourceID="13" lineno="27" defID="18" defLine="1" value="34"  vip="false"/>
+			<macro name="ceilLog2" module="no_cache_mem" sourceID="13" lineno="28" defID="18" defLine="1" value="34"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="13" lineno="30" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="13" lineno="38" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="13" lineno="39" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="CPU_INST_BITS" module="cache" sourceID="18" lineno="39" defID="2" defLine="10" value="16"  vip="false"/>
+			<macro name="CPU_ADDR_BITS" module="cache" sourceID="18" lineno="40" defID="2" defLine="9" value="16"  vip="false"/>
+			<macro name="ceilLog2" module="cache" sourceID="18" lineno="40" defID="18" defLine="1" value="33"  vip="false"/>
+			<macro name="ceilLog2" module="cache" sourceID="18" lineno="57" defID="18" defLine="1" value="35"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="cache" sourceID="18" lineno="61" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="cache" sourceID="18" lineno="63" defID="2" defLine="4" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="cache" sourceID="18" lineno="66" defID="2" defLine="4" value="8"  vip="false"/>
+		</macroDefinitionList>
+		<!-- Macro value list for the whole design --> 
+		<macroValueList>
+			<mv i="15" n="256" />
+			<mv i="22" n="34" />
+			<mv i="32" n="" />
+			<mv i="23" n="16" />
+			<mv i="28" n="( 
+(DEPTH) &gt; 2**30 ? 31 : 
+(DEPTH) &gt; 2**29 ? 30 : 
+(DEPTH) &gt; 2**28 ? 29 : 
+(DEPTH) &gt; 2**27 ? 28 : 
+(DEPTH) &gt; 2**26 ? 27 : 
+(DEPTH) &gt; 2**25 ? 26 : 
+(DEPTH) &gt; 2**24 ? 25 : 
+(DEPTH) &gt; 2**23 ? 24 : 
+(DEPTH) &gt; 2**22 ? 23 : 
+(DEPTH) &gt; 2**21 ? 22 : 
+(DEPTH) &gt; 2**20 ? 21 : 
+(DEPTH) &gt; 2**19 ? 20 : 
+(DEPTH) &gt; 2**18 ? 19 : 
+(DEPTH) &gt; 2**17 ? 18 : 
+(DEPTH) &gt; 2**16 ? 17 : 
+(DEPTH) &gt; 2**15 ? 16 : 
+(DEPTH) &gt; 2**14 ? 15 : 
+(DEPTH) &gt; 2**13 ? 14 : 
+(DEPTH) &gt; 2**12 ? 13 : 
+(DEPTH) &gt; 2**11 ? 12 : 
+(DEPTH) &gt; 2**10 ? 11 : 
+(DEPTH) &gt; 2**9 ? 10 : 
+(DEPTH) &gt; 2**8 ? 9 : 
+(DEPTH) &gt; 2**7 ? 8 : 
+(DEPTH) &gt; 2**6 ? 7 : 
+(DEPTH) &gt; 2**5 ? 6 : 
+(DEPTH) &gt; 2**4 ? 5 : 
+(DEPTH) &gt; 2**3 ? 4 : 
+(DEPTH) &gt; 2**2 ? 3 : 
+(DEPTH) &gt; 2**1 ? 2 : 
+(DEPTH) &gt; 2**0 ? 1 : 0)" />
+			<mv i="2" n="7&apos;b0010111" />
+			<mv i="30" n="1.6" />
+			<mv i="1" n="7&apos;b0110111" />
+			<mv i="26" n="39" />
+			<mv i="34" n="( 
+(WORDS) &gt; 2**30 ? 31 : 
+(WORDS) &gt; 2**29 ? 30 : 
+(WORDS) &gt; 2**28 ? 29 : 
+(WORDS) &gt; 2**27 ? 28 : 
+(WORDS) &gt; 2**26 ? 27 : 
+(WORDS) &gt; 2**25 ? 26 : 
+(WORDS) &gt; 2**24 ? 25 : 
+(WORDS) &gt; 2**23 ? 24 : 
+(WORDS) &gt; 2**22 ? 23 : 
+(WORDS) &gt; 2**21 ? 22 : 
+(WORDS) &gt; 2**20 ? 21 : 
+(WORDS) &gt; 2**19 ? 20 : 
+(WORDS) &gt; 2**18 ? 19 : 
+(WORDS) &gt; 2**17 ? 18 : 
+(WORDS) &gt; 2**16 ? 17 : 
+(WORDS) &gt; 2**15 ? 16 : 
+(WORDS) &gt; 2**14 ? 15 : 
+(WORDS) &gt; 2**13 ? 14 : 
+(WORDS) &gt; 2**12 ? 13 : 
+(WORDS) &gt; 2**11 ? 12 : 
+(WORDS) &gt; 2**10 ? 11 : 
+(WORDS) &gt; 2**9 ? 10 : 
+(WORDS) &gt; 2**8 ? 9 : 
+(WORDS) &gt; 2**7 ? 8 : 
+(WORDS) &gt; 2**6 ? 7 : 
+(WORDS) &gt; 2**5 ? 6 : 
+(WORDS) &gt; 2**4 ? 5 : 
+(WORDS) &gt; 2**3 ? 4 : 
+(WORDS) &gt; 2**2 ? 3 : 
+(WORDS) &gt; 2**1 ? 2 : 
+(WORDS) &gt; 2**0 ? 1 : 0)" />
+			<mv i="11" n="1024" />
+			<mv i="8" n="128" />
+			<mv i="3" n="7&apos;b1100011" />
+			<mv i="25" n="22" />
+			<mv i="33" n="( 
+(32/8) &gt; 2**30 ? 31 : 
+(32/8) &gt; 2**29 ? 30 : 
+(32/8) &gt; 2**28 ? 29 : 
+(32/8) &gt; 2**27 ? 28 : 
+(32/8) &gt; 2**26 ? 27 : 
+(32/8) &gt; 2**25 ? 26 : 
+(32/8) &gt; 2**24 ? 25 : 
+(32/8) &gt; 2**23 ? 24 : 
+(32/8) &gt; 2**22 ? 23 : 
+(32/8) &gt; 2**21 ? 22 : 
+(32/8) &gt; 2**20 ? 21 : 
+(32/8) &gt; 2**19 ? 20 : 
+(32/8) &gt; 2**18 ? 19 : 
+(32/8) &gt; 2**17 ? 18 : 
+(32/8) &gt; 2**16 ? 17 : 
+(32/8) &gt; 2**15 ? 16 : 
+(32/8) &gt; 2**14 ? 15 : 
+(32/8) &gt; 2**13 ? 14 : 
+(32/8) &gt; 2**12 ? 13 : 
+(32/8) &gt; 2**11 ? 12 : 
+(32/8) &gt; 2**10 ? 11 : 
+(32/8) &gt; 2**9 ? 10 : 
+(32/8) &gt; 2**8 ? 9 : 
+(32/8) &gt; 2**7 ? 8 : 
+(32/8) &gt; 2**6 ? 7 : 
+(32/8) &gt; 2**5 ? 6 : 
+(32/8) &gt; 2**4 ? 5 : 
+(32/8) &gt; 2**3 ? 4 : 
+(32/8) &gt; 2**2 ? 3 : 
+(32/8) &gt; 2**1 ? 2 : 
+(32/8) &gt; 2**0 ? 1 : 0)" />
+			<mv i="29" n="( 
+(DEPTH/DATA_CYCLES) &gt; 2**30 ? 31 : 
+(DEPTH/DATA_CYCLES) &gt; 2**29 ? 30 : 
+(DEPTH/DATA_CYCLES) &gt; 2**28 ? 29 : 
+(DEPTH/DATA_CYCLES) &gt; 2**27 ? 28 : 
+(DEPTH/DATA_CYCLES) &gt; 2**26 ? 27 : 
+(DEPTH/DATA_CYCLES) &gt; 2**25 ? 26 : 
+(DEPTH/DATA_CYCLES) &gt; 2**24 ? 25 : 
+(DEPTH/DATA_CYCLES) &gt; 2**23 ? 24 : 
+(DEPTH/DATA_CYCLES) &gt; 2**22 ? 23 : 
+(DEPTH/DATA_CYCLES) &gt; 2**21 ? 22 : 
+(DEPTH/DATA_CYCLES) &gt; 2**20 ? 21 : 
+(DEPTH/DATA_CYCLES) &gt; 2**19 ? 20 : 
+(DEPTH/DATA_CYCLES) &gt; 2**18 ? 19 : 
+(DEPTH/DATA_CYCLES) &gt; 2**17 ? 18 : 
+(DEPTH/DATA_CYCLES) &gt; 2**16 ? 17 : 
+(DEPTH/DATA_CYCLES) &gt; 2**15 ? 16 : 
+(DEPTH/DATA_CYCLES) &gt; 2**14 ? 15 : 
+(DEPTH/DATA_CYCLES) &gt; 2**13 ? 14 : 
+(DEPTH/DATA_CYCLES) &gt; 2**12 ? 13 : 
+(DEPTH/DATA_CYCLES) &gt; 2**11 ? 12 : 
+(DEPTH/DATA_CYCLES) &gt; 2**10 ? 11 : 
+(DEPTH/DATA_CYCLES) &gt; 2**9 ? 10 : 
+(DEPTH/DATA_CYCLES) &gt; 2**8 ? 9 : 
+(DEPTH/DATA_CYCLES) &gt; 2**7 ? 8 : 
+(DEPTH/DATA_CYCLES) &gt; 2**6 ? 7 : 
+(DEPTH/DATA_CYCLES) &gt; 2**5 ? 6 : 
+(DEPTH/DATA_CYCLES) &gt; 2**4 ? 5 : 
+(DEPTH/DATA_CYCLES) &gt; 2**3 ? 4 : 
+(DEPTH/DATA_CYCLES) &gt; 2**2 ? 3 : 
+(DEPTH/DATA_CYCLES) &gt; 2**1 ? 2 : 
+(DEPTH/DATA_CYCLES) &gt; 2**0 ? 1 : 0)" />
+			<mv i="21" n="64" />
+			<mv i="13" n="46" />
+			<mv i="19" n="512" />
+			<mv i="6" n="28" />
+			<mv i="14" n="48" />
+			<mv i="24" n="4" />
+			<mv i="7" n="5" />
+			<mv i="27" n="( 
+(DATA_CYCLES) &gt; 2**30 ? 31 : 
+(DATA_CYCLES) &gt; 2**29 ? 30 : 
+(DATA_CYCLES) &gt; 2**28 ? 29 : 
+(DATA_CYCLES) &gt; 2**27 ? 28 : 
+(DATA_CYCLES) &gt; 2**26 ? 27 : 
+(DATA_CYCLES) &gt; 2**25 ? 26 : 
+(DATA_CYCLES) &gt; 2**24 ? 25 : 
+(DATA_CYCLES) &gt; 2**23 ? 24 : 
+(DATA_CYCLES) &gt; 2**22 ? 23 : 
+(DATA_CYCLES) &gt; 2**21 ? 22 : 
+(DATA_CYCLES) &gt; 2**20 ? 21 : 
+(DATA_CYCLES) &gt; 2**19 ? 20 : 
+(DATA_CYCLES) &gt; 2**18 ? 19 : 
+(DATA_CYCLES) &gt; 2**17 ? 18 : 
+(DATA_CYCLES) &gt; 2**16 ? 17 : 
+(DATA_CYCLES) &gt; 2**15 ? 16 : 
+(DATA_CYCLES) &gt; 2**14 ? 15 : 
+(DATA_CYCLES) &gt; 2**13 ? 14 : 
+(DATA_CYCLES) &gt; 2**12 ? 13 : 
+(DATA_CYCLES) &gt; 2**11 ? 12 : 
+(DATA_CYCLES) &gt; 2**10 ? 11 : 
+(DATA_CYCLES) &gt; 2**9 ? 10 : 
+(DATA_CYCLES) &gt; 2**8 ? 9 : 
+(DATA_CYCLES) &gt; 2**7 ? 8 : 
+(DATA_CYCLES) &gt; 2**6 ? 7 : 
+(DATA_CYCLES) &gt; 2**5 ? 6 : 
+(DATA_CYCLES) &gt; 2**4 ? 5 : 
+(DATA_CYCLES) &gt; 2**3 ? 4 : 
+(DATA_CYCLES) &gt; 2**2 ? 3 : 
+(DATA_CYCLES) &gt; 2**1 ? 2 : 
+(DATA_CYCLES) &gt; 2**0 ? 1 : 0)" />
+			<mv i="20" n="6" />
+			<mv i="12" n="7" />
+			<mv i="10" n="8" />
+			<mv i="4" n="7&apos;b0000011" />
+			<mv i="31" n="0.24 " />
+			<mv i="9" n="10" />
+			<mv i="5" n="7&apos;b0100011" />
+			<mv i="18" n="9" />
+			<mv i="35" n="( 
+(128/CPU_WIDTH) &gt; 2**30 ? 31 : 
+(128/CPU_WIDTH) &gt; 2**29 ? 30 : 
+(128/CPU_WIDTH) &gt; 2**28 ? 29 : 
+(128/CPU_WIDTH) &gt; 2**27 ? 28 : 
+(128/CPU_WIDTH) &gt; 2**26 ? 27 : 
+(128/CPU_WIDTH) &gt; 2**25 ? 26 : 
+(128/CPU_WIDTH) &gt; 2**24 ? 25 : 
+(128/CPU_WIDTH) &gt; 2**23 ? 24 : 
+(128/CPU_WIDTH) &gt; 2**22 ? 23 : 
+(128/CPU_WIDTH) &gt; 2**21 ? 22 : 
+(128/CPU_WIDTH) &gt; 2**20 ? 21 : 
+(128/CPU_WIDTH) &gt; 2**19 ? 20 : 
+(128/CPU_WIDTH) &gt; 2**18 ? 19 : 
+(128/CPU_WIDTH) &gt; 2**17 ? 18 : 
+(128/CPU_WIDTH) &gt; 2**16 ? 17 : 
+(128/CPU_WIDTH) &gt; 2**15 ? 16 : 
+(128/CPU_WIDTH) &gt; 2**14 ? 15 : 
+(128/CPU_WIDTH) &gt; 2**13 ? 14 : 
+(128/CPU_WIDTH) &gt; 2**12 ? 13 : 
+(128/CPU_WIDTH) &gt; 2**11 ? 12 : 
+(128/CPU_WIDTH) &gt; 2**10 ? 11 : 
+(128/CPU_WIDTH) &gt; 2**9 ? 10 : 
+(128/CPU_WIDTH) &gt; 2**8 ? 9 : 
+(128/CPU_WIDTH) &gt; 2**7 ? 8 : 
+(128/CPU_WIDTH) &gt; 2**6 ? 7 : 
+(128/CPU_WIDTH) &gt; 2**5 ? 6 : 
+(128/CPU_WIDTH) &gt; 2**4 ? 5 : 
+(128/CPU_WIDTH) &gt; 2**3 ? 4 : 
+(128/CPU_WIDTH) &gt; 2**2 ? 3 : 
+(128/CPU_WIDTH) &gt; 2**1 ? 2 : 
+(128/CPU_WIDTH) &gt; 2**0 ? 1 : 0)" />
+			<mv i="17" n="50" />
+			<mv i="16" n="32" />
+		</macroValueList>
+	</body>
+</opml>
