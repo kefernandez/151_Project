@@ -32,7 +32,7 @@ module Riscv141(
 
 
    //csrw wires
-   wire [4:0] csrwi_imm_ID
+   wire [4:0]  csrwi_imm_ID;
    reg [4:0] csrwi_imm_EX;
    wire [31:0] csrwi_zimm, csrw_result;
    reg [31:0] tohost;
@@ -158,7 +158,7 @@ module Riscv141(
     );
 
    //3
-   zero_extender_LUI_JAL ZE_LUI_AUI(
+   zero_extender_LUI ZE_LUI_AUI(
 	.ZE1_in(ZE_imm_LUI_AUI),
 	.ZE1_out(ZE_data_ID)
     );
@@ -187,7 +187,7 @@ module Riscv141(
 	.in0(RF_data2_EX),
 	.in1(RAddr2_EX), //might not need
         .in2(immediate_load_SE_EX),
-        .in3(immediate_branch_store_SE_EX)
+        .in3(immediate_branch_store_SE_EX),
 	.sel(ALU_Mux_EX),  
 	.out(ALU_src2)
     );
@@ -274,35 +274,77 @@ module Riscv141(
     );
 
    //18
-   regfile regfile1( .RAddr1_RF(RAddr1_ID), .RAddr2_RF(RAddr2_ID), .WAddr_RF(WAddr_ID), .WrEn_RF(WrEn_RF_WB),
-		     .WD_RF(write_data_reg_ID), .RD1_RF(RF_data1_ID), .RD2_RF(RF_data2_ID)
+   regfile regfile1(.RAddr1_RF(RAddr1_ID), 
+		    .RAddr2_RF(RAddr2_ID), 
+		    .WAddr_RF(WAddr_ID), 
+		    .WrEn_RF(WrEn_RF_WB),
+		    .WD_RF(write_data_reg_ID), 
+		    .RD1_RF(RF_data1_ID), 
+		    .RD2_RF(RF_data2_ID)
     );
 		     
 
    //19
    control control1( .clk(clk),
-         .last_opcode(last_opcode), .last_funct3(last_funct3), .take_branch(take_branch),
-	 .PC_Mux(PC_Mux_EX), .WrEn_RF(WrEn_RF_EX), WD_Mux(WD_Mux_EX), .ALU_Mux(ALU_Mux_EX), .CSRW_Mux(CSRW_Mux_EX), .Branch_Mux(Branch_Mux_EX),
-         .RByteEn_DM(RByteEn_DM_EX), .WByteEn_DM(WByteEn_DM_EX),.DM_Mux(DM_Mux_EX), .SE2_Ctrl(SE2_Ctrl_EX)	
+		     .last_opcode(last_opcode),
+		     .last_funct3(last_funct3), 
+		     .take_branch(take_branch),
+		     .PC_Mux(PC_Mux_EX), 
+		     .WrEn_RF(WrEn_RF_EX), 
+		     .WD_Mux(WD_Mux_EX), 
+		     .ALU_Mux(ALU_Mux_EX), 
+		     .CSRW_Mux(CSRW_Mux_EX), 
+		     .Branch_Mux(Branch_Mux_EX),
+		     .RByteEn_DM(RByteEn_DM_EX), 
+		     .WByteEn_DM(WByteEn_DM_EX),
+		     .DM_Mux(DM_Mux_EX), 
+		     .SE2_Ctrl(SE2_Ctrl_EX)	
     );
     
    //20
-   pipeline1 pipeline(
-        .clk(clk),
-        .csrwi_imm_ID(csrwi_imm_ID), .RF_data1_ID(RF_data1_ID), .RF_data2_ID(RF_data2_ID), .RAddr2_ID(RAddr2_ID),  .write_data_reg_EX(write_data_reg_EX), 
-        .csrwi_imm_EX(csrwi_imm_EX), .RF_data1_EX(RF_data1_EX), .RF_data2_EX(RF_data2_EX), .RAddr2_EX(RAddr2_EX), .write_data_reg_ID(write_data_reg_ID),
-        .ZE_data_ID(ZE_data_ID), .immediate_load_SE_ID(immediate_load_SE_ID), .SE_imm_br_str(SE_imm_br_str), .JAL_SE_ID(JAL_SE_ID), .PCplus4_ID(PCplus4_ID), 
-        .ZE_data_EX(ZE_data_EX), .immediate_load_SE_EX(immediate_load_SE_EX), .SE_imm_br_str_piped(SE_imm_br_str_piped), .JAL_SE_EX(JAL_SE_EX), .PCplus4_EX(PCplus4_EX), 
-        .DM_ALU_data_WB(DM_ALU_data_WB), .PCplus4_imm_prime_EX(PCplus4_imm_prime_EX), .RF_data2_EX(RF_data2_EX),
-        .DM_ALU_data_EX(DM_ALU_data_EX), .PCplus4_imm_WB(PCplus4_imm_WB), .DM_write(DM_write),
-        .PC(PC), .csrw_result(csrw_result),
-        .PCprime(PCprime), .tohost(tohost) 
-        .PC_Mux_EX(PC_Mux_EX), .WrEn_RF_EX(WrEn_RF_EX), .WD_Mux_EX(WD_Mux_EX), .RByteEn_DM_EX(RByteEn_DM_EX),
-	.WByteEn_DM_EX(WByteEn_DM_EX), .DM_Mux_EX(DM_Mux_EX),
-	.WrEn_RF_WB(WrEn_RF_WB), .WD_Mux_WB(WD_Mux_WB), .RByteEn_DM_WB(RByteEn_DM_WB),
-	.WByteEn_DM_WB(WByteEn_DM_WB), .DM_Mux_WB(DM_Mux_WB),
-	.PC_Mux_IDplus1(PC_Mux_IDplus1)
-		      
+   pipeline1 pipeline(.clk(clk),
+		      .csrwi_imm_ID(csrwi_imm_ID), 
+		      .RF_data1_ID(RF_data1_ID), 
+		      .RF_data2_ID(RF_data2_ID), 
+		      .RAddr2_ID(RAddr2_ID),  
+		      .write_data_reg_EX(write_data_reg_EX), 
+		      .csrwi_imm_EX(csrwi_imm_EX), 
+		      .RF_data1_EX(RF_data1_EX), 
+		      .RF_data2_EX(RF_data2_EX), 
+		      .RAddr2_EX(RAddr2_EX), 
+		      .write_data_reg_ID(write_data_reg_ID),
+		      .ZE_data_ID(ZE_data_ID), 
+		      .immediate_load_SE_ID(immediate_load_SE_ID), 
+		      .SE_imm_br_str(SE_imm_br_str), 
+		      .JAL_SE_ID(JAL_SE_ID), 
+		      .PCplus4_ID(PCplus4_ID), 
+		      .ZE_data_EX(ZE_data_EX), 
+		      .immediate_load_SE_EX(immediate_load_SE_EX), 
+		      .SE_imm_br_str_piped(SE_imm_br_str_piped), 
+		      .JAL_SE_EX(JAL_SE_EX), 
+		      .PCplus4_EX(PCplus4_EX), 
+		      .DM_ALU_data_WB(DM_ALU_data_WB), 
+		      .PCplus4_imm_prime_EX(PCplus4_imm_prime_EX), 
+		      .RF_data2_EX(RF_data2_EX),
+		      .DM_ALU_data_EX(DM_ALU_data_EX), 
+		      .PCplus4_imm_WB(PCplus4_imm_WB), 
+		      .DM_write(DM_write),
+		      .PC(PC), 
+		      .csrw_result(csrw_result),
+		      .PCprime(PCprime), 
+		      .tohost(tohost), 
+		      .PC_Mux_EX(PC_Mux_EX), 
+		      .WrEn_RF_EX(WrEn_RF_EX), 
+		      .WD_Mux_EX(WD_Mux_EX), 
+		      .RByteEn_DM_EX(RByteEn_DM_EX),
+		      .WByteEn_DM_EX(WByteEn_DM_EX), 
+		      .DM_Mux_EX(DM_Mux_EX),
+		      .WrEn_RF_WB(WrEn_RF_WB), 
+		      .WD_Mux_WB(WD_Mux_WB), 
+		      .RByteEn_DM_WB(RByteEn_DM_WB),
+		      .WByteEn_DM_WB(WByteEn_DM_WB), 
+		      .DM_Mux_WB(DM_Mux_WB),
+		      .PC_Mux_IDplus1(PC_Mux_IDplus1)		      
      );
    
 		  

@@ -1,11 +1,13 @@
 module sign_extender_br_str(
-    input[11:0] SEin,
+    input[11:0] SE2_in,
     input SE2_ctrl,			       
-    output [31:0] SEout	       
+    output [31:0] SE2_out	       
 );
+
+   reg [31:0] 	  SE2_out;
     
    always@(*)begin
-      if(SE2_ctrl) SEout <= {{21{SEin[11]}},SEin[0], SEin[10:5],SEin[4:1]};
-      else SEout <= {{21{SEin[11]}},SE[10:0]};
+      if(SE2_ctrl) SE2_out <= {{21{SE2_in[11]}},SE2_in[0], SE2_in[10:5],SE2_in[4:1]};
+      else SE2_out <= {{21{SE2_in[11]}},SE2_in[10:0]};
    end
  endmodule

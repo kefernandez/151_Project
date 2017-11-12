@@ -1,8 +1,8 @@
-module zero_extender_CRSW(
-    input[4:0] ZEin,
-    output [31:0] ZEout	       
+module zero_extender_CSRW(
+    input[4:0] ZE2_in,
+    output [31:0] ZE2_out	       
 );
    
-   assign ZEout = {27'b0,ZEin};
+   assign ZE2_out = {27'b0,ZE2_in};
    
 endmodule  

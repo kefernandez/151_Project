@@ -1,8 +1,8 @@
 module sign_extender_load_JALR(
-    input[11:0] SEin,
-    output [31:0] SEout	       
+    input[11:0] SE1_in,
+    output [31:0] SE1_out	       
 );
 
-   assign SEout = {{21{SEin[11]}}, SEin[10:0]};
+   assign SE1_out = {{21{SE1_in[11]}}, SE1_in[10:0]};
    
 endmodule  
