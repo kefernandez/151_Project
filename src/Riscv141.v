@@ -280,9 +280,9 @@ module Riscv141(
 
    //17
    ALUdec ALUdec1(
-	.opcode(last_opcode), //problem?
-        .funct(last_funct3), //problem?
-	.add_rshift_type(add_rshift_type), //problem?
+	.opcode(opcode_EX), //problem?
+        .funct(funct_EX), //problem?
+	.add_rshift_type(add_rshift_type_EX), //problem?
 	.ALUop(ALUop)
     );
 
