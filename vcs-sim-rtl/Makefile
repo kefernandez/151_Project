@@ -222,7 +222,7 @@ all : $(simv)
 # Clean up
 #--------------------------------------------------------------------
 
-junk += simv* *.vpd *.key DVE* .vcs* timestamp
+junk += simv* *.key DVE* .vcs* timestamp *.vpd
 
 clean :
 	rm -rf $(junk) *~ \#* *.log *.cmd *.daidir csrc

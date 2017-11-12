@@ -2,9 +2,10 @@
 0 Opcode.vh
 0 ALUop.vh
 0 const.vh
-66
+84
 +cli+1
 +define+CLOCK_PERIOD=1.6
++define+DEBUG
 +define+INPUT_DELAY=0.24
 +define+no_cache_mem
 +incdir+../src
@@ -29,10 +30,11 @@
 -Mcsrc=
 -Mldflags= -Wl,-E
 -Mobjects= /share/instsww/synopsys/G-2012.09/amd64/lib/libvirsim.so /share/instsww/synopsys/G-2012.09/amd64/lib/liberrorinf.so /share/instsww/synopsys/G-2012.09/amd64/lib/libsnpsmalloc.so
--Mout=simv-alu-vlsi
+-Mout=simv-vlsi-debug
 -Msaverestoreobj=/share/instsww/synopsys/G-2012.09/amd64/lib/vcs_save_restore_new.o
 -Msyslibs=-ldl -lm
 -Mvcsaceobjs=
+-Xcbug=0x1
 -Xcbug=0x1
 -Xnotice
 -debug=4
@@ -40,7 +42,7 @@
 -full64
 -gen_obj
 -line
--o simv-alu-vlsi
+-o simv-vlsi-debug
 -pp_used
 -q
 -timescale=1ns/10ps
@@ -55,22 +57,38 @@
 ../src/Memory141.v
 ../src/Opcode.vh
 ../src/Riscv141.v
+../src/Riscv141_backup.v
 ../src/backup_mem.v
 ../src/const.vh
+../src/control.v
 ../src/controller.v
 ../src/datapath.v
+../src/mux_2x1.v
+../src/mux_3x1.v
+../src/mux_4x1.v
 ../src/no_cache_mem.v
+../src/pipline1.v
+../src/regfile.v
 ../src/riscv_arbiter.v
 ../src/riscv_test_harness.v
 ../src/riscv_top.v
+../src/shift.v
+../src/sign_extender_DM.v
+../src/sign_extender_JAL.v
+../src/sign_extender_br_str.v
+../src/sign_extender_load_JALR.v
+../src/sum.v
+../src/zero_extender_CSRW.v
+../src/zero_extender_DM.v
+../src/zero_extender_LUI.v
 /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v
 /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v
 /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/sram.v
 /share/instsww/synopsys/G-2012.09/amd64/bin/vcs1
-ALUTestbench
 rocketTestHarness
-114
-sysc_uni_pwd=/home/cc/eecs151/fa17/class/eecs151-aca/project/vcs-sim-rtl
+rocketTestHarness
+117
+sysc_uni_pwd=/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl
 XSESSION_EXEC=/usr/bin/gnome-session
 XMODIFIERS=@im=none
 XKEYSYMDB=/usr/share/X11/XKeysymDB
@@ -81,12 +99,12 @@ XILINX_EDK=/opt/Xilinx/14.6/ISE_DS/EDK
 XILINX_DSP=/opt/Xilinx/14.6/ISE_DS/ISE
 XILINXD_LICENSE_FILE=2100@license-srv.eecs.berkeley.edu
 XILINX=/opt/Xilinx/14.6/ISE_DS/ISE
-XDG_SESSION_COOKIE=133c3af82de28a7327eaf5da00000010-1508805908.240673-657861542
+XDG_SESSION_COOKIE=253dc50f3aa24e617431eb9300000011-1510119485.959472-1650077466
 XA_HOME=/home/ff/eecs151/tools/xa/G-2012.06-SP2
 XA_64=1
-XAUTHORITY=/home/cc/eecs151/fa17/class/eecs151-aca/.Xauthority
-X2GO_SESSION=eecs151-aca-52-1508805889_stDGNOME_dp32
-X2GO_AGENT_PID=20943
+XAUTHORITY=/home/cc/eecs151/fa17/class/eecs151-aai/.Xauthority
+X2GO_SESSION=eecs151-aai-51-1510119473_stDGNOME_dp32
+X2GO_AGENT_PID=2213
 VMR_MODE_FLAG=64
 VCS_PATH=/share/instsww/synopsys/G-2012.09/bin
 VCS_MODE_FLAG=64
@@ -105,13 +123,13 @@ SYNOPSYS_ROOT=/home/ff/cs250/tools/synopsys
 SYNOPSYS_NCX_ROOT=/home/ff/eecs151/tools/ncx/G-2012.06-SP3
 STAR_HOME=/home/ff/eecs151/tools/starrcxt/G-2012.06-SP3
 STARTUP=/usr/bin/env LD_LIBRARY_PATH=/usr/lib64/nx/X11/Xinerama:/usr/lib64/nx/X11:/usr/lib64:/opt/Xilinx/14.6/ISE_DS/ISE/lib/lin64:/opt/Xilinx/14.6/ISE_DS/ISE/smartmodel/lin64/installed_lin64/lib:/opt/Xilinx/14.6/ISE_DS/ISE/sysgen/lib:/opt/Xilinx/14.6/ISE_DS/EDK/lib/lin64:/opt/Xilinx/14.6/ISE_DS/common/lib/lin64:/usr/sww/lib:/home/ff/eecs151/tools-151/riscv/x86_64-unknown-linux-gnu/riscv-elf/lib /usr/bin/gnome-session
-SSH_CONNECTION=128.32.47.142 61174 128.32.40.161 22
-SSH_CLIENT=128.32.47.142 61174 22
-SSH_AUTH_SOCK=/tmp/keyring-saPew7/socket.ssh
+SSH_CONNECTION=24.23.228.39 59852 128.32.40.177 22
+SSH_CLIENT=24.23.228.39 59852 22
+SSH_AUTH_SOCK=/tmp/keyring-z3BIMt/socket.ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
-SSH_AGENT_PID=21584
+SSH_AGENT_PID=3034
 SNPSLMD_LICENSE_FILE=27005@scotland.eecs.berkeley.edu:1701@sunv40z-1.eecs.berkeley.edu:1701@sunv20z-1.eecs.berkeley.edu:/share/instsww/synopsys/G-2012.09/flexlm//license.dat
-SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/21581,unix/unix:/tmp/.ICE-unix/21581
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3033,unix/unix:/tmp/.ICE-unix/3033
 SERIALTTY=/dev/ttyUSB0
 SELINUX_USE_CURRENT_RANGE=
 SELINUX_ROLE_REQUESTED=
@@ -124,14 +142,13 @@ QT_GRAPHICSSYSTEM=native
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
 QTDIR=/usr/lib64/qt-3.3
-PULSE_CLIENTCONFIG=/home/cc/eecs151/fa17/class/eecs151-aca/.x2go/C-eecs151-aca-52-1508805889_stDGNOME_dp32/.pulse-client.conf
 PT_PATH=/home/ff/cs250/tools/synopsys/pt/current/bin
 PT_HOME=/home/ff/cs250/tools/synopsys/pt/current
 OVA_UUM=0
 OS=Linux
-ORBIT_SOCKETDIR=/tmp/orbit-eecs151-aca
+ORBIT_SOCKETDIR=/tmp/orbit-eecs151-aai
 OA_HOME=/share/instsww/cadence/IC615.151/share/oa/
-NX_XINERAMA_CONF=/home/cc/eecs151/fa17/class/eecs151-aca/.x2go/C-eecs151-aca-52-1508805889_stDGNOME_dp32/xinerama.conf
+NX_XINERAMA_CONF=/home/cc/eecs151/fa17/class/eecs151-aai/.x2go/C-eecs151-aai-51-1510119473_stDGNOME_dp32/xinerama.conf
 NNTPSERVER=news.csua.berkeley.edu
 NCX_HOME=/home/ff/eecs151/tools/ncx/G-2012.06-SP3
 MW_PATH=/home/ff/cs250/tools/synopsys/mw/current/bin/AMD.64
@@ -160,22 +177,26 @@ ICC_PATH=/home/ff/eecs151/tools/icc/bin
 ICC_HOME=/home/ff/eecs151/tools/icc
 HSP_HOME=/home/ff/eecs151/tools/hspice/G-2012.06-SP1/hspice
 HSPICE_HOME=/home/ff/eecs151/tools/hspice/G-2012.06-SP1
-HOSTNAME=c125m-1.EECS.Berkeley.EDU
+HOSTNAME=c125m-17.EECS.Berkeley.EDU
 HISTCONTROL=ignoredups
 HERCULES_HOME_DIR=/home/ff/eecs151/tools/hercules/B-2008.09-SP5
 G_BROKEN_FILENAMES=1
-GTK_RC_FILES=/etc/gtk/gtkrc:/home/cc/eecs151/fa17/class/eecs151-aca/.gtkrc-1.2-gnome2
+GTK_RC_FILES=/etc/gtk/gtkrc:/home/cc/eecs151/fa17/class/eecs151-aai/.gtkrc-1.2-gnome2
 GTK_IM_MODULE=gtk-im-context-simple
-GNOME_KEYRING_SOCKET=/tmp/keyring-saPew7/socket
+GNOME_KEYRING_SOCKET=/tmp/keyring-z3BIMt/socket
 GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GIO_LAUNCHED_DESKTOP_FILE_PID=4266
+GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/Terminal.desktop
 FORMALITY_HOME=/home/ff/cs250/tools/synopsys/fm/current
 FORMALITY_BIN=/home/ff/cs250/tools/synopsys/fm/current/bin
+ESPEAKER=localhost:39596
+DESKTOP_STARTUP_ID=
 DC_PATH=/share/instsww/synopsys/J-2014.09-SP3/bin
 DC_HOME=/share/instsww/synopsys/J-2014.09-SP3
-DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-Wy6zoIS8sW,guid=06d8ffe6ddc9003e32e543690000b618
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-lwtmdYXa0j,guid=33545ecab2b97ed222cf79c80014d8f4
 CVS_RSH=ssh
 CONFIG_SHELL=/usr/bin/ksh
-COLORTERM=gnome-terminal
+COLORTERM=Terminal
 CHISEL=/home/ff/cs250/install/chisel
 CDS_ROOT=/share/instsww/cadence/IC615.151
 CDS_Netlisting_Mode=Analog
@@ -186,31 +207,47 @@ BASH_FUNC_module()=() {  eval `/usr/bin/modulecmd bash $*`
 }
 ARCH=x86_64
 0
-21
+37
 1447456694 /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v
 1442946606 /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v
 1447519765 /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/sram.v
-1508816268 ../src/riscv_top.v
-1508816268 ../src/riscv_test_harness.v
-1508816268 ../src/riscv_arbiter.v
-1508816268 ../src/Riscv141.v
-1508816268 ../src/no_cache_mem.v
-1508816268 ../src/Memory141.v
-1508816268 ../src/datapath.v
-1508816268 ../src/controller.v
-1508816268 ../src/Cache.v
-1508816268 ../src/backup_mem.v
-1508963670 ../src/ALU.v
-1508816267 ../src/ALUTestVectorTestbench.v
-1508816267 ../src/ALUTestbench.v
-1509128995 ../src/ALUdec.v
-1508816268 ../src/Opcode.vh
-1508816268 ../src/const.vh
-1508816268 ../src/ALUop.vh
+1510461905 ../src/zero_extender_LUI.v
+1510463675 ../src/zero_extender_DM.v
+1510461816 ../src/zero_extender_CSRW.v
+1510441061 ../src/sum.v
+1510462049 ../src/sign_extender_load_JALR.v
+1510462210 ../src/sign_extender_JAL.v
+1510463532 ../src/sign_extender_DM.v
+1510463613 ../src/sign_extender_br_str.v
+1510441061 ../src/shift.v
+1508733828 ../src/riscv_top.v
+1508733828 ../src/riscv_test_harness.v
+1508733828 ../src/riscv_arbiter.v
+1510471605 ../src/Riscv141.v
+1510471605 ../src/Riscv141_backup.v
+1510471605 ../src/regfile.v
+1510471605 ../src/pipline1.v
+1508733828 ../src/no_cache_mem.v
+1510448376 ../src/mux_4x1.v
+1510448376 ../src/mux_3x1.v
+1510447453 ../src/mux_2x1.v
+1508733828 ../src/Memory141.v
+1508733828 ../src/datapath.v
+1510505735 ../src/control.v
+1508733828 ../src/controller.v
+1508733828 ../src/Cache.v
+1508733828 ../src/backup_mem.v
+1510107901 ../src/ALU.v
+1508733828 ../src/ALUTestVectorTestbench.v
+1510442661 ../src/ALUTestbench.v
+1510447453 ../src/ALUdec.v
+1508733828 ../src/Opcode.vh
+1508733828 ../src/const.vh
+1508733828 ../src/ALUop.vh
 1345792088 /share/instsww/synopsys/G-2012.09/amd64/lib/vcsdp.tab
 4
 0 
 1345792743 /share/instsww/synopsys/G-2012.09/amd64/lib/libvirsim.so
 1345792505 /share/instsww/synopsys/G-2012.09/amd64/lib/liberrorinf.so
 1345792224 /share/instsww/synopsys/G-2012.09/amd64/lib/libsnpsmalloc.so
-1509129011 simv-alu-vlsi.daidir
+1510509958 simv-vlsi-debug.daidir

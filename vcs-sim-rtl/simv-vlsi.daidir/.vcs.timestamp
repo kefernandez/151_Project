@@ -85,8 +85,10 @@
 /share/instsww/synopsys/G-2012.09/amd64/bin/vcs1
 rocketTestHarness
 rocketTestHarness
-92
+117
 sysc_uni_pwd=/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl
+XSESSION_EXEC=/usr/bin/gnome-session
+XMODIFIERS=@im=none
 XKEYSYMDB=/usr/share/X11/XKeysymDB
 XILINX_VERSION=14.6
 XILINX_PLANAHEAD=/opt/Xilinx/14.6/ISE_DS/PlanAhead
@@ -95,8 +97,12 @@ XILINX_EDK=/opt/Xilinx/14.6/ISE_DS/EDK
 XILINX_DSP=/opt/Xilinx/14.6/ISE_DS/ISE
 XILINXD_LICENSE_FILE=2100@license-srv.eecs.berkeley.edu
 XILINX=/opt/Xilinx/14.6/ISE_DS/ISE
+XDG_SESSION_COOKIE=253dc50f3aa24e617431eb9300000011-1510119485.959472-1650077466
 XA_HOME=/home/ff/eecs151/tools/xa/G-2012.06-SP2
 XA_64=1
+XAUTHORITY=/home/cc/eecs151/fa17/class/eecs151-aai/.Xauthority
+X2GO_SESSION=eecs151-aai-51-1510119473_stDGNOME_dp32
+X2GO_AGENT_PID=2213
 VMR_MODE_FLAG=64
 VCS_PATH=/share/instsww/synopsys/G-2012.09/bin
 VCS_MODE_FLAG=64
@@ -114,11 +120,14 @@ SYNOPSYS_SYSTYPE=linux
 SYNOPSYS_ROOT=/home/ff/cs250/tools/synopsys
 SYNOPSYS_NCX_ROOT=/home/ff/eecs151/tools/ncx/G-2012.06-SP3
 STAR_HOME=/home/ff/eecs151/tools/starrcxt/G-2012.06-SP3
-SSH_TTY=/dev/pts/0
-SSH_CONNECTION=24.23.228.39 54521 128.32.40.237 22
-SSH_CLIENT=24.23.228.39 54521 22
+STARTUP=/usr/bin/env LD_LIBRARY_PATH=/usr/lib64/nx/X11/Xinerama:/usr/lib64/nx/X11:/usr/lib64:/opt/Xilinx/14.6/ISE_DS/ISE/lib/lin64:/opt/Xilinx/14.6/ISE_DS/ISE/smartmodel/lin64/installed_lin64/lib:/opt/Xilinx/14.6/ISE_DS/ISE/sysgen/lib:/opt/Xilinx/14.6/ISE_DS/EDK/lib/lin64:/opt/Xilinx/14.6/ISE_DS/common/lib/lin64:/usr/sww/lib:/home/ff/eecs151/tools-151/riscv/x86_64-unknown-linux-gnu/riscv-elf/lib /usr/bin/gnome-session
+SSH_CONNECTION=24.23.228.39 59852 128.32.40.177 22
+SSH_CLIENT=24.23.228.39 59852 22
+SSH_AUTH_SOCK=/tmp/keyring-z3BIMt/socket.ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
+SSH_AGENT_PID=3034
 SNPSLMD_LICENSE_FILE=27005@scotland.eecs.berkeley.edu:1701@sunv40z-1.eecs.berkeley.edu:1701@sunv20z-1.eecs.berkeley.edu:/share/instsww/synopsys/G-2012.09/flexlm//license.dat
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/3033,unix/unix:/tmp/.ICE-unix/3033
 SERIALTTY=/dev/ttyUSB0
 SELINUX_USE_CURRENT_RANGE=
 SELINUX_ROLE_REQUESTED=
@@ -126,6 +135,8 @@ SELINUX_LEVEL_REQUESTED=
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 RUNAS=/share/b/runas/x86_64
+QT_IM_MODULE=xim
+QT_GRAPHICSSYSTEM=native
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
 QTDIR=/usr/lib64/qt-3.3
@@ -133,7 +144,9 @@ PT_PATH=/home/ff/cs250/tools/synopsys/pt/current/bin
 PT_HOME=/home/ff/cs250/tools/synopsys/pt/current
 OVA_UUM=0
 OS=Linux
+ORBIT_SOCKETDIR=/tmp/orbit-eecs151-aai
 OA_HOME=/share/instsww/cadence/IC615.151/share/oa/
+NX_XINERAMA_CONF=/home/cc/eecs151/fa17/class/eecs151-aai/.x2go/C-eecs151-aai-51-1510119473_stDGNOME_dp32/xinerama.conf
 NNTPSERVER=news.csua.berkeley.edu
 NCX_HOME=/home/ff/eecs151/tools/ncx/G-2012.06-SP3
 MW_PATH=/home/ff/cs250/tools/synopsys/mw/current/bin/AMD.64
@@ -156,20 +169,32 @@ KDEDIRS=/usr
 IPDK_SYN_28NM=/home/ff/eecs151/synopsys-32nm
 INSTMANPATH=/usr/local/man:/usr/sww/man:/usr/man:/usr/share/man:/usr/java/man:/share/b/grading/man:/home/aa/projects/scheme/lib/man
 INSTALLER_PATH=/home/ff/cs250/tools/synopsys/installer/current
+IMSETTINGS_MODULE=none
+IMSETTINGS_INTEGRATE_DESKTOP=yes
 ICC_PATH=/home/ff/eecs151/tools/icc/bin
 ICC_HOME=/home/ff/eecs151/tools/icc
 HSP_HOME=/home/ff/eecs151/tools/hspice/G-2012.06-SP1/hspice
 HSPICE_HOME=/home/ff/eecs151/tools/hspice/G-2012.06-SP1
-HOSTNAME=c125m-23.EECS.Berkeley.EDU
+HOSTNAME=c125m-17.EECS.Berkeley.EDU
 HISTCONTROL=ignoredups
 HERCULES_HOME_DIR=/home/ff/eecs151/tools/hercules/B-2008.09-SP5
 G_BROKEN_FILENAMES=1
+GTK_RC_FILES=/etc/gtk/gtkrc:/home/cc/eecs151/fa17/class/eecs151-aai/.gtkrc-1.2-gnome2
+GTK_IM_MODULE=gtk-im-context-simple
+GNOME_KEYRING_SOCKET=/tmp/keyring-z3BIMt/socket
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GIO_LAUNCHED_DESKTOP_FILE_PID=4266
+GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/Terminal.desktop
 FORMALITY_HOME=/home/ff/cs250/tools/synopsys/fm/current
 FORMALITY_BIN=/home/ff/cs250/tools/synopsys/fm/current/bin
+ESPEAKER=localhost:39596
+DESKTOP_STARTUP_ID=
 DC_PATH=/share/instsww/synopsys/J-2014.09-SP3/bin
 DC_HOME=/share/instsww/synopsys/J-2014.09-SP3
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-lwtmdYXa0j,guid=33545ecab2b97ed222cf79c80014d8f4
 CVS_RSH=ssh
 CONFIG_SHELL=/usr/bin/ksh
+COLORTERM=Terminal
 CHISEL=/home/ff/cs250/install/chisel
 CDS_ROOT=/share/instsww/cadence/IC615.151
 CDS_Netlisting_Mode=Analog
@@ -223,4 +248,4 @@ ARCH=x86_64
 1345792743 /share/instsww/synopsys/G-2012.09/amd64/lib/libvirsim.so
 1345792505 /share/instsww/synopsys/G-2012.09/amd64/lib/liberrorinf.so
 1345792224 /share/instsww/synopsys/G-2012.09/amd64/lib/libsnpsmalloc.so
-1510505743 simv-vlsi.daidir
+1510509621 simv-vlsi.daidir

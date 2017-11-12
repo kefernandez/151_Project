@@ -1,5 +1,5 @@
-psSimBaseName                      	simv-alu-vlsi
-pDaiDir                            	/home/cc/eecs151/fa17/class/eecs151-aca/project/vcs-sim-rtl/simv-alu-vlsi.daidir
+psSimBaseName                      	simv-vlsi-debug
+pDaiDir                            	/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/simv-vlsi-debug.daidir
 destPath                           	csrc/
 hsMainFileCount                    	0
 hsMainFileName                     	dummy

@@ -3,11 +3,11 @@
 	<head>
 		<title>VCS dump file for DVE debugging</title>
 		<vcsVersion>G-2012.09_Full64</vcsVersion>
-		<dateCreated>Sun Nov 12 10:00:19 2017</dateCreated>
+		<dateCreated>Sun Nov 12 10:05:57 2017</dateCreated>
 	</head>
 	<body>
 		<!-- VCS compile options -->
-		<vcsCompileOptions text="/share/instsww/synopsys/G-2012.09/amd64/bin/vcs1 -Mcc=gcc -Mcplusplus=g++ -Masflags= -Mcfl= -pipe -O -I/share/instsww/synopsys/G-2012.09/include  -Mldflags= -Wl,-E  -Mout=simv-vlsi -Mamsrun= -Mvcsaceobjs= -Mobjects= /share/instsww/synopsys/G-2012.09/amd64/lib/libvirsim.so /share/instsww/synopsys/G-2012.09/amd64/lib/liberrorinf.so /share/instsww/synopsys/G-2012.09/amd64/lib/libsnpsmalloc.so  -Msaverestoreobj=/share/instsww/synopsys/G-2012.09/amd64/lib/vcs_save_restore_new.o -Mcrt0= -Mcrtn= -Mcsrc= -Msyslibs=-ldl -lm  -full64 -Xnotice -line +lint=all,noVCDE,noONGS,noUI +warn=noTMR -error=PCWM-L -timescale=1ns/10ps -q +v2k +vcs+lic+wait +vcs+initreg+0 +vcs+initmem+0 +define+no_cache_mem -top rocketTestHarness -Xcbug=0x1 +define+INPUT_DELAY=0.24 +define+CLOCK_PERIOD=1.6 -o simv-vlsi -top rocketTestHarness -pp_used +vcsd +itf+/share/instsww/synopsys/G-2012.09/amd64/lib/vcsdp.tab +cli+1 -debug=4 +memcbk +rad +vpi -gen_obj +incdir+../src ../src/ALUop.vh ../src/const.vh ../src/Opcode.vh ../src/ALUdec.v ../src/ALUTestbench.v ../src/ALUTestVectorTestbench.v ../src/ALU.v ../src/backup_mem.v ../src/Cache.v ../src/controller.v ../src/control.v ../src/datapath.v ../src/Memory141.v ../src/mux_2x1.v ../src/mux_3x1.v ../src/mux_4x1.v ../src/no_cache_mem.v ../src/pipline1.v ../src/regfile.v ../src/Riscv141_backup.v ../src/Riscv141.v ../src/riscv_arbiter.v ../src/riscv_test_harness.v ../src/riscv_top.v ../src/shift.v ../src/sign_extender_br_str.v ../src/sign_extender_DM.v ../src/sign_extender_JAL.v ../src/sign_extender_load_JALR.v ../src/sum.v ../src/zero_extender_CSRW.v ../src/zero_extender_DM.v ../src/zero_extender_LUI.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/sram.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v "/>
+		<vcsCompileOptions text="/share/instsww/synopsys/G-2012.09/amd64/bin/vcs1 -Mcc=gcc -Mcplusplus=g++ -Masflags= -Mcfl= -pipe -O -I/share/instsww/synopsys/G-2012.09/include  -Mldflags= -Wl,-E  -Mout=simv-vlsi-debug -Mamsrun= -Mvcsaceobjs= -Mobjects= /share/instsww/synopsys/G-2012.09/amd64/lib/libvirsim.so /share/instsww/synopsys/G-2012.09/amd64/lib/liberrorinf.so /share/instsww/synopsys/G-2012.09/amd64/lib/libsnpsmalloc.so  -Msaverestoreobj=/share/instsww/synopsys/G-2012.09/amd64/lib/vcs_save_restore_new.o -Mcrt0= -Mcrtn= -Mcsrc= -Msyslibs=-ldl -lm  -full64 -Xnotice -line +lint=all,noVCDE,noONGS,noUI +warn=noTMR -error=PCWM-L -timescale=1ns/10ps -q +v2k +vcs+lic+wait +vcs+initreg+0 +vcs+initmem+0 +define+no_cache_mem -top rocketTestHarness -Xcbug=0x1 +define+INPUT_DELAY=0.24 +define+CLOCK_PERIOD=1.6 -o simv-vlsi-debug -top rocketTestHarness +define+DEBUG -Xcbug=0x1 -pp_used +vcsd +itf+/share/instsww/synopsys/G-2012.09/amd64/lib/vcsdp.tab +cli+1 -debug=4 +memcbk +rad +vpi -gen_obj +incdir+../src ../src/ALUop.vh ../src/const.vh ../src/Opcode.vh ../src/ALUdec.v ../src/ALUTestbench.v ../src/ALUTestVectorTestbench.v ../src/ALU.v ../src/backup_mem.v ../src/Cache.v ../src/controller.v ../src/control.v ../src/datapath.v ../src/Memory141.v ../src/mux_2x1.v ../src/mux_3x1.v ../src/mux_4x1.v ../src/no_cache_mem.v ../src/pipline1.v ../src/regfile.v ../src/Riscv141_backup.v ../src/Riscv141.v ../src/riscv_arbiter.v ../src/riscv_test_harness.v ../src/riscv_top.v ../src/shift.v ../src/sign_extender_br_str.v ../src/sign_extender_DM.v ../src/sign_extender_JAL.v ../src/sign_extender_load_JALR.v ../src/sum.v ../src/zero_extender_CSRW.v ../src/zero_extender_DM.v ../src/zero_extender_LUI.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/sram.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v "/>
 		<!-- File list for the whole design -->
 		<fileList>
 			<file fid="0" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/sign_extender_JAL.v" />
@@ -64,7 +64,7 @@
 		</encryptedCodesList>
 		<!-- Inactive codes list for the whole design -->
 		<inactiveCodesList>
-			<inactiveCodes fid="10" lineno="113:121 130:130 136:136 151:151 155:175 250:253" />
+			<inactiveCodes fid="10" lineno="138:138 151:151 250:253" />
 			<inactiveCodes fid="25" lineno="79:155" />
 		</inactiveCodesList>
 		<!-- Compile options UUM based -->
@@ -101,8 +101,8 @@
 			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="10" lineno="28" defID="0" defLine="0" value="8"  vip="false"/>
 			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="10" lineno="29" defID="24" defLine="4" value="4"  vip="false"/>
 			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="10" lineno="93" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="VCDPLUSCLOSE" module="rocketTestHarness" sourceID="10" lineno="208" defID="10" defLine="138" value="9"  vip="false"/>
-			<macro name="VCDPLUSCLOSE" module="rocketTestHarness" sourceID="10" lineno="215" defID="10" defLine="138" value="9"  vip="false"/>
+			<macro name="VCDPLUSCLOSE" module="rocketTestHarness" sourceID="10" lineno="208" defID="10" defLine="136" value="9"  vip="false"/>
+			<macro name="VCDPLUSCLOSE" module="rocketTestHarness" sourceID="10" lineno="215" defID="10" defLine="136" value="9"  vip="false"/>
 			<macro name="OPC_LUI" module="ALUTestbench" sourceID="11" lineno="100" defID="2" defLine="15" value="10"  vip="false"/>
 			<macro name="OPC_AUIPC" module="ALUTestbench" sourceID="11" lineno="108" defID="2" defLine="16" value="11"  vip="false"/>
 			<macro name="OPC_BRANCH" module="ALUTestbench" sourceID="11" lineno="115" defID="2" defLine="23" value="12"  vip="false"/>
@@ -455,10 +455,10 @@
 		</macroDefinitionList>
 		<!-- Macro value list for the whole design --> 
 		<macroValueList>
-			<mv i="9" n="" />
 			<mv i="32" n="256" />
 			<mv i="38" n="34" />
 			<mv i="39" n="16" />
+			<mv i="9" n="$vcdplusclose; $dumpoff;" />
 			<mv i="17" n="3&apos;b110" />
 			<mv i="24" n="( 
 (DEPTH) &gt; 2**30 ? 31 : 
