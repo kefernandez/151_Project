@@ -17,14 +17,12 @@ module ALUdec(
   input             add_rshift_type,
   output reg [3:0]  ALUop
 );
-   reg i;
-   initial i<=0;
- 
+
    always@(opcode or funct or add_rshift_type) begin
     
       
       case(opcode)
-	/*7'b1100011: begin //Branches
+	7'b1100011: begin //Branches
 	   case(funct) 
 	     3'b000: ALUop <= 4'b0000; //BEQ ALU checks if rs1 == rs2 
 	     3'b001: ALUop <= 4'b0001; //BNE ALU checks if rs1 != rs2
@@ -32,10 +30,10 @@ module ALUdec(
 	     3'b110: ALUop <= 4'b0011; //BLTU ALU checks if rs1 < rs2 (unsigned)
 	     3'b101: ALUop <= 4'b0100; //BGE ALU checks if rs1 > rs2 (signed)
 	     3'b111: ALUop <= 4'b0101; //BGEU ALU checks if rs1 > rs2 (unsigned)
-	   endcase end */
+	   endcase end 
 	
-	// 7'b0000011, 7'b0100011: begin  //For loads LB, LH, LW, LBU, LHU and stores SB, SH, SW
-	//   ALUop <= 4'b0110; end //ALU does:  rs1 + 32 bit immediate signed extended
+	7'b0000011, 7'b0100011: begin  //For loads LB, LH, LW, LBU, LHU and stores SB, SH, SW
+	   ALUop <= 4'b0110; end //ALU does:  rs1 + 32 bit immediate signed extended
    
 	7'b0010011: begin //for Logic Immediates 
 	   case(funct)
