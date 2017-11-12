@@ -142,7 +142,7 @@ module ALUTestbench();
 
        // AND function
        opcode = `OPC_ARI_RTYPE;
-       funct = FNC_AND;
+       funct = `FNC_AND;
        A = 4'hFFFE;
        B = 4'h0001;
        REFout = 4'h0000;
@@ -152,7 +152,7 @@ module ALUTestbench();
 
        // OR function
        opcode = `OPC_ARI_RTYPE;
-       funct = FNC_OR;
+       funct = `FNC_OR;
        A = 4'hFFFF;
        B = 4'h7641;
        REFout = 4'hFFFF;
@@ -162,7 +162,7 @@ module ALUTestbench();
 
        // XOR function
        opcode = `OPC_ARI_RTYPE;
-       funct = FNC_XOR;
+       funct = `FNC_XOR;
        A = 4'hFFFF;
        B = 4'hE5C1;
        REFout = 4'h1C5E;
@@ -172,7 +172,7 @@ module ALUTestbench();
 
        // SLL function
        opcode = `OPC_ARI_RTYPE;
-       funct = FNC_SLL;
+       funct = `FNC_SLL;
        A = 4'hFFFF;
        B = 4'h0001;
        REFout = 4'hFFFE;
@@ -182,7 +182,7 @@ module ALUTestbench();
 
        // SLT function
        opcode = `OPC_ARI_RTYPE;
-       funct = FNC_SLT;
+       funct = `FNC_SLT;
        A = 4'h0FFF;
        B = 4'h00FF;
        REFout = 4'h0000;
@@ -192,7 +192,7 @@ module ALUTestbench();
 
        // SLTU function
        opcode = `OPC_ARI_RTYPE;
-       funct = FNC_SLTU;
+       funct = `FNC_SLTU;
        A = 4'hFFFF;
        B = 4'h0000;
        REFout = 4'h0000;
