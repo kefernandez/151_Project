@@ -30,12 +30,13 @@ module control (input clk,
                 reg [6:0] opcode;
    		reg [2:0] funct3;
 
-   		parameter WD_0 = 0;
-   		parameter WD_1 = 0;
-   		parameter DM_0 = 0;
-   		parameter DM_1 = 0;
-   		parameter Branch_0 = 0;
-   		parameter Branch_1 = 0;
+   		reg WD_0 = 1'b0;
+   		reg WD_1 = 1'b0;
+   		reg DM_0 = 1'b0;
+   		reg DM_1 = 1'b0;
+   		reg Branch_0 = 1'b0;
+   		reg Branch_1 = 1'b0;
+   		reg [3:0] WByteEn_DM;
    
 		/////////////////
 		// Internal logic
@@ -71,9 +72,9 @@ module control (input clk,
 		   // Write byte enable data cache control
    		   if ( opcode == 7'b0100011 ) begin
 		      case (funct3)
-			0: assign WByteEn_DM = 4'b0001;
-			1: assign WByteEn_DM = 4'b0011;
-			2: assign WByteEn_DM = 4'b1111;
+			0: WByteEn_DM = 4'b0001;
+			1: WByteEn_DM = 4'b0011;
+			2: WByteEn_DM = 4'b1111;
 		      endcase
 		   end
 		end
