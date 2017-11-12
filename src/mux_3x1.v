@@ -6,8 +6,8 @@ module mux_3x1(
 );
 
    always@(*)begin
-      if(sel == 2'b00) Out <= In0;
-      else if (sel == 2'b01) Out <= In1;
-      else Out <= In2;
+      if(sel == 2'b00) out <= in0;
+      else if (sel == 2'b01) out <= in1;
+      else out <= in2;
    end
 endmodule
