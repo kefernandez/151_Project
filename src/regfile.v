@@ -67,119 +67,119 @@ module regfile(input clk,
 	       
 	       always @ (posedge clk) begin
 	       // set all non-x0 outputs equal to inputs
-	       x1_out <= x1_in;
-	       x2_out <= x2_in;
-	       x3_out <= x3_in;
-	       x4_out <= x4_in;
-	       x5_out <= x5_in;
-	       x6_out <= x6_in;
-	       x7_out <= x7_in;
-	       x8_out <= x8_in;
-	       x9_out <= x9_in;
-	       x10_out <= x10_in;
-	       x11_out <= x11_in;
-	       x12_out <= x12_in;
-	       x13_out <= x13_in;
-	       x14_out <= x14_in;
-	       x15_out <= x15_in;
-	       x16_out <= x16_in;
-	       x17_out <= x17_in;
-	       x18_out <= x18_in;
-	       x19_out <= x19_in;
-	       x20_out <= x20_in;
-	       x21_out <= x21_in;
-	       x22_out <= x22_in;
-	       x23_out <= x23_in;
-	       x24_out <= x24_in;
-	       x25_out <= x25_in;
-	       x26_out <= x26_in;
-	       x27_out <= x27_in;
-	       x28_out <= x28_in;
-	       x29_out <= x29_in;
-	       x30_out <= x30_in;
-	       x31_out <= x31_in;
-	       end // always @ (posedge clk)
+	       x1_out = x1_in;
+	       x2_out = x2_in;
+	       x3_out = x3_in;
+	       x4_out = x4_in;
+	       x5_out = x5_in;
+	       x6_out = x6_in;
+	       x7_out = x7_in;
+	       x8_out = x8_in;
+	       x9_out = x9_in;
+	       x10_out = x10_in;
+	       x11_out = x11_in;
+	       x12_out = x12_in;
+	       x13_out = x13_in;
+	       x14_out = x14_in;
+	       x15_out = x15_in;
+	       x16_out = x16_in;
+	       x17_out = x17_in;
+	       x18_out = x18_in;
+	       x19_out = x19_in;
+	       x20_out = x20_in;
+	       x21_out = x21_in;
+	       x22_out = x22_in;
+	       x23_out = x23_in;
+	       x24_out = x24_in;
+	       x25_out = x25_in;
+	       x26_out = x26_in;
+	       x27_out = x27_in;
+	       x28_out = x28_in;
+	       x29_out = x29_in;
+	       x30_out = x30_in;
+	       x31_out = x31_in;
+	       //end // always @ (posedge clk)
 
 
 	       // Continuous assignment signal routing
 
 	       // set x0 output to zero always
-	       assign x0_out = 4'h0000;
+	       x0_out = 16'h0000;
 	       
 	       // Register 1 output
 	       case (RAddr1_RF)
-	       0: assign RD1_RF = x0_out;
-	       1: assign RD1_RF = x1_out;
-	       2: assign RD1_RF = x2_out;
-	       3: assign RD1_RF = x3_out;
-	       4: assign RD1_RF = x4_out;
-	       5: assign RD1_RF = x5_out;
-	       6: assign RD1_RF = x6_out;
-	       7: assign RD1_RF = x7_out;
-	       8: assign RD1_RF = x8_out;
-	       9: assign RD1_RF = x9_out;
-	       10: assign RD1_RF = x10_out;
-	       11: assign RD1_RF = x11_out;
-	       12: assign RD1_RF = x12_out;
-	       13: assign RD1_RF = x13_out;
-	       14: assign RD1_RF = x14_out;
-	       15: assign RD1_RF = x15_out;
-	       16: assign RD1_RF = x16_out;
-	       17: assign RD1_RF = x17_out;
-	       18: assign RD1_RF = x18_out;
-	       19: assign RD1_RF = x19_out;
-	       20: assign RD1_RF = x20_out;
-	       21: assign RD1_RF = x21_out;
-	       22: assign RD1_RF = x22_out;
-	       23: assign RD1_RF = x23_out;
-	       24: assign RD1_RF = x24_out;
-	       25: assign RD1_RF = x25_out;
-	       26: assign RD1_RF = x26_out;
-	       27: assign RD1_RF = x27_out;
-	       28: assign RD1_RF = x28_out;
-	       29: assign RD1_RF = x29_out;
-	       30: assign RD1_RF = x30_out;
-	       31: assign RD1_RF = x31_out;
+	       0: RD1_RF = x0_out;
+	       1: RD1_RF = x1_out;
+	       2: RD1_RF = x2_out;
+	       3: RD1_RF = x3_out;
+	       4: RD1_RF = x4_out;
+	       5: RD1_RF = x5_out;
+	       6: RD1_RF = x6_out;
+	       7: RD1_RF = x7_out;
+	       8: RD1_RF = x8_out;
+	       9: RD1_RF = x9_out;
+	       10: RD1_RF = x10_out;
+	       11: RD1_RF = x11_out;
+	       12: RD1_RF = x12_out;
+	       13: RD1_RF = x13_out;
+	       14: RD1_RF = x14_out;
+	       15: RD1_RF = x15_out;
+	       16: RD1_RF = x16_out;
+	       17: RD1_RF = x17_out;
+	       18: RD1_RF = x18_out;
+	       19: RD1_RF = x19_out;
+	       20: RD1_RF = x20_out;
+	       21: RD1_RF = x21_out;
+	       22: RD1_RF = x22_out;
+	       23: RD1_RF = x23_out;
+	       24: RD1_RF = x24_out;
+	       25: RD1_RF = x25_out;
+	       26: RD1_RF = x26_out;
+	       27: RD1_RF = x27_out;
+	       28: RD1_RF = x28_out;
+	       29: RD1_RF = x29_out;
+	       30: RD1_RF = x30_out;
+	       31: RD1_RF = x31_out;
 	       endcase
 
 	       // Register 2 output
 	       case (RAddr2_RF)
-	       0: assign RD2_RF = x0_out;
-	       1: assign RD2_RF = x1_out;
-	       2: assign RD2_RF = x2_out;
-	       3: assign RD2_RF = x3_out;
-	       4: assign RD2_RF = x4_out;
-	       5: assign RD2_RF = x5_out;
-	       6: assign RD2_RF = x6_out;
-	       7: assign RD2_RF = x7_out;
-	       8: assign RD2_RF = x8_out;
-	       9: assign RD2_RF = x9_out;
-	       10: assign RD2_RF = x10_out;
-	       11: assign RD2_RF = x11_out;
-	       12: assign RD2_RF = x12_out;
-	       13: assign RD2_RF = x13_out;
-	       14: assign RD2_RF = x14_out;
-	       15: assign RD2_RF = x15_out;
-	       16: assign RD2_RF = x16_out;
-	       17: assign RD2_RF = x17_out;
-	       18: assign RD2_RF = x18_out;
-	       19: assign RD2_RF = x19_out;
-	       20: assign RD2_RF = x20_out;
-	       21: assign RD2_RF = x21_out;
-	       22: assign RD2_RF = x22_out;
-	       23: assign RD2_RF = x23_out;
-	       24: assign RD2_RF = x24_out;
-	       25: assign RD2_RF = x25_out;
-	       26: assign RD2_RF = x26_out;
-	       27: assign RD2_RF = x27_out;
-	       28: assign RD2_RF = x28_out;
-	       29: assign RD2_RF = x29_out;
-	       30: assign RD2_RF = x30_out;
-	       31: assign RD2_RF = x31_out;
+	       0:  RD2_RF = x0_out;
+	       1:  RD2_RF = x1_out;
+	       2:  RD2_RF = x2_out;
+	       3:  RD2_RF = x3_out;
+	       4:  RD2_RF = x4_out;
+	       5:  RD2_RF = x5_out;
+	       6:  RD2_RF = x6_out;
+	       7:  RD2_RF = x7_out;
+	       8:  RD2_RF = x8_out;
+	       9:  RD2_RF = x9_out;
+	       10: RD2_RF = x10_out;
+	       11: RD2_RF = x11_out;
+	       12: RD2_RF = x12_out;
+	       13: RD2_RF = x13_out;
+	       14: RD2_RF = x14_out;
+	       15: RD2_RF = x15_out;
+	       16: RD2_RF = x16_out;
+	       17: RD2_RF = x17_out;
+	       18: RD2_RF = x18_out;
+	       19: RD2_RF = x19_out;
+	       20: RD2_RF = x20_out;
+	       21: RD2_RF = x21_out;
+	       22: RD2_RF = x22_out;
+	       23: RD2_RF = x23_out;
+	       24: RD2_RF = x24_out;
+	       25: RD2_RF = x25_out;
+	       26: RD2_RF = x26_out;
+	       27: RD2_RF = x27_out;
+	       28: RD2_RF = x28_out;
+	       29: RD2_RF = x29_out;
+	       30: RD2_RF = x30_out;
+	       31: RD2_RF = x31_out;
 	       endcase
 
 	       // Register inputs
-	       always @ (posedge clk) begin
+	      // always @ (posedge clk) begin
 	       //(WrEn & WAddr == 0) ? x0_in = WD_RF : x0_in = x0_out; // this line seems unnecessary
 	       (WrEn & WAddr == 1) ? x1_in = WD_RF : x1_in <= x1_out;
 	       (WrEn & WAddr == 2) ? x2_in = WD_RF : x2_in <= x2_out;
