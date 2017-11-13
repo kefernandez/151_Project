@@ -5,6 +5,10 @@ module mux_PC(
     output reg [31:0] out
 );
 
+   /*always @ (posedge clk) begin
+      if (reset) out <= 32'h2000;
+   end*/
+   
    always @ (*) begin
       if (reset) out <= 32'h2000;
       else if (sel) out <= in1;

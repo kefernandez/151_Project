@@ -89,8 +89,9 @@
 /share/instsww/synopsys/G-2012.09/amd64/bin/vcs1
 rocketTestHarness
 rocketTestHarness
-92
+110
 sysc_uni_pwd=/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl
+XMODIFIERS=@im=none
 XKEYSYMDB=/usr/share/X11/XKeysymDB
 XILINX_VERSION=14.6
 XILINX_PLANAHEAD=/opt/Xilinx/14.6/ISE_DS/PlanAhead
@@ -99,8 +100,11 @@ XILINX_EDK=/opt/Xilinx/14.6/ISE_DS/EDK
 XILINX_DSP=/opt/Xilinx/14.6/ISE_DS/ISE
 XILINXD_LICENSE_FILE=2100@license-srv.eecs.berkeley.edu
 XILINX=/opt/Xilinx/14.6/ISE_DS/ISE
+XDG_SESSION_COOKIE=4220acf1083384b30744869500000010-1510593160.271136-947906980
 XA_HOME=/home/ff/eecs151/tools/xa/G-2012.06-SP2
 XA_64=1
+XAUTHORITY=/var/run/gdm/auth-for-eecs151-aai-CoJgAY/database
+WINDOWPATH=11
 VMR_MODE_FLAG=64
 VCS_PATH=/share/instsww/synopsys/G-2012.09/bin
 VCS_MODE_FLAG=64
@@ -109,6 +113,7 @@ VCS_DEPTH=0
 VCS_ARG_ADDED_FOR_TMP=1
 VCS_ARCH_OVERRIDE=linux
 VCS_ARCH=amd64
+USERNAME=eecs151-aai
 UNAME=/bin/uname
 UCB_VLSI_HOME=/home/ff/eecs151
 UCB_VLSI_HOME2=/home/ff/eecs151
@@ -118,18 +123,15 @@ SYNOPSYS_SYSTYPE=linux
 SYNOPSYS_ROOT=/home/ff/cs250/tools/synopsys
 SYNOPSYS_NCX_ROOT=/home/ff/eecs151/tools/ncx/G-2012.06-SP3
 STAR_HOME=/home/ff/eecs151/tools/starrcxt/G-2012.06-SP3
-SSH_TTY=/dev/pts/0
-SSH_CONNECTION=24.23.228.39 60903 128.32.40.237 22
-SSH_CLIENT=24.23.228.39 60903 22
+SSH_AUTH_SOCK=/tmp/keyring-mO6iqa/socket.ssh
 SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass
 SNPSLMD_LICENSE_FILE=27005@scotland.eecs.berkeley.edu:1701@sunv40z-1.eecs.berkeley.edu:1701@sunv20z-1.eecs.berkeley.edu:/share/instsww/synopsys/G-2012.09/flexlm//license.dat
+SESSION_MANAGER=local/unix:@/tmp/.ICE-unix/2915,unix/unix:/tmp/.ICE-unix/2915
 SERIALTTY=/dev/ttyUSB0
-SELINUX_USE_CURRENT_RANGE=
-SELINUX_ROLE_REQUESTED=
-SELINUX_LEVEL_REQUESTED=
 SCRNAME=vcs
 SCRIPT_NAME=vcs
 RUNAS=/share/b/runas/x86_64
+QT_IM_MODULE=xim
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
 QTDIR=/usr/lib64/qt-3.3
@@ -137,6 +139,7 @@ PT_PATH=/home/ff/cs250/tools/synopsys/pt/current/bin
 PT_HOME=/home/ff/cs250/tools/synopsys/pt/current
 OVA_UUM=0
 OS=Linux
+ORBIT_SOCKETDIR=/tmp/orbit-eecs151-aai
 OA_HOME=/share/instsww/cadence/IC615.151/share/oa/
 NNTPSERVER=news.csua.berkeley.edu
 NCX_HOME=/home/ff/eecs151/tools/ncx/G-2012.06-SP3
@@ -160,20 +163,35 @@ KDEDIRS=/usr
 IPDK_SYN_28NM=/home/ff/eecs151/synopsys-32nm
 INSTMANPATH=/usr/local/man:/usr/sww/man:/usr/man:/usr/share/man:/usr/java/man:/share/b/grading/man:/home/aa/projects/scheme/lib/man
 INSTALLER_PATH=/home/ff/cs250/tools/synopsys/installer/current
+IMSETTINGS_MODULE=none
+IMSETTINGS_INTEGRATE_DESKTOP=yes
 ICC_PATH=/home/ff/eecs151/tools/icc/bin
 ICC_HOME=/home/ff/eecs151/tools/icc
 HSP_HOME=/home/ff/eecs151/tools/hspice/G-2012.06-SP1/hspice
 HSPICE_HOME=/home/ff/eecs151/tools/hspice/G-2012.06-SP1
-HOSTNAME=c125m-23.EECS.Berkeley.EDU
+HOSTNAME=c125m-11.EECS.Berkeley.EDU
 HISTCONTROL=ignoredups
 HERCULES_HOME_DIR=/home/ff/eecs151/tools/hercules/B-2008.09-SP5
 G_BROKEN_FILENAMES=1
+GTK_RC_FILES=/etc/gtk/gtkrc:/home/cc/eecs151/fa17/class/eecs151-aai/.gtkrc-1.2-gnome2
+GNOME_KEYRING_SOCKET=/tmp/keyring-mO6iqa/socket
+GNOME_KEYRING_PID=2853
+GNOME_DESKTOP_SESSION_ID=this-is-deprecated
+GIO_LAUNCHED_DESKTOP_FILE_PID=3789
+GIO_LAUNCHED_DESKTOP_FILE=/usr/share/applications/Terminal.desktop
+GDM_LANG=en_US.UTF-8
+GDM_KEYBOARD_LAYOUT=us
+GDMSESSION=gnome
 FORMALITY_HOME=/home/ff/cs250/tools/synopsys/fm/current
 FORMALITY_BIN=/home/ff/cs250/tools/synopsys/fm/current/bin
+DESKTOP_STARTUP_ID=
+DESKTOP_SESSION=gnome
 DC_PATH=/share/instsww/synopsys/J-2014.09-SP3/bin
 DC_HOME=/share/instsww/synopsys/J-2014.09-SP3
+DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-EodpLgq7NU,guid=3b1ec9d71e2757a726c12744001b0492
 CVS_RSH=ssh
 CONFIG_SHELL=/usr/bin/ksh
+COLORTERM=Terminal
 CHISEL=/home/ff/cs250/install/chisel
 CDS_ROOT=/share/instsww/cadence/IC615.151
 CDS_Netlisting_Mode=Analog
@@ -206,7 +224,7 @@ ARCH=x86_64
 1510541072 ../src/regfile_old.v
 1510546366 ../src/pipeline1.v
 1508733828 ../src/no_cache_mem.v
-1510552621 ../src/mux_PC.v
+1510594548 ../src/mux_PC.v
 1510448376 ../src/mux_4x1.v
 1510448376 ../src/mux_3x1.v
 1510447453 ../src/mux_2x1.v
@@ -229,4 +247,4 @@ ARCH=x86_64
 1345792743 /share/instsww/synopsys/G-2012.09/amd64/lib/libvirsim.so
 1345792505 /share/instsww/synopsys/G-2012.09/amd64/lib/liberrorinf.so
 1345792224 /share/instsww/synopsys/G-2012.09/amd64/lib/libsnpsmalloc.so
-1510553158 simv-vlsi-debug.daidir
+1510594568 simv-vlsi-debug.daidir
