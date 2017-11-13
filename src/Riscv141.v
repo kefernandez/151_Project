@@ -22,7 +22,7 @@ module Riscv141(
    wire [31:0]  PCprime, PCplus4_EX, PCplus4_imm_WB;//reg 	       
   	       
    //Reg file related wires
-   wire [4:0] RAddr1_ID, RAddr2_ID, WAddr_ID;
+   wire [4:0] RAddr1_ID, RAddr2_ID, WAddr_ID, WAddr_WB;
    //coming from IM cache - need assign statements
    wire [31:0] write_data_reg_EX, RF_data1_ID, RF_data2_ID;
    //to and from reg file
@@ -287,9 +287,11 @@ module Riscv141(
     );
 
    //18
-   regfile regfile1(.RAddr1_RF(RAddr1_ID), 
+   regfile regfile1(.clk(clk),
+		    .reset(reset),
+		    .RAddr1_RF(RAddr1_ID), 
 		    .RAddr2_RF(RAddr2_ID), 
-		    .WAddr_RF(WAddr_ID), 
+		    .WAddr_RF(WAddr_WB), 
 		    .WrEn_RF(WrEn_RF_WB),
 		    .WD_RF(write_data_reg_ID), 
 		    .RD1_RF(RF_data1_ID), 
@@ -319,9 +321,11 @@ module Riscv141(
 		      .csrwi_imm_ID(csrwi_imm_ID), 
 		      .RF_data1_ID(RF_data1_ID), 
 		      .RF_data2_ID(RF_data2_ID), 
-		      .RAddr2_ID(RAddr2_ID),  
+		      .RAddr2_ID(RAddr2_ID),
+		      .WAddr_ID(WAddr_ID),
 		      .write_data_reg_EX(write_data_reg_EX), 
-		      .csrwi_imm_EX(csrwi_imm_EX), 
+		      .csrwi_imm_EX(csrwi_imm_EX),
+		      .WAddr_WB(WAddr_WB),
 		      .RF_data1_EX(RF_data1_EX), 
 		      .RF_data2_EX(RF_data2_EX), 
 		      .RAddr2_EX(RAddr2_EX), 
@@ -338,7 +342,6 @@ module Riscv141(
 		      .PCplus4_EX(PCplus4_EX), 
 		      .DM_ALU_data_WB(DM_ALU_data_WB), 
 		      .PCplus4_imm_prime_EX(PCplus4_imm_prime_EX), 
-		      .RF_data2_EX(RF_data2_EX),
 		      .DM_ALU_data_EX(DM_ALU_data_EX), 
 		      .PCplus4_imm_WB(PCplus4_imm_WB), 
 		      .DM_write(DM_write),

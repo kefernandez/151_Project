@@ -1,4 +1,5 @@
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/sign_extender_JAL.v
+/home/cc/eecs151/fa17/class/eecs151-aai/project/src/regfile_old.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/mux_4x1.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/Opcode.vh
 /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v
@@ -17,7 +18,6 @@
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUdec.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUTestVectorTestbench.v
 /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v
-/home/cc/eecs151/fa17/class/eecs151-aai/project/src/pipline1.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUop.vh
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALU.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/backup_mem.v
@@ -33,4 +33,5 @@
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/riscv_top.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/datapath.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/mux_3x1.v
+/home/cc/eecs151/fa17/class/eecs151-aai/project/src/pipeline1.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/zero_extender_DM.v

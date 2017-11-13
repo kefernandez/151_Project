@@ -3,33 +3,33 @@
 	<head>
 		<title>VCS dump file for DVE debugging</title>
 		<vcsVersion>G-2012.09_Full64</vcsVersion>
-		<dateCreated>Sun Nov 12 10:05:57 2017</dateCreated>
+		<dateCreated>Sun Nov 12 20:25:50 2017</dateCreated>
 	</head>
 	<body>
 		<!-- VCS compile options -->
-		<vcsCompileOptions text="/share/instsww/synopsys/G-2012.09/amd64/bin/vcs1 -Mcc=gcc -Mcplusplus=g++ -Masflags= -Mcfl= -pipe -O -I/share/instsww/synopsys/G-2012.09/include  -Mldflags= -Wl,-E  -Mout=simv-vlsi-debug -Mamsrun= -Mvcsaceobjs= -Mobjects= /share/instsww/synopsys/G-2012.09/amd64/lib/libvirsim.so /share/instsww/synopsys/G-2012.09/amd64/lib/liberrorinf.so /share/instsww/synopsys/G-2012.09/amd64/lib/libsnpsmalloc.so  -Msaverestoreobj=/share/instsww/synopsys/G-2012.09/amd64/lib/vcs_save_restore_new.o -Mcrt0= -Mcrtn= -Mcsrc= -Msyslibs=-ldl -lm  -full64 -Xnotice -line +lint=all,noVCDE,noONGS,noUI +warn=noTMR -error=PCWM-L -timescale=1ns/10ps -q +v2k +vcs+lic+wait +vcs+initreg+0 +vcs+initmem+0 +define+no_cache_mem -top rocketTestHarness -Xcbug=0x1 +define+INPUT_DELAY=0.24 +define+CLOCK_PERIOD=1.6 -o simv-vlsi-debug -top rocketTestHarness +define+DEBUG -Xcbug=0x1 -pp_used +vcsd +itf+/share/instsww/synopsys/G-2012.09/amd64/lib/vcsdp.tab +cli+1 -debug=4 +memcbk +rad +vpi -gen_obj +incdir+../src ../src/ALUop.vh ../src/const.vh ../src/Opcode.vh ../src/ALUdec.v ../src/ALUTestbench.v ../src/ALUTestVectorTestbench.v ../src/ALU.v ../src/backup_mem.v ../src/Cache.v ../src/controller.v ../src/control.v ../src/datapath.v ../src/Memory141.v ../src/mux_2x1.v ../src/mux_3x1.v ../src/mux_4x1.v ../src/no_cache_mem.v ../src/pipline1.v ../src/regfile.v ../src/Riscv141_backup.v ../src/Riscv141.v ../src/riscv_arbiter.v ../src/riscv_test_harness.v ../src/riscv_top.v ../src/shift.v ../src/sign_extender_br_str.v ../src/sign_extender_DM.v ../src/sign_extender_JAL.v ../src/sign_extender_load_JALR.v ../src/sum.v ../src/zero_extender_CSRW.v ../src/zero_extender_DM.v ../src/zero_extender_LUI.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/sram.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v "/>
+		<vcsCompileOptions text="/share/instsww/synopsys/G-2012.09/amd64/bin/vcs1 -Mcc=gcc -Mcplusplus=g++ -Masflags= -Mcfl= -pipe -O -I/share/instsww/synopsys/G-2012.09/include  -Mldflags= -Wl,-E  -Mout=simv-vlsi-debug -Mamsrun= -Mvcsaceobjs= -Mobjects= /share/instsww/synopsys/G-2012.09/amd64/lib/libvirsim.so /share/instsww/synopsys/G-2012.09/amd64/lib/liberrorinf.so /share/instsww/synopsys/G-2012.09/amd64/lib/libsnpsmalloc.so  -Msaverestoreobj=/share/instsww/synopsys/G-2012.09/amd64/lib/vcs_save_restore_new.o -Mcrt0= -Mcrtn= -Mcsrc= -Msyslibs=-ldl -lm  -full64 -Xnotice -line +lint=all,noVCDE,noONGS,noUI +warn=noTMR -error=PCWM-L -timescale=1ns/10ps -q +v2k +vcs+lic+wait +vcs+initreg+0 +vcs+initmem+0 +define+no_cache_mem -top rocketTestHarness -Xcbug=0x1 +define+INPUT_DELAY=0.24 +define+CLOCK_PERIOD=1.6 -o simv-vlsi-debug -top rocketTestHarness +define+DEBUG -Xcbug=0x1 -pp_used +vcsd +itf+/share/instsww/synopsys/G-2012.09/amd64/lib/vcsdp.tab +cli+1 -debug=4 +memcbk +rad +vpi -gen_obj +incdir+../src ../src/ALUop.vh ../src/const.vh ../src/Opcode.vh ../src/ALUdec.v ../src/ALUTestbench.v ../src/ALUTestVectorTestbench.v ../src/ALU.v ../src/backup_mem.v ../src/Cache.v ../src/controller.v ../src/control.v ../src/datapath.v ../src/Memory141.v ../src/mux_2x1.v ../src/mux_3x1.v ../src/mux_4x1.v ../src/no_cache_mem.v ../src/pipeline1.v ../src/regfile_old.v ../src/regfile.v ../src/Riscv141_backup.v ../src/Riscv141.v ../src/riscv_arbiter.v ../src/riscv_test_harness.v ../src/riscv_top.v ../src/shift.v ../src/sign_extender_br_str.v ../src/sign_extender_DM.v ../src/sign_extender_JAL.v ../src/sign_extender_load_JALR.v ../src/sum.v ../src/zero_extender_CSRW.v ../src/zero_extender_DM.v ../src/zero_extender_LUI.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/sram.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v "/>
 		<!-- File list for the whole design -->
 		<fileList>
-			<file fid="0" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/sign_extender_JAL.v" />
-			<file fid="1" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/mux_4x1.v" />
-			<file fid="2" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/Opcode.vh" />
-			<file fid="3" path="/home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v" />
-			<file fid="4" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/Cache.v" />
-			<file fid="5" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/shift.v" />
-			<file fid="6" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/sign_extender_br_str.v" />
-			<file fid="8" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/zero_extender_CSRW.v" />
-			<file fid="7" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/sign_extender_DM.v" />
-			<file fid="9" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/riscv_arbiter.v" />
-			<file fid="10" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/riscv_test_harness.v" />
-			<file fid="11" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUTestbench.v" />
-			<file fid="12" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/zero_extender_LUI.v" />
-			<file fid="13" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/Riscv141.v" />
-			<file fid="14" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/sum.v" />
-			<file fid="15" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/no_cache_mem.v" />
-			<file fid="16" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUdec.v" />
-			<file fid="17" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUTestVectorTestbench.v" />
+			<file fid="1" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/sign_extender_JAL.v" />
+			<file fid="0" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/regfile_old.v" />
+			<file fid="2" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/mux_4x1.v" />
+			<file fid="3" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/Opcode.vh" />
+			<file fid="4" path="/home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW256x128_new.v" />
+			<file fid="5" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/Cache.v" />
+			<file fid="6" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/shift.v" />
+			<file fid="7" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/sign_extender_br_str.v" />
+			<file fid="9" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/zero_extender_CSRW.v" />
+			<file fid="8" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/sign_extender_DM.v" />
+			<file fid="10" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/riscv_arbiter.v" />
+			<file fid="11" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/riscv_test_harness.v" />
+			<file fid="12" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUTestbench.v" />
+			<file fid="13" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/zero_extender_LUI.v" />
+			<file fid="14" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/Riscv141.v" />
+			<file fid="15" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/sum.v" />
+			<file fid="16" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/no_cache_mem.v" />
+			<file fid="17" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUdec.v" />
+			<file fid="18" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUTestVectorTestbench.v" />
 			<file fid="19" path="/home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v" />
-			<file fid="18" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/pipline1.v" />
 			<file fid="20" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUop.vh" />
 			<file fid="21" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALU.v" />
 			<file fid="22" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/backup_mem.v" />
@@ -45,18 +45,19 @@
 			<file fid="32" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/riscv_top.v" />
 			<file fid="33" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/datapath.v" />
 			<file fid="34" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/mux_3x1.v" />
-			<file fid="35" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/zero_extender_DM.v" />
+			<file fid="35" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/pipeline1.v" />
+			<file fid="36" path="/home/cc/eecs151/fa17/class/eecs151-aai/project/src/zero_extender_DM.v" />
 		</fileList>
 		<!-- Include file list for the whole design -->
 		<includeFileList>
-			<incfile fid="11" lineno="13" includeID="2" />
-			<incfile fid="16" lineno="11" includeID="2" />
-			<incfile fid="16" lineno="12" includeID="20" />
-			<incfile fid="21" lineno="13" includeID="2" />
+			<incfile fid="12" lineno="13" includeID="3" />
+			<incfile fid="17" lineno="11" includeID="3" />
+			<incfile fid="17" lineno="12" includeID="20" />
+			<incfile fid="21" lineno="13" includeID="3" />
 			<incfile fid="21" lineno="14" includeID="20" />
-			<incfile fid="28" lineno="1" includeID="2" />
+			<incfile fid="28" lineno="1" includeID="3" />
 			<incfile fid="28" lineno="2" includeID="24" />
-			<incfile fid="33" lineno="1" includeID="2" />
+			<incfile fid="33" lineno="1" includeID="3" />
 			<incfile fid="33" lineno="2" includeID="24" />
 		</includeFileList>
 		<!-- Encrypted codes list for the whole design -->
@@ -64,74 +65,74 @@
 		</encryptedCodesList>
 		<!-- Inactive codes list for the whole design -->
 		<inactiveCodesList>
-			<inactiveCodes fid="10" lineno="138:138 151:151 250:253" />
+			<inactiveCodes fid="11" lineno="138:138 151:151 250:253" />
 			<inactiveCodes fid="25" lineno="79:155" />
 		</inactiveCodesList>
 		<!-- Compile options UUM based -->
 		<langKeywords>
-			<v2kFiles fid="0-35" />
+			<v2kFiles fid="0-36" />
 		</langKeywords>
 		<!--  Case insensitive file list -->
 		<caseInsensitiveFiles fid="" />
 		<!-- Macro definition list for the whole design --> 
 		<macroDefinitionList>
-			<macro name="CPU_INST_BITS" module="cache" sourceID="4" lineno="39" defID="24" defLine="10" value="1"  vip="false"/>
-			<macro name="CPU_ADDR_BITS" module="cache" sourceID="4" lineno="40" defID="24" defLine="9" value="1"  vip="false"/>
-			<macro name="ceilLog2" module="cache" sourceID="4" lineno="40" defID="4" defLine="1" value="2"  vip="false"/>
-			<macro name="ceilLog2" module="cache" sourceID="4" lineno="57" defID="4" defLine="1" value="3"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="cache" sourceID="4" lineno="61" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="cache" sourceID="4" lineno="63" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="cache" sourceID="4" lineno="66" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="MEM_ADDR_BITS" module="riscv_arbiter" sourceID="9" lineno="8" defID="24" defLine="6" value="5"  vip="false"/>
-			<macro name="MEM_ADDR_BITS" module="riscv_arbiter" sourceID="9" lineno="14" defID="24" defLine="6" value="5"  vip="false"/>
-			<macro name="MEM_ADDR_BITS" module="riscv_arbiter" sourceID="9" lineno="20" defID="24" defLine="6" value="5"  vip="false"/>
-			<macro name="MEM_TAG_BITS" module="riscv_arbiter" sourceID="9" lineno="21" defID="24" defLine="5" value="6"  vip="false"/>
-			<macro name="MEM_TAG_BITS" module="riscv_arbiter" sourceID="9" lineno="23" defID="24" defLine="5" value="6"  vip="false"/>
-			<macro name="CLOCK_PERIOD" module="rocketTestHarness" sourceID="10" lineno="16" defID="0" defLine="0" value="7"  vip="false"/>
-			<macro name="MEM_TAG_BITS" module="rocketTestHarness" sourceID="10" lineno="19" defID="24" defLine="5" value="6"  vip="false"/>
-			<macro name="MEM_ADDR_BITS" module="rocketTestHarness" sourceID="10" lineno="20" defID="24" defLine="6" value="5"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="10" lineno="21" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="10" lineno="23" defID="0" defLine="0" value="8"  vip="false"/>
-			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="10" lineno="24" defID="0" defLine="0" value="8"  vip="false"/>
-			<macro name="MEM_TAG_BITS" module="rocketTestHarness" sourceID="10" lineno="25" defID="24" defLine="5" value="6"  vip="false"/>
-			<macro name="MEM_TAG_BITS" module="rocketTestHarness" sourceID="10" lineno="26" defID="24" defLine="5" value="6"  vip="false"/>
-			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="10" lineno="26" defID="0" defLine="0" value="8"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="10" lineno="27" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="10" lineno="28" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="10" lineno="28" defID="0" defLine="0" value="8"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="10" lineno="29" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="10" lineno="93" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="VCDPLUSCLOSE" module="rocketTestHarness" sourceID="10" lineno="208" defID="10" defLine="136" value="9"  vip="false"/>
-			<macro name="VCDPLUSCLOSE" module="rocketTestHarness" sourceID="10" lineno="215" defID="10" defLine="136" value="9"  vip="false"/>
-			<macro name="OPC_LUI" module="ALUTestbench" sourceID="11" lineno="100" defID="2" defLine="15" value="10"  vip="false"/>
-			<macro name="OPC_AUIPC" module="ALUTestbench" sourceID="11" lineno="108" defID="2" defLine="16" value="11"  vip="false"/>
-			<macro name="OPC_BRANCH" module="ALUTestbench" sourceID="11" lineno="115" defID="2" defLine="23" value="12"  vip="false"/>
-			<macro name="OPC_LOAD" module="ALUTestbench" sourceID="11" lineno="122" defID="2" defLine="27" value="13"  vip="false"/>
-			<macro name="OPC_STORE" module="ALUTestbench" sourceID="11" lineno="129" defID="2" defLine="26" value="14"  vip="false"/>
-			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="11" lineno="144" defID="2" defLine="30" value="15"  vip="false"/>
-			<macro name="FNC_AND" module="ALUTestbench" sourceID="11" lineno="145" defID="2" defLine="61" value="16"  vip="false"/>
-			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="11" lineno="154" defID="2" defLine="30" value="15"  vip="false"/>
-			<macro name="FNC_OR" module="ALUTestbench" sourceID="11" lineno="155" defID="2" defLine="60" value="17"  vip="false"/>
-			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="11" lineno="164" defID="2" defLine="30" value="15"  vip="false"/>
-			<macro name="FNC_XOR" module="ALUTestbench" sourceID="11" lineno="165" defID="2" defLine="59" value="18"  vip="false"/>
-			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="11" lineno="174" defID="2" defLine="30" value="15"  vip="false"/>
-			<macro name="FNC_SLL" module="ALUTestbench" sourceID="11" lineno="175" defID="2" defLine="56" value="19"  vip="false"/>
-			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="11" lineno="184" defID="2" defLine="30" value="15"  vip="false"/>
-			<macro name="FNC_SLT" module="ALUTestbench" sourceID="11" lineno="185" defID="2" defLine="57" value="20"  vip="false"/>
-			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="11" lineno="194" defID="2" defLine="30" value="15"  vip="false"/>
-			<macro name="FNC_SLTU" module="ALUTestbench" sourceID="11" lineno="195" defID="2" defLine="58" value="21"  vip="false"/>
-			<macro name="CPU_INST_BITS" module="no_cache_mem" sourceID="15" lineno="3" defID="24" defLine="10" value="1"  vip="false"/>
-			<macro name="CPU_ADDR_BITS" module="no_cache_mem" sourceID="15" lineno="4" defID="24" defLine="9" value="1"  vip="false"/>
-			<macro name="ceilLog2" module="no_cache_mem" sourceID="15" lineno="4" defID="4" defLine="1" value="2"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="15" lineno="20" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="15" lineno="22" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="ceilLog2" module="no_cache_mem" sourceID="15" lineno="24" defID="4" defLine="1" value="22"  vip="false"/>
-			<macro name="ceilLog2" module="no_cache_mem" sourceID="15" lineno="25" defID="4" defLine="1" value="22"  vip="false"/>
-			<macro name="ceilLog2" module="no_cache_mem" sourceID="15" lineno="27" defID="4" defLine="1" value="22"  vip="false"/>
-			<macro name="ceilLog2" module="no_cache_mem" sourceID="15" lineno="28" defID="4" defLine="1" value="22"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="15" lineno="30" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="15" lineno="38" defID="24" defLine="4" value="4"  vip="false"/>
-			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="15" lineno="39" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="CPU_INST_BITS" module="cache" sourceID="5" lineno="39" defID="24" defLine="10" value="1"  vip="false"/>
+			<macro name="CPU_ADDR_BITS" module="cache" sourceID="5" lineno="40" defID="24" defLine="9" value="1"  vip="false"/>
+			<macro name="ceilLog2" module="cache" sourceID="5" lineno="40" defID="5" defLine="1" value="2"  vip="false"/>
+			<macro name="ceilLog2" module="cache" sourceID="5" lineno="57" defID="5" defLine="1" value="3"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="cache" sourceID="5" lineno="61" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="cache" sourceID="5" lineno="63" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="cache" sourceID="5" lineno="66" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="riscv_arbiter" sourceID="10" lineno="8" defID="24" defLine="6" value="5"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="riscv_arbiter" sourceID="10" lineno="14" defID="24" defLine="6" value="5"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="riscv_arbiter" sourceID="10" lineno="20" defID="24" defLine="6" value="5"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="riscv_arbiter" sourceID="10" lineno="21" defID="24" defLine="5" value="6"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="riscv_arbiter" sourceID="10" lineno="23" defID="24" defLine="5" value="6"  vip="false"/>
+			<macro name="CLOCK_PERIOD" module="rocketTestHarness" sourceID="11" lineno="16" defID="0" defLine="0" value="7"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="rocketTestHarness" sourceID="11" lineno="19" defID="24" defLine="5" value="6"  vip="false"/>
+			<macro name="MEM_ADDR_BITS" module="rocketTestHarness" sourceID="11" lineno="20" defID="24" defLine="6" value="5"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="11" lineno="21" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="11" lineno="23" defID="0" defLine="0" value="8"  vip="false"/>
+			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="11" lineno="24" defID="0" defLine="0" value="8"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="rocketTestHarness" sourceID="11" lineno="25" defID="24" defLine="5" value="6"  vip="false"/>
+			<macro name="MEM_TAG_BITS" module="rocketTestHarness" sourceID="11" lineno="26" defID="24" defLine="5" value="6"  vip="false"/>
+			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="11" lineno="26" defID="0" defLine="0" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="11" lineno="27" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="11" lineno="28" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="INPUT_DELAY" module="rocketTestHarness" sourceID="11" lineno="28" defID="0" defLine="0" value="8"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="11" lineno="29" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="rocketTestHarness" sourceID="11" lineno="93" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="VCDPLUSCLOSE" module="rocketTestHarness" sourceID="11" lineno="208" defID="11" defLine="136" value="9"  vip="false"/>
+			<macro name="VCDPLUSCLOSE" module="rocketTestHarness" sourceID="11" lineno="215" defID="11" defLine="136" value="9"  vip="false"/>
+			<macro name="OPC_LUI" module="ALUTestbench" sourceID="12" lineno="100" defID="3" defLine="15" value="10"  vip="false"/>
+			<macro name="OPC_AUIPC" module="ALUTestbench" sourceID="12" lineno="108" defID="3" defLine="16" value="11"  vip="false"/>
+			<macro name="OPC_BRANCH" module="ALUTestbench" sourceID="12" lineno="115" defID="3" defLine="23" value="12"  vip="false"/>
+			<macro name="OPC_LOAD" module="ALUTestbench" sourceID="12" lineno="122" defID="3" defLine="27" value="13"  vip="false"/>
+			<macro name="OPC_STORE" module="ALUTestbench" sourceID="12" lineno="129" defID="3" defLine="26" value="14"  vip="false"/>
+			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="12" lineno="144" defID="3" defLine="30" value="15"  vip="false"/>
+			<macro name="FNC_AND" module="ALUTestbench" sourceID="12" lineno="145" defID="3" defLine="61" value="16"  vip="false"/>
+			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="12" lineno="154" defID="3" defLine="30" value="15"  vip="false"/>
+			<macro name="FNC_OR" module="ALUTestbench" sourceID="12" lineno="155" defID="3" defLine="60" value="17"  vip="false"/>
+			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="12" lineno="164" defID="3" defLine="30" value="15"  vip="false"/>
+			<macro name="FNC_XOR" module="ALUTestbench" sourceID="12" lineno="165" defID="3" defLine="59" value="18"  vip="false"/>
+			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="12" lineno="174" defID="3" defLine="30" value="15"  vip="false"/>
+			<macro name="FNC_SLL" module="ALUTestbench" sourceID="12" lineno="175" defID="3" defLine="56" value="19"  vip="false"/>
+			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="12" lineno="184" defID="3" defLine="30" value="15"  vip="false"/>
+			<macro name="FNC_SLT" module="ALUTestbench" sourceID="12" lineno="185" defID="3" defLine="57" value="20"  vip="false"/>
+			<macro name="OPC_ARI_RTYPE" module="ALUTestbench" sourceID="12" lineno="194" defID="3" defLine="30" value="15"  vip="false"/>
+			<macro name="FNC_SLTU" module="ALUTestbench" sourceID="12" lineno="195" defID="3" defLine="58" value="21"  vip="false"/>
+			<macro name="CPU_INST_BITS" module="no_cache_mem" sourceID="16" lineno="3" defID="24" defLine="10" value="1"  vip="false"/>
+			<macro name="CPU_ADDR_BITS" module="no_cache_mem" sourceID="16" lineno="4" defID="24" defLine="9" value="1"  vip="false"/>
+			<macro name="ceilLog2" module="no_cache_mem" sourceID="16" lineno="4" defID="5" defLine="1" value="2"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="16" lineno="20" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="16" lineno="22" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="ceilLog2" module="no_cache_mem" sourceID="16" lineno="24" defID="5" defLine="1" value="22"  vip="false"/>
+			<macro name="ceilLog2" module="no_cache_mem" sourceID="16" lineno="25" defID="5" defLine="1" value="22"  vip="false"/>
+			<macro name="ceilLog2" module="no_cache_mem" sourceID="16" lineno="27" defID="5" defLine="1" value="22"  vip="false"/>
+			<macro name="ceilLog2" module="no_cache_mem" sourceID="16" lineno="28" defID="5" defLine="1" value="22"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="16" lineno="30" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="16" lineno="38" defID="24" defLine="4" value="4"  vip="false"/>
+			<macro name="MEM_DATA_BITS" module="no_cache_mem" sourceID="16" lineno="39" defID="24" defLine="4" value="4"  vip="false"/>
 			<macro name="MEM_ADDR_BITS" module="BackupMemory" sourceID="22" lineno="44" defID="24" defLine="6" value="5"  vip="false"/>
 			<macro name="MEM_TAG_BITS" module="BackupMemory" sourceID="22" lineno="45" defID="24" defLine="5" value="6"  vip="false"/>
 			<macro name="MEM_DATA_BITS" module="BackupMemory" sourceID="22" lineno="49" defID="24" defLine="4" value="4"  vip="false"/>
