@@ -17,14 +17,15 @@
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/no_cache_mem.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUdec.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUTestVectorTestbench.v
+/home/cc/eecs151/fa17/class/eecs151-aai/project/src/mux_PC.v
 /home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/SRAM1RW64x32_new.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALUop.vh
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/ALU.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/backup_mem.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/Riscv141_backup.v
-/home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/sram.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/const.vh
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/Memory141.v
+/home/ff/eecs151/stdcells/synopsys-32nm/multi_vt/verilog/sram.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/control.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/controller.v
 /home/cc/eecs151/fa17/class/eecs151-aai/project/src/regfile.v

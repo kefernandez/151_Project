@@ -19,7 +19,7 @@ module Riscv141(
    //PC related wires
    wire [31:0] PC, PCplus4_ID;
    wire [31:0] PC_imm, PCplus4_imm_prime_EX;
-   wire [31:0]  PCprime, PCplus4_EX, PCplus4_imm_WB;//reg 	       
+   wire [31:0] PCprime, PCplus4_EX, PCplus4_imm_WB; 	       
   	       
    //Reg file related wires
    wire [4:0] RAddr1_ID, RAddr2_ID, WAddr_ID, WAddr_WB;
@@ -57,7 +57,7 @@ module Riscv141(
    
    
    //DM wires
-   wire [31:0] DM_data, DM_data_SM,DM_data_ZE, DM_ALU_data_WB, DM_ALU_data_WB;
+   wire [31:0] DM_data, DM_data_SM,DM_data_ZE, DM_ALU_data_WB;
    wire [31:0]  DM_write, DM_ALU_data_EX; //reg	        	       
 	       
    //controls
@@ -126,7 +126,6 @@ module Riscv141(
    //DM Assignments
    assign dcache_din = DM_write;
    assign DM_data = dcache_dout;
-
    
     controller ctrl(
         .datapath_contents(datapath_contents),
@@ -156,7 +155,9 @@ module Riscv141(
 
 
    //1
-   mux_2x1 PC_mux( 
+   mux_PC PC_mux(
+	.clk(clk),
+	.reset(reset),
 	.in0(PCplus4_ID),
 	.in1(PCplus4_imm_WB),
         .sel(PC_Mux_IDplus1),
