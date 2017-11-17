@@ -71,7 +71,7 @@ module cache #
    //////////////////
 
    wire 		      set_dirty_bit;
-   wire 		      write_enable, write_enable_bar0, write_enable_bar1, write_enable_bar2, write_enable_bar3;
+   wire 		      write_enable_bar, write_enable_bar0, write_enable_bar1, write_enable_bar2, write_enable_bar3;
    wire [1:0] 		      block_sel, word_sel, byte_sel;
 
    // SRAM connections
@@ -80,6 +80,7 @@ module cache #
    reg [31:0] 			tag_sram_out, tag_sram_in;
    reg [127:0] 			data_sram0_out, data_sram1_out, data_sram2_out, data_sram3_out;
    reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
+   reg [31:0] 			write_mask;
    
    ////////////////////////////
    // Control signal assignment
@@ -144,8 +145,11 @@ module cache #
       // Write operations
       else
 	if ( cpu_req_valid ) begin
-	
-	      
+	   // Hit
+	   if ( tag == (cpu_req_addr >> (6+`ceilLog2(LINES)) ) && ( tag_sram_out[31] == 1  ) ) begin
+	      write_mask <= 
+	      if  ( block_sel == 0 ) begin
+		 
 	   
 
 	 
