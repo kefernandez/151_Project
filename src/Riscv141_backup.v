@@ -19,64 +19,77 @@ module Riscv141(
    //PC related wires
    wire [31:0] PC, PCplus4_ID;
    wire [31:0] PC_imm, PCplus4_imm_prime_EX;
-   reg [31:0]  PCprime, PCplus4_EX, PCplus4_imm_WB; 	       
-  	       
+   wire [31:0] PCprime, PCplus4_EX, PCplus4_imm_WB; 
+   wire [31:0] PCprime_EX, PC_rel;
+ 
    //Reg file related wires
-   wire [31:0] RAddr1_ID, RAddr2_ID, WAddr_ID;
+   wire [4:0] RAddr1_ID, RAddr2_ID, WAddr_ID, WAddr_WB;
    //coming from IM cache - need assign statements
    wire [31:0] write_data_reg_EX, RF_data1_ID, RF_data2_ID;
    //to and from reg file
-   reg [31:0]  RF_data1_EX, RF_data2_EX, RAddr2_EX, write_data_reg_ID;
+   wire [31:0]  RF_data1_EX, RF_data2_EX, RAddr2_EX, write_data_reg_ID, write_data_reg_ID_prev; //reg
    
    
 
 
    //csrw wires
    wire [4:0]  csrwi_imm_ID;
-   reg [4:0] csrwi_imm_EX;
+   wire [4:0] csrwi_imm_EX; //reg
    wire [31:0] csrwi_zimm, csrw_result;
-   reg [31:0] tohost;
+   wire [31:0] tohost;//reg
 
  
    //Immediate related wires
-   wire [31:0] ZE_imm_LUI_AUI, SE_imm_load_JALR, SE_imm_br_str, SE_imm_br_str_piped, SE_imm_JAL;   
+   wire [31:0] SE_imm_br_str;
+   wire [11:0] SE_imm_br_str_piped, SE_imm_load_JALR;
+   wire [19:0] SE_imm_JAL, ZE_imm_LUI_AUI;   
    wire [31:0] ZE_data_ID, immediate_load_SE_ID, immediate_branch_store_SE_ID, JAL_SE_ID;
-   reg [31:0]  ZE_data_EX, immediate_load_SE_EX, JAL_SE_EX;
+   wire [31:0] ZE_data_EX, immediate_load_SE_EX, JAL_SE_EX; //reg
    wire [31:0] immediate_branch_store_SE_EX;
    wire [31:0] branch_store_shift,JAL_SE_EX_shift;
      
 	          
    //ALU wires
-   wire [31:0] ALU_src2, ALU_result, ALU_res_zLSB;
-  
+   wire [31:0] ALU_src1, ALU_src2, ALU_result, ALU_res_zLSB, ALU_mux_out;
+   wire [3:0]  ALUop;
+   wire [6:0]  opcode_ID, opcode_EX;
+   wire [2:0]  funct_ID, funct_EX;
+   wire add_rshift_type_ID, add_rshift_type_EX;
+   
    
    //DM wires
-   wire [31:0] DM_data, DM_data_SM, DM_data_ZM, DM_ALU_data_WB, DM_ALU_data_WB;
-   reg [31:0]  DM_write, DM_ALU_data_EX;	        	       
+   wire [31:0] DM_data, DM_data_SM,DM_data_ZE, DM_ALU_data_WB;
+   wire [31:0]  DM_write, DM_ALU_data_EX; //reg	        	       
 	       
    //controls
    wire [6:0]  last_opcode;
-   wire [2:0]  last_funct3; 
+   wire [2:0]  last_funct3;
+   wire  add_rshift_type;
    wire take_branch;
-   wire PC_Mux_EX, WrEn_RF_EX;
-   reg [1:0] WD_Mux_EX, ALU_Mux_EX, Branch_Mux_EX;
+   wire PC_Mux_EX, PC_Mux_WB, WrEn_RF_WB;
+   wire [1:0] WD_Mux_EX, ALU_Mux_EX, Branch_Mux_ID, Branch_Mux_EX; //wire
    wire CSRW_Mux_EX, WrEn_DM_EX, SE2_Ctrl_EX;
-   wire [1:0] RByteEn_DM_EX, WByteEn_DM_EX, DM_Mux_EX;
+   wire [1:0] RByteEn_DM_EX, DM_Mux_EX;
+   wire [3:0] WByteEn_DM_EX;
    
-   reg WrEn_RF_WB;
-   reg [1:0] WD_Mux_WB, RByteEn_DM_WB, WByteEn_DM_WB, DM_Mux_WB;
-   reg WrEn_DM_WB;
-  
-   wire PC_Mux_IDplus1;      
-	  
+   wire WrEn_RF_ID; //reg
+   wire [1:0] WD_Mux_WB, RByteEn_DM_WB, DM_Mux_WB; //reg
+   wire [3:0] WByteEn_DM_WB; //reg
+   wire WrEn_DM_WB; //reg
+   wire PCplus4_Mux_ctrl_ID, PCplus4_Mux_ctrl_EX;
+   wire PC_Mux_IDplus1;      //reg
+   wire [1:0] ALU_hazmux2_sel_ID, ALU_hazmux1_sel_ID, ALU_hazmux2_sel_EX, ALU_hazmux1_sel_EX;
+   wire ALU_result_mux_ctrl_ID, ALU_result_mux_ctrl_EX;
+   wire [31:0] Branch_mux_in0;
+   
    wire [0:0] datapath_contents;
    wire [0:0]  dpath_controls_i;
    wire [0:0]  exec_controls_x;
    wire [0:0]  hazard_controls;
 
    assign dcache_we =  WByteEn_DM_WB;
-   assign dcache_re = 1;
-   assign  icache_re = 1;
+   assign dcache_re = 1'b1;
+   assign  icache_re = 1'b1;
    
    assign last_opcode = icache_dout[6:0];
    assign last_funct3 = icache_dout[14:12]; 
@@ -84,8 +97,10 @@ module Riscv141(
 
 
    //PC assignments
-   assign i_cache_addr = PC;
-
+   /*always @(posedge clk)begin
+      if(reset == 1) icache_addr <= 32'h2000; 
+      else icache_addr <= PC; end*/
+   assign icache_addr = PC;
    
    //Reg file assignments
    assign RAddr1_ID = icache_dout[19:15];
@@ -99,23 +114,26 @@ module Riscv141(
 
    //immediate assignments
    assign ZE_imm_LUI_AUI = icache_dout[31:12];
-   assign SE_imm_Load_JALR = icache_dout[31:20];
+   assign SE_imm_load_JALR = icache_dout[31:20];
    assign SE_imm_br_str = {icache_dout[31:25],icache_dout[11:7]};
    assign SE_imm_JAL = {icache_dout[31],icache_dout[19:12],icache_dout[20],icache_dout[30:21]};
    //shifted immediate assignments 
    assign branch_store_shift = immediate_branch_store_SE_EX << 1;
    assign JAL_SE_EX_shift = JAL_SE_EX << 1;
-
+   
    //ALU assignments
    assign ALU_res_zLSB = {ALU_result[31:1],1'b0};
    assign dcache_addr = ALU_result;
-
+   assign add_rshift_type = dcache_dout[30];
+   assign opcode_ID = icache_dout[6:0];
+   assign funct_ID = icache_dout[14:12];
+   assign add_rshift_type_ID = icache_dout[30];
+   
    //DM Assignments
    assign dcache_din = DM_write;
    assign DM_data = dcache_dout;
-
    
-    controller ctrl(
+    /*controller ctrl(
         .datapath_contents(datapath_contents),
         .dpath_controls_i(dpath_controls_i),
         .exec_controls_x(exec_controls_x),
@@ -139,20 +157,23 @@ module Riscv141(
         .dcache_dout(dcache_dout),
         .icache_dout(icache_dout),
         .csr_tohost(csr)
-    );
+    );*/
 
 
    //1
-   mux_2x1 PC_mux( 
+   mux_PC PC_mux(
+	//.clk(clk),
+	//.reset(reset),
 	.in0(PCplus4_ID),
 	.in1(PCplus4_imm_WB),
-        .sel(PC_Mux_IDplus1),
+        .sel(PC_Mux_WB),
         .out(PC)
     );
 
    //2
-   sum PC_sum(
-	.in0(PC_prime),
+   sum PC_sum1(
+	//.reset(reset),      
+	.in0(PCprime),
 	.in1(32'b100),
 	.out(PCplus4_ID)
     );
@@ -166,13 +187,13 @@ module Riscv141(
    //4
    sign_extender_load_JALR SE_load_JALR(
         .SE1_in(SE_imm_load_JALR),
-        .SE1_out(immediate_load_ID)
+        .SE1_out(immediate_load_SE_ID)
     );
 
    //5
    sign_extender_br_str SE_branch_store(
         .SE2_in(SE_imm_br_str_piped),
-        .SE2_out(immediate_branch_store_ID),
+        .SE2_out(immediate_branch_store_SE_EX),
 	.SE2_ctrl(SE2_Ctrl_EX)      
     );
    
@@ -189,21 +210,21 @@ module Riscv141(
         .in2(immediate_load_SE_EX),
         .in3(immediate_branch_store_SE_EX),
 	.sel(ALU_Mux_EX),  
-	.out(ALU_src2)
+	.out(ALU_mux_out)
     );
    
    //8
    mux_3x1 WD_mux(     
-	.in0(DM_ALU_data_EX),
+	.in0(DM_ALU_data_WB),
 	.in1(ZE_data_EX),
-        .in2(PCplus4_imm_EX),
+        .in2(PCplus4_imm_prime_EX),
         .sel(WD_Mux_WB),
         .out(write_data_reg_EX)
     ); 
 
    //9
    mux_4x1 Branch_mux(
-	.in0(ALU_res_zLSB),
+	.in0(Branch_mux_in0),
 	.in1(ZE_data_EX),
 	.in2(branch_store_shift), //ask if we need
 	.in3(JAL_SE_EX_shift),
@@ -214,7 +235,7 @@ module Riscv141(
    //10
    sum jump_sum(
 	.in0(PC_imm),
-	.in1(PCplus4_EX),
+	.in1(PC_rel),
         .out(PCplus4_imm_prime_EX)
     );
    
@@ -258,8 +279,8 @@ module Riscv141(
 
    //16
    ALU ALU1(
-        .A(RF_data1_EX), 
-	.B(RF_data2_EX),
+        .A(ALU_src1), 
+	.B(ALU_src2),
         .ALUop(ALUop),
         .Out(ALU_result)	 
     );
@@ -267,16 +288,18 @@ module Riscv141(
 
    //17
    ALUdec ALUdec1(
-	.opcode(opcode),
-        .funct(funct),
-	.add_rshift_type(add_rshift_type),
+	.opcode(opcode_EX), //problem?
+        .funct(funct_EX), //problem?
+	.add_rshift_type(add_rshift_type_EX), //problem?
 	.ALUop(ALUop)
     );
 
    //18
-   regfile regfile1(.RAddr1_RF(RAddr1_ID), 
+   regfile regfile1(.clk(clk),
+		    .reset(reset),
+		    .RAddr1_RF(RAddr1_ID), 
 		    .RAddr2_RF(RAddr2_ID), 
-		    .WAddr_RF(WAddr_ID), 
+		    .WAddr_RF(WAddr_WB), 
 		    .WrEn_RF(WrEn_RF_WB),
 		    .WD_RF(write_data_reg_ID), 
 		    .RD1_RF(RF_data1_ID), 
@@ -290,25 +313,37 @@ module Riscv141(
 		     .last_funct3(last_funct3), 
 		     .take_branch(take_branch),
 		     .PC_Mux(PC_Mux_EX), 
-		     .WrEn_RF(WrEn_RF_EX), 
+		     .WrEn_RF(WrEn_RF_ID), 
 		     .WD_Mux(WD_Mux_EX), 
 		     .ALU_Mux(ALU_Mux_EX), 
 		     .CSRW_Mux(CSRW_Mux_EX), 
-		     .Branch_Mux(Branch_Mux_EX),
+		     .Branch_Mux(Branch_Mux_ID),
 		     .RByteEn_DM(RByteEn_DM_EX), 
 		     .WByteEn_DM(WByteEn_DM_EX),
 		     .DM_Mux(DM_Mux_EX), 
-		     .SE2_Ctrl(SE2_Ctrl_EX)	
+		     .SE2_Ctrl(SE2_Ctrl_EX),
+		     .rd(WAddr_ID),
+		     .rs1(RAddr1_ID),
+		     .rs2(RAddr2_ID),
+		     .ALU_hazmux1_sel(ALU_hazmux1_sel_ID),
+		     .ALU_hazmux2_sel(ALU_hazmux2_sel_ID),
+		     .PCplus4_Mux_ctrl(PCplus4_Mux_ctrl_ID),
+		     .PCprime(PCprime),
+		     .ALU_result_mux_ctrl(ALU_result_mux_ctrl_ID)
+		    
     );
     
    //20
    pipeline1 pipeline(.clk(clk),
+		      .reset(reset),
 		      .csrwi_imm_ID(csrwi_imm_ID), 
 		      .RF_data1_ID(RF_data1_ID), 
 		      .RF_data2_ID(RF_data2_ID), 
-		      .RAddr2_ID(RAddr2_ID),  
+		      .RAddr2_ID(RAddr2_ID),
+		      .WAddr_ID(WAddr_ID),
 		      .write_data_reg_EX(write_data_reg_EX), 
-		      .csrwi_imm_EX(csrwi_imm_EX), 
+		      .csrwi_imm_EX(csrwi_imm_EX),
+		      .WAddr_WB(WAddr_WB),
 		      .RF_data1_EX(RF_data1_EX), 
 		      .RF_data2_EX(RF_data2_EX), 
 		      .RAddr2_EX(RAddr2_EX), 
@@ -323,18 +358,18 @@ module Riscv141(
 		      .SE_imm_br_str_piped(SE_imm_br_str_piped), 
 		      .JAL_SE_EX(JAL_SE_EX), 
 		      .PCplus4_EX(PCplus4_EX), 
-		      .DM_ALU_data_WB(DM_ALU_data_WB), 
+		      //.DM_ALU_data_WB(DM_ALU_data_WB), 
 		      .PCplus4_imm_prime_EX(PCplus4_imm_prime_EX), 
-		      .RF_data2_EX(RF_data2_EX),
-		      .DM_ALU_data_EX(DM_ALU_data_EX), 
+		      //.DM_ALU_data_EX(DM_ALU_data_EX), 
 		      .PCplus4_imm_WB(PCplus4_imm_WB), 
 		      .DM_write(DM_write),
 		      .PC(PC), 
 		      .csrw_result(csrw_result),
-		      .PCprime(PCprime), 
+		      .PCprime(PCprime),
+		      .PCprime_EX(PCprime_EX),
 		      .tohost(tohost), 
 		      .PC_Mux_EX(PC_Mux_EX), 
-		      .WrEn_RF_EX(WrEn_RF_EX), 
+		      .WrEn_RF_ID(WrEn_RF_ID), 
 		      .WD_Mux_EX(WD_Mux_EX), 
 		      .RByteEn_DM_EX(RByteEn_DM_EX),
 		      .WByteEn_DM_EX(WByteEn_DM_EX), 
@@ -344,9 +379,57 @@ module Riscv141(
 		      .RByteEn_DM_WB(RByteEn_DM_WB),
 		      .WByteEn_DM_WB(WByteEn_DM_WB), 
 		      .DM_Mux_WB(DM_Mux_WB),
-		      .PC_Mux_IDplus1(PC_Mux_IDplus1)		      
+		      .PC_Mux_IDplus1(PC_Mux_IDplus1),
+		      .opcode_EX(opcode_EX),
+		      .opcode_ID(opcode_ID),
+		      .funct_EX(funct_EX),
+		      .funct_ID(funct_ID),
+		      .add_rshift_type_EX(add_rshift_type_EX),
+		      .write_data_reg_ID_prev(write_data_reg_ID_prev),
+		      .add_rshift_type_ID(add_rshift_type_ID),
+		      .ALU_hazmux2_sel_ID(ALU_hazmux2_sel_ID),
+		      .ALU_hazmux1_sel_ID(ALU_hazmux1_sel_ID),
+		      .ALU_hazmux2_sel_EX(ALU_hazmux2_sel_EX),
+		      .ALU_hazmux1_sel_EX(ALU_hazmux1_sel_EX),
+		      .Branch_Mux_ID(Branch_Mux_ID),
+		      .Branch_Mux_EX(Branch_Mux_EX),
+		      .PCplus4_Mux_ctrl_ID(PCplus4_Mux_ctrl_ID),
+		      .PCplus4_Mux_ctrl_EX(PCplus4_Mux_ctrl_EX),
+		      .PC_Mux_WB(PC_Mux_WB),
+		      .ALU_result_mux_ctrl_ID(ALU_result_mux_ctrl_ID),
+		      .ALU_result_mux_ctrl_EX(ALU_result_mux_ctrl_EX)
      );
-   
+
+   //21
+   mux_3x1 ALU_hazmux1(.in0(RF_data1_EX),
+		       .in1(write_data_reg_ID),
+		       .in2(write_data_reg_ID_prev),
+		       .sel(ALU_hazmux1_sel_EX),
+		       .out(ALU_src1)
+		       );
+
+   //22
+   mux_3x1 ALU_hazmux2(.in0(ALU_mux_out),
+		       .in1(write_data_reg_ID),
+		       .in2(write_data_reg_ID_prev),
+		       .sel(ALU_hazmux2_sel_EX),
+		       .out(ALU_src2)
+		       );
+   //23
+   mux_2x1 PCplus4_Mux(
+		    .in0(PCprime_EX),
+		    .in1(PCplus4_EX),		    
+		    .out(PC_rel),
+		    .sel(PCplus4_Mux_ctrl_EX)
+    );
+
+   //24
+   mux_2x1 ALU_result_mux(
+		    .in0(ALU_res_zLSB),
+		    .in1(ALU_result),		    
+		    .out(Branch_mux_in0),
+		    .sel(ALU_result_mux_ctrl_EX)
+    );
 		  
 
 endmodule

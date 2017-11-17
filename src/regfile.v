@@ -27,8 +27,6 @@ module regfile(input clk,
    // Define register file
    reg [31:0] 			 register_file [0:31];
 
-   // Dummy reset value (remove this when reset is implemented as an input)
-
    // Read functionality
    assign RD1_RF = register_file[RAddr1_RF];
    assign RD2_RF = register_file[RAddr2_RF];

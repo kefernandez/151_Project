@@ -22,7 +22,7 @@ module ALUdec(
     
       
       case(opcode)
-	7'b1100011: begin //Branches
+	/*7'b1100011: begin //Branches
 	   case(funct) 
 	     3'b000: ALUop <= 4'b0000; //BEQ ALU checks if rs1 == rs2 
 	     3'b001: ALUop <= 4'b0001; //BNE ALU checks if rs1 != rs2
@@ -30,7 +30,7 @@ module ALUdec(
 	     3'b110: ALUop <= 4'b0011; //BLTU ALU checks if rs1 < rs2 (unsigned)
 	     3'b101: ALUop <= 4'b0100; //BGE ALU checks if rs1 > rs2 (signed)
 	     3'b111: ALUop <= 4'b0101; //BGEU ALU checks if rs1 > rs2 (unsigned)
-	   endcase end 
+	   endcase end */
 	
 	7'b0000011, 7'b0100011: begin  //For loads LB, LH, LW, LBU, LHU and stores SB, SH, SW
 	   ALUop <= 4'b0110; end //ALU does:  rs1 + 32 bit immediate signed extended
@@ -65,13 +65,15 @@ module ALUdec(
 		else ALUop <= 4'b1101; //SRL - Use same as SRLI
 	     end
 	     3'b110: ALUop <= 4'b1001; //OR - use same as ORI
-	     3'b111: ALUop <= 4'b1010; //AND - same as ANDI
-	   
-	   endcase
+	     3'b111: ALUop <= 4'b1010; //AND - same as ANDI    
+	   endcase // case (funct)
 	end // case: 7'b0110011
+
+	//7'b1100111: ALUop <= 4'b0110; //for JALR
+	
 	7'b0110111: ALUop <= 4'b0111; //for LUI
 			     
-	default: ALUop <= 4'b1111; //for opcodes 0110111 (LUI), 0010111 (AUIPC), 1101111 (JAL and JALR)
+	default: ALUop <= 4'b1111; //for opcodes 0110111 (LUI), 0010111 (AUIPC), 1101111 (JAL)
       
       endcase // case (opcode)
    end

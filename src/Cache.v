@@ -35,7 +35,7 @@
 
 module cache #
 (
-  parameter LINES = 64,
+  parameter LINES = 8,
   parameter CPU_WIDTH = `CPU_INST_BITS,
   parameter WORD_ADDR_BITS = `CPU_ADDR_BITS-`ceilLog2(`CPU_INST_BITS/8)
 )
@@ -65,6 +65,108 @@ module cache #
   input                       mem_resp_val,
   input [`MEM_DATA_BITS-1:0]  mem_resp_data
 );
+   
+   //////////////////
+   // Internal wiring
+   //////////////////
 
+   wire 		      set_dirty_bit;
+   wire 		      write_enable, write_enable_bar0, write_enable_bar1, write_enable_bar2, write_enable_bar3;
+   wire [1:0] 		      block_sel, word_sel, byte_sel;
 
+   // SRAM connections
+   wire [`ceilLog2(LINES)-1:0]  sram_addr;
+   reg [25-`ceilLog2(LINES):0] 	tag;
+   reg [31:0] 			tag_sram_out, tag_sram_in;
+   reg [127:0] 			data_sram0_out, data_sram1_out, data_sram2_out, data_sram3_out;
+   reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
+   
+   ////////////////////////////
+   // Control signal assignment
+   ////////////////////////////
+
+   assign set_dirty_bit = cpu_req_write; 
+   assign sram_addr = cpu_req_addr[`ceilLog2(LINES)+1:2];
+
+   assign block_sel = cpu_req_addr[5:4];
+   assign word_sel = cpu_req_addr[3:2];
+   assign byte_sel = cpu_req_addr[1:0];
+
+   assign write_enable_bar = ~(cpu_req_valid & cpu_req_write);
+   assign write_enable_bar0 = ~(~write_enable_bar && block_sel == 0);
+   assign write_enable_bar1 = ~(~write_enable_bar && block_sel == 1);
+   assign write_enable_bar2 = ~(~write_enable_bar && block_sel == 2);
+   assign write_enable_bar3 = ~(~write_enable_bar && block_sel == 3);
+   
+   /////////////////
+   // Internal logic
+   /////////////////
+
+   always @ (posedge clk) begin
+      
+      tag <= tag_sram_out[25-`ceilLog2(LINES):0];
+      
+      // Read case
+      if (cpu_req_write == 4'b0000) begin
+	 // Hit case
+	 if (tag == (cpu_req_addr >> (6+`ceilLog2(LINES))) begin
+	     
+	   
+	  
+      
+   
+   
+   //////////
+   // Modules
+   //////////
+
+   way1_data0 SRAM1RW256x128(.CE(clk),
+			     .OEB(ground),
+			     .CSB(ground),
+			     .WEB(write_enable_bar0),
+			     .A(sram_addr0),
+			     .I(data_sram0_in),
+			     .O(data_sram0_out),
+			     .BYTEMASK()
+			     );
+
+   way1_data1 SRAM1RW256x128(.CE(clk),
+			     .OEB(ground),
+			     .CSB(ground),
+			     .WEB(write_enable_bar1),
+			     .A(sram_addr),
+			     .I(data_sram1_in),
+			     .O(data_sram1_out),
+			     .BYTEMASK()
+			     );
+
+   way1_data2 SRAM1RW256x128(.CE(clk),
+			     .OEB(ground),
+			     .CSB(ground),
+			     .WEB(write_enable_bar2),
+			     .A(sram_addr),
+			     .I(data_sram2_in),
+			     .O(data_sram2_out),
+			     .BYTEMASK()
+			     );
+
+   way1_data3 SRAM1RW256x128(.CE(clk),
+			     .OEB(ground),
+			     .CSB(ground),
+			     .WEB(write_enable_bar3),
+			     .A(sram_addr),
+			     .I(data_sram3_in),
+			     .O(data_sram3_out),
+			     .BYTEMASK()
+			     );
+   
+   way1_tag SRAM1RW256x32(.CE(clk),
+			  .OEB(ground),
+			  .CSB(ground),
+			  .WEB(write_enable_bar),
+			  .A(sram_addr),
+			  .I(tag_sram_in),
+			  .O(tag_sram_out)
+			  );
+   */
 endmodule

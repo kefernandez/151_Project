@@ -59,10 +59,10 @@ module ALU(
 	4'b1011: begin //Logical left shift of A
 	   Out <= (A << shift_amt);
 	   i <= 1;end
-	4'b1100: Out <= A >>> shift_amt; //Arithmetic right shift of A
+	4'b1100: Out <= A_signed >>> shift_amt; //Arithmetic right shift of A
 	4'b1101: Out <= A >> shift_amt; //logical right shift of A
 	4'b1110: Out <= A - B; //Subtraction of A and B
-	4'b1111: Out <= A+B; //When ALU is not needed
+	4'b1111: Out <= 0; //When ALU is not needed
       endcase
    end 
 
