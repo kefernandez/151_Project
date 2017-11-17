@@ -1,0 +1,10 @@
+`define NUMLINES 8
+
+module cache(
+	     //////////////////////////////
+	     // Define CPU-side connections
+	     //////////////////////////////
+	     input cpu_req_valid,
+	     output cpu_req_rdy,
+	     
+	     

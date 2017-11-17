@@ -85,8 +85,8 @@ module cache #
    // Control signal assignment
    ////////////////////////////
 
-   assign set_dirty_bit = cpu_req_write; 
-   assign sram_addr = cpu_req_addr[`ceilLog2(LINES)+1:2];
+   assign set_dirty_bit = cpu_req_write;
+   assign sram_addr = cpu_req_addr[5+`ceilLog2(LINES):6];
 
    assign block_sel = cpu_req_addr[5:4];
    assign word_sel = cpu_req_addr[3:2];
@@ -103,19 +103,34 @@ module cache #
    /////////////////
 
    always @ (posedge clk) begin
-      
+
+      // Get tag
       tag <= tag_sram_out[25-`ceilLog2(LINES):0];
+
+      // Set valid outputs to zero
+      cpu_resp_valid <= 1'b0;
+      mem_req_val <= 1'b0;
+      mem_req_data_valid <= 1'b0;
       
-      // Read case
-      if (cpu_req_write == 4'b0000) begin
-	 // Hit case
-	 if (tag == (cpu_req_addr >> (6+`ceilLog2(LINES))) begin
-	     
-	   
-	  
-      
-   
-   
+      // Read operations
+      if (cpu_req_write == 4'b0000 && cpu_req_valid) begin
+	 // Set CPU request ready
+	 cpu_req_rdy <= 1'b1;
+	 // Hit
+	 if ( tag == (cpu_req_addr >> (6+`ceilLog2(LINES)) ) && ( tag_sram_out[31] == 1  ) ) begin
+	    // Route output data to CPU
+	    if (block_sel == 0) cpu_resp_data <= data_sram0_out[word_sel*32 +: 32];
+	    else if (block_sel == 1) cpu_resp_data <= data_sram1_out[word_sel*32 +: 32];
+	    else if (block_sel == 2) cpu_resp_data <= data_sram2_out[word_sel*32 +: 32];
+	    else if (block_sel == 3) cpu_resp_data <= data_sram3_out[word_sel*32 +: 32];
+	    // Set CPU response valid
+	    cpu_resp_valid <= 1'b1;
+	 end
+	 // Miss - not dirty
+	 if ( tag_sram_out[30:25] == 0 ) begin
+	    
+	      
+	      
    //////////
    // Modules
    //////////
