@@ -107,29 +107,48 @@ module cache #
       // Get tag
       tag <= tag_sram_out[25-`ceilLog2(LINES):0];
 
-      // Set valid outputs to zero
+      // Set ready/valid outputs to zero
+      cpu_req_rdy <= 1'b0;
       cpu_resp_valid <= 1'b0;
       mem_req_val <= 1'b0;
       mem_req_data_valid <= 1'b0;
       
       // Read operations
-      if (cpu_req_write == 4'b0000 && cpu_req_valid) begin
+      if ( cpu_req_write == 4'b0000 && cpu_req_valid ) begin
 	 // Set CPU request ready
 	 cpu_req_rdy <= 1'b1;
 	 // Hit
 	 if ( tag == (cpu_req_addr >> (6+`ceilLog2(LINES)) ) && ( tag_sram_out[31] == 1  ) ) begin
 	    // Route output data to CPU
-	    if (block_sel == 0) cpu_resp_data <= data_sram0_out[word_sel*32 +: 32];
-	    else if (block_sel == 1) cpu_resp_data <= data_sram1_out[word_sel*32 +: 32];
-	    else if (block_sel == 2) cpu_resp_data <= data_sram2_out[word_sel*32 +: 32];
-	    else if (block_sel == 3) cpu_resp_data <= data_sram3_out[word_sel*32 +: 32];
+	    if ( block_sel == 0 ) cpu_resp_data <= data_sram0_out[word_sel*32 +: 32];
+	    else if ( block_sel == 1 ) cpu_resp_data <= data_sram1_out[word_sel*32 +: 32];
+	    else if ( block_sel == 2 ) cpu_resp_data <= data_sram2_out[word_sel*32 +: 32];
+	    else if ( block_sel == 3 ) cpu_resp_data <= data_sram3_out[word_sel*32 +: 32];
 	    // Set CPU response valid
 	    cpu_resp_valid <= 1'b1;
 	 end
 	 // Miss - not dirty
 	 if ( tag_sram_out[30:25] == 0 ) begin
-	    
+	    // Request main memory transaction
+	    mem_req_val <= 1'b1;
+	    // Proceed when memory is ready
+	    if ( mem_req_rdy ) begin
+	       // DO SOME STUFF!
+	    end
+	 end
+	 // Miss - dirty
+	 else begin
+	    // DO SOME STUFF!
+	 end // else: !if( tag_sram_out[30:25] == 0 )
+      end // if ( cpu_req_write == 4'b0000 && cpu_req_valid )
+      // Write operations
+      else
+	if ( cpu_req_valid ) begin
+	
 	      
+	   
+
+	 
 	      
    //////////
    // Modules
