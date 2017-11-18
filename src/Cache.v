@@ -77,7 +77,7 @@ module cache #
    // SRAM connections
    wire [`ceilLog2(LINES)-1:0]  sram_addr;
    reg [25-`ceilLog2(LINES):0] 	tag;
-   reg [31:0] 			tag_sram_out, tag_sram_in;
+   reg [45:0] 			tag_sram_out, tag_sram_in, dirty_bit_wire;
    reg [127:0] 			data_sram0_out, data_sram1_out, data_sram2_out, data_sram3_out;
    reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
    reg [31:0] 			write_mask;
@@ -129,7 +129,7 @@ module cache #
 	    cpu_resp_valid <= 1'b1;
 	 end
 	 // Miss - not dirty
-	 if ( tag_sram_out[30:25] == 0 ) begin
+	 if ( tag_sram_out[44:29] == 0 ) begin
 	    // Request main memory transaction
 	    mem_req_val <= 1'b1;
 	    // Proceed when memory is ready
@@ -142,15 +142,38 @@ module cache #
 	    // DO SOME STUFF!
 	 end // else: !if( tag_sram_out[30:25] == 0 )
       end // if ( cpu_req_write == 4'b0000 && cpu_req_valid )
+
       // Write operations
       else
 	if ( cpu_req_valid ) begin
+	   // Set write mask
+	   write_mask <= cpu_req_write << (word_sel * 4);
 	   // Hit
-	   if ( tag == (cpu_req_addr >> (6+`ceilLog2(LINES)) ) && ( tag_sram_out[31] == 1  ) ) begin
-	      write_mask <= 
-	      if  ( block_sel == 0 ) begin
-		 
-	   
+	   if ( tag == (cpu_req_addr >> (6 + `ceilLog2(LINES)) ) && ( tag_sram_out[31] == 1  ) ) begin
+	      // Route input data to appropriate SRAM
+	      if  ( block_sel == 0 ) data_sram0_in <= cpu_req_data << (word_sel * 4);
+	      else if ( block_sel == 1 ) data_sram1_in <= cpu_req_data << (word_sel * 4);
+	      else if ( block_sel == 2 ) data_sram2_in <= cpu_req_data << (word_sel * 4);
+	      else if ( block_sel == 3 ) data_sram3_in <= cpu_req_data << (word_sel * 4);
+	      // Set dirty bit
+	      dirty_bit_wire <= ( tag_sram_out & ( ~(1'b1 << (29 + cpu_req_addr[5:2]) ) ) );
+	      tag_sram_in <= ( dirty_bit_wire | (1'b1 << (29 + cpu_req_addr[5:2]) ) );
+	   end
+	   // Miss - not dirty
+	   if ( tag_sram_out[44:29] == 0 ) begin
+	      // Request main memory transaction
+	      mem_req_val <= 1'b1;
+	      // Proceed when memory is ready
+	      if ( mem_req_rdy ) begin
+	       // DO SOME STUFF!
+	      end
+	   end
+	   // Miss - dirty
+	   else begin
+	      // DO SOME STUFF!
+	   end // else: !if( tag_sram_out[44:29] == 0 )
+	end // if ( cpu_req_valid )
+      
 
 	 
 	      
@@ -165,7 +188,7 @@ module cache #
 			     .A(sram_addr0),
 			     .I(data_sram0_in),
 			     .O(data_sram0_out),
-			     .BYTEMASK()
+			     .BYTEMASK(write_mask)
 			     );
 
    way1_data1 SRAM1RW256x128(.CE(clk),
@@ -175,7 +198,7 @@ module cache #
 			     .A(sram_addr),
 			     .I(data_sram1_in),
 			     .O(data_sram1_out),
-			     .BYTEMASK()
+			     .BYTEMASK(write_mask)
 			     );
 
    way1_data2 SRAM1RW256x128(.CE(clk),
@@ -185,7 +208,7 @@ module cache #
 			     .A(sram_addr),
 			     .I(data_sram2_in),
 			     .O(data_sram2_out),
-			     .BYTEMASK()
+			     .BYTEMASK(write_mask)
 			     );
 
    way1_data3 SRAM1RW256x128(.CE(clk),
@@ -195,10 +218,10 @@ module cache #
 			     .A(sram_addr),
 			     .I(data_sram3_in),
 			     .O(data_sram3_out),
-			     .BYTEMASK()
+			     .BYTEMASK(write_mask)
 			     );
    
-   way1_tag SRAM1RW256x32(.CE(clk),
+   way1_tag SRAM1RW256x46(.CE(clk),
 			  .OEB(ground),
 			  .CSB(ground),
 			  .WEB(write_enable_bar),
