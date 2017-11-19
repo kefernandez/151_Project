@@ -146,6 +146,8 @@ module cache #
       // Write operations
       else
 	if ( cpu_req_valid ) begin
+	   // Set CPU request ready
+	   cpu_req_rdy <= 1'b1;
 	   // Set write mask
 	   write_mask <= cpu_req_write << (word_sel * 4);
 	   // Hit
