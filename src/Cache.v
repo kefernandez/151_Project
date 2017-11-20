@@ -103,7 +103,7 @@ module cache #
 
    // SRAM connections
    wire [`ceilLog2(LINES)-1:0]  sram_addr;
-   reg [25-`ceilLog2(LINES):0] 	tag;
+   wire [25-`ceilLog2(LINES):0] tag;
    reg [31:0] 			tag_sram_out, tag_sram_in, dirty_bit_wire;
    reg [127:0] 			data_sram0_out, data_sram1_out, data_sram2_out, data_sram3_out;
    reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
@@ -120,8 +120,11 @@ module cache #
    assign mem_req_rw = ( 0 | cpu_req_write );
    assign cpu_req_fire = cpu_req_valid & cpu_req_rdy;
    assign mem_req_fire = mem_req_valid & mem_req_rdy;
-   assign hit = ( ( tag == ( cpu_req_addr >> ( 6+`ceilLog2(LINES) ) ) && ( tag_sram_out[31] == 1 ) );
+   assign hit = ( tag == ( cpu_req_addr >> ( 6+`ceilLog2(LINES) ) ) && ( tag_sram_out[31] == 1 ) );
+   assign dirty = ~( tag_sram_out[30:27] == 4'b0000 );
+   assign tag = tag_sram_out[25-`ceilLog2(LINES):0];
 
+   
    assign sram_addr = cpu_req_addr[5+`ceilLog2(LINES):6];
    assign block_sel = cpu_req_addr[5:4];
    assign word_sel = cpu_req_addr[3:2];
@@ -143,17 +146,22 @@ module cache #
    end
 
    always @ (*) begin
-      next_state = IDLE; // default state transition
+      next_state = IDLE; // default state transition and output
+      FSM_done = 0;
       if ( ~hit ) begin
-	 
-      end
-   end
+	 if ( ~dirty ) begin
+	    if ( ~mem_req_rw ) begin
+	       case ( current_state )
+		 IDLE: begin 
+		    mem_req_addr <= {tag, 6'b0};
+		    next_state = STATE0; end
+		 STATE0: begin
+		    mem_req_addr <= {tag, 2'b01, 4'b0};
+		    next_state = STATE1: end
+		  
    
    // Main logic
    always @ (posedge clk) begin
-
-      // Get tag
-      tag <= tag_sram_out[25-`ceilLog2(LINES):0];
 
       // Set ready/valid outputs to zero (default)
       cpu_req_rdy = 1'b0;
