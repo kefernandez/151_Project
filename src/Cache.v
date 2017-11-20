@@ -86,6 +86,7 @@ module cache #
    // Control signal assignment
    ////////////////////////////
 
+   assign mem_req_rw = ( 0 | cpu_req_write );
    assign set_dirty_bit = cpu_req_write;
    assign sram_addr = cpu_req_addr[5+`ceilLog2(LINES):6];
 
@@ -108,7 +109,7 @@ module cache #
       // Get tag
       tag <= tag_sram_out[25-`ceilLog2(LINES):0];
 
-      // Set ready/valid outputs to zero
+      // Set ready/valid outputs to zero - will doing it this way actually work?
       cpu_req_rdy <= 1'b0;
       cpu_resp_valid <= 1'b0;
       mem_req_val <= 1'b0;
