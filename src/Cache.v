@@ -65,6 +65,14 @@ module cache #
   input                       mem_resp_val,
   input [`MEM_DATA_BITS-1:0]  mem_resp_data
 );
+   /////////////////
+   // FSM parameters
+   /////////////////
+   localparam IDLE = 4;
+   localparam STATE0 = 0;
+   localparam STATE1 = 1;
+   localparam STATE2 = 2;
+   localparam STATE3 = 3;
    
    //////////////////
    // Internal wiring
@@ -81,6 +89,29 @@ module cache #
    reg [127:0] 			data_sram0_out, data_sram1_out, data_sram2_out, data_sram3_out;
    reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
    reg [31:0] 			write_mask;
+
+   // FSM connections
+   wire [2:0] 			current_state, next_state; 			
+   
+   //////////////////
+   // Internal wiring
+   //////////////////
+
+   wire 		      set_dirty_bit;
+   wire 		      write_enable_bar, write_enable_bar0, write_enable_bar1, write_enable_bar2, write_enable_bar3;
+   wire [1:0] 		      block_sel, word_sel, byte_sel;
+
+   // SRAM connections
+   wire [`ceilLog2(LINES)-1:0]  sram_addr;
+   reg [25-`ceilLog2(LINES):0] 	tag;
+   reg [31:0] 			tag_sram_out, tag_sram_in, dirty_bit_wire;
+   reg [127:0] 			data_sram0_out, data_sram1_out, data_sram2_out, data_sram3_out;
+   reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
+   reg [31:0] 			write_mask;
+
+   // FSM connections
+   reg [2:0] 			current_state, next_state; 			
+   reg 				FSM_done;   
    
    ////////////////////////////
    // Control signal assignment
@@ -88,11 +119,10 @@ module cache #
 
    assign mem_req_rw = ( 0 | cpu_req_write );
    assign cpu_req_fire = cpu_req_valid & cpu_req_rdy;
-   assign mem_req_fire = mem_req_valid & mem_req_rdy;  
+   assign mem_req_fire = mem_req_valid & mem_req_rdy;
+   assign hit = ( ( tag == ( cpu_req_addr >> ( 6+`ceilLog2(LINES) ) ) && ( tag_sram_out[31] == 1 ) );
 
-   assign set_dirty_bit = cpu_req_write;
    assign sram_addr = cpu_req_addr[5+`ceilLog2(LINES):6];
-
    assign block_sel = cpu_req_addr[5:4];
    assign word_sel = cpu_req_addr[3:2];
    assign byte_sel = cpu_req_addr[1:0];
@@ -107,6 +137,19 @@ module cache #
    // Internal logic
    /////////////////
 
+   // FSM logic
+   always @ (posedge clk) begin
+      current_state <= next_state;
+   end
+
+   always @ (*) begin
+      next_state = IDLE; // default state transition
+      if ( ~hit ) begin
+	 
+      end
+   end
+   
+   // Main logic
    always @ (posedge clk) begin
 
       // Get tag
@@ -123,7 +166,7 @@ module cache #
 	 // Set CPU request ready
 	 cpu_req_rdy = 1'b1;
 	 // Hit
-	 if ( tag == (cpu_req_addr >> (6+`ceilLog2(LINES)) ) && ( tag_sram_out[31] == 1  ) ) begin
+	 if ( hit ) begin
 	    // Route output data to CPU
 	    if ( block_sel == 0 ) cpu_resp_data <= data_sram0_out[word_sel*32 +: 32];
 	    else if ( block_sel == 1 ) cpu_resp_data <= data_sram1_out[word_sel*32 +: 32];
@@ -155,7 +198,7 @@ module cache #
 	   // Set write mask
 	   write_mask <= cpu_req_write << (word_sel * 4);
 	   // Hit
-	   if ( tag == (cpu_req_addr >> (6 + `ceilLog2(LINES)) ) && ( tag_sram_out[31] == 1  ) ) begin
+	   if ( hit ) begin
 	      // Route input data to appropriate SRAM
 	      if  ( block_sel == 0 ) data_sram0_in <= cpu_req_data << (word_sel * 4);
 	      else if ( block_sel == 1 ) data_sram1_in <= cpu_req_data << (word_sel * 4);
