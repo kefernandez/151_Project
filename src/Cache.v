@@ -77,7 +77,7 @@ module cache #
    // SRAM connections
    wire [`ceilLog2(LINES)-1:0]  sram_addr;
    reg [25-`ceilLog2(LINES):0] 	tag;
-   reg [45:0] 			tag_sram_out, tag_sram_in, dirty_bit_wire;
+   reg [31:0] 			tag_sram_out, tag_sram_in, dirty_bit_wire;
    reg [127:0] 			data_sram0_out, data_sram1_out, data_sram2_out, data_sram3_out;
    reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
    reg [31:0] 			write_mask;
@@ -87,6 +87,9 @@ module cache #
    ////////////////////////////
 
    assign mem_req_rw = ( 0 | cpu_req_write );
+   assign cpu_req_fire = cpu_req_valid & cpu_req_rdy;
+   assign mem_req_fire = mem_req_valid & mem_req_rdy;  
+
    assign set_dirty_bit = cpu_req_write;
    assign sram_addr = cpu_req_addr[5+`ceilLog2(LINES):6];
 
@@ -109,16 +112,16 @@ module cache #
       // Get tag
       tag <= tag_sram_out[25-`ceilLog2(LINES):0];
 
-      // Set ready/valid outputs to zero - will doing it this way actually work?
-      cpu_req_rdy <= 1'b0;
-      cpu_resp_valid <= 1'b0;
-      mem_req_val <= 1'b0;
-      mem_req_data_valid <= 1'b0;
+      // Set ready/valid outputs to zero (default)
+      cpu_req_rdy = 1'b0;
+      cpu_resp_valid = 1'b0;
+      mem_req_val = 1'b0;
+      mem_req_data_valid = 1'b0;
       
       // Read operations
       if ( cpu_req_write == 4'b0000 && cpu_req_valid ) begin
 	 // Set CPU request ready
-	 cpu_req_rdy <= 1'b1;
+	 cpu_req_rdy = 1'b1;
 	 // Hit
 	 if ( tag == (cpu_req_addr >> (6+`ceilLog2(LINES)) ) && ( tag_sram_out[31] == 1  ) ) begin
 	    // Route output data to CPU
@@ -127,28 +130,28 @@ module cache #
 	    else if ( block_sel == 2 ) cpu_resp_data <= data_sram2_out[word_sel*32 +: 32];
 	    else if ( block_sel == 3 ) cpu_resp_data <= data_sram3_out[word_sel*32 +: 32];
 	    // Set CPU response valid
-	    cpu_resp_valid <= 1'b1;
+	    cpu_resp_valid = 1'b1;
 	 end
 	 // Miss - not dirty
-	 if ( tag_sram_out[44:29] == 0 ) begin
+	 if ( tag_sram_out[30:27] == 0 ) begin
 	    // Request main memory transaction
-	    mem_req_val <= 1'b1;
+	    mem_req_val = 1'b1;
 	    // Proceed when memory is ready
-	    if ( mem_req_rdy ) begin
-	       // DO SOME STUFF!
+	    if ( mem_req_fire ) begin
+	       
 	    end
 	 end
 	 // Miss - dirty
 	 else begin
 	    // DO SOME STUFF!
-	 end // else: !if( tag_sram_out[30:25] == 0 )
+	 end // else: !if( tag_sram_out[30:27] == 0 )
       end // if ( cpu_req_write == 4'b0000 && cpu_req_valid )
 
       // Write operations
       else
 	if ( cpu_req_valid ) begin
 	   // Set CPU request ready
-	   cpu_req_rdy <= 1'b1;
+	   cpu_req_rdy = 1'b1;
 	   // Set write mask
 	   write_mask <= cpu_req_write << (word_sel * 4);
 	   // Hit
@@ -159,13 +162,13 @@ module cache #
 	      else if ( block_sel == 2 ) data_sram2_in <= cpu_req_data << (word_sel * 4);
 	      else if ( block_sel == 3 ) data_sram3_in <= cpu_req_data << (word_sel * 4);
 	      // Set dirty bit
-	      dirty_bit_wire <= ( tag_sram_out & ( ~(1'b1 << (29 + cpu_req_addr[5:2]) ) ) );
-	      tag_sram_in <= ( dirty_bit_wire | (1'b1 << (29 + cpu_req_addr[5:2]) ) );
+	      dirty_bit_wire <= ( tag_sram_out & ( ~(1'b1 << (27 + block_sel) ) ) );
+	      tag_sram_in <= ( dirty_bit_wire | (1'b1 << (27 + block_sel) ) );
 	   end
 	   // Miss - not dirty
-	   if ( tag_sram_out[44:29] == 0 ) begin
+	   if ( tag_sram_out[30:27] == 0 ) begin
 	      // Request main memory transaction
-	      mem_req_val <= 1'b1;
+	      mem_req_val = 1'b1;
 	      // Proceed when memory is ready
 	      if ( mem_req_rdy ) begin
 	       // DO SOME STUFF!
@@ -174,7 +177,7 @@ module cache #
 	   // Miss - dirty
 	   else begin
 	      // DO SOME STUFF!
-	   end // else: !if( tag_sram_out[44:29] == 0 )
+	   end // else: !if( tag_sram_out[30:27] == 0 )
 	end // if ( cpu_req_valid )
       
 
