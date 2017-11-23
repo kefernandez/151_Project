@@ -85,35 +85,20 @@ module cache #
    // Internal wiring
    //////////////////
 
-   wire 		      write_enable_bar, write_enable_bar0, write_enable_bar1, write_enable_bar2, write_enable_bar3;
-   wire [1:0] 		      block_sel, word_sel, byte_sel;
+   // Parsed byte select values
+   wire [1:0] 		        block_sel, word_sel, byte_sel;
 
    // SRAM connections
    wire [`ceilLog2(LINES)-1:0]  sram_addr;
-   reg [25-`ceilLog2(LINES):0] 	tag;
-   reg [31:0] 			tag_sram_out, tag_sram_in, dirty_bit_wire;
+   reg [25-`ceilLog2(LINES):0] 	tag, load_tag;
+   reg [31:0] 			tag_sram_out, tag_sram_in, dirty_bit_wire, write_mask;
    reg [127:0] 			data_sram0_out, data_sram1_out, data_sram2_out, data_sram3_out;
    reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
-   reg [31:0] 			write_mask;
-
+   wire 		        write_enable_bar, write_enable_bar0, write_enable_bar1, write_enable_bar2, write_enable_bar3;
+   
    // FSM state registers
    reg [3:0] 			current_state, next_state; 			
    
-   //////////////////
-   // Internal wiring
-   //////////////////
-
-   wire 		      write_enable_bar, write_enable_bar0, write_enable_bar1, write_enable_bar2, write_enable_bar3;
-   wire [1:0] 		      block_sel, word_sel, byte_sel;
-
-   // SRAM connections
-   wire [`ceilLog2(LINES)-1:0]  sram_addr;
-   wire [25-`ceilLog2(LINES):0] tag;
-   reg [31:0] 			tag_sram_out, tag_sram_in, dirty_bit_wire;
-   reg [127:0] 			data_sram0_out, data_sram1_out, data_sram2_out, data_sram3_out;
-   reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
-   reg [31:0] 			write_mask;
-
    ////////////////////////////
    // Control signal assignment
    ////////////////////////////
@@ -200,12 +185,67 @@ module cache #
 	     2: data_sram2_in <= cpu_req_data << ( word_sel * 4 );
 	     3: data_sram3_in <= cpu_req_data << ( word_sel * 4 );
 	   endcase // case ( block_sel )
+	   // Set dirty bit
+	   dirty_bit_wire <= ( tag_sram_out & ( ~(1'b1 << (27 + block_sel) ) ) );
+	   tag_sram_in <= ( dirty_bit_wire | (1'b1 << (27 + block_sel) ) );
+	   // Transition back to IDLE
+	   next_state = IDLE;
 	end // case: WRITE
 
 	LOAD0: begin
-	   //
+	   // Get load tag
+	   load_tag <= tag;
+	   // Request main memory transaction, proceed when ready
+	   if ( mem_req_rdy ) begin
+	      mem_req_val = 1'b1;
+	      mem_req_addr <= { load_tag, 6'b0 };
+	      // Transfer data from main memory to cache, transition to next state
+	      if ( mem_resp_val ) begin
+		 data_sram0_in <= mem_resp_data;
+		 next_state = LOAD1;
+	      end
+	   end
+	end // case: LOAD0
+
+	LOAD1: begin
+	   // Request main memory transaction, proceed when ready
+	   if ( mem_req_rdy ) begin
+	      mem_req_val = 1'b1;
+	      mem_req_addr <= { load_tag, 6'b010000 };
+	      // Transfer data from main memory to cache, transition to next state
+	      if ( mem_resp_val ) begin
+		 data_sram1_in <= mem_resp_data;
+		 next_state = LOAD2;
+	      end
+	   end
+	end // case: LOAD1
 	   
-	   
+	LOAD2: begin
+	   // Request main memory transaction, proceed when ready
+	   if ( mem_req_rdy ) begin
+	      mem_req_val = 1'b1;
+	      mem_req_addr <= { load_tag, 6'b100000 };
+	      // Transfer data from main memory to cache, transition to next state
+	      if ( mem_resp_val ) begin
+		 data_sram2_in <= mem_resp_data;
+		 next_state = LOAD3;
+	      end
+	   end
+	end // case: LOAD2   
+	
+	LOAD3: begin
+	   // Request main memory transaction, proceed when ready
+	   if ( mem_req_rdy ) begin
+	      mem_req_val = 1'b1;
+	      mem_req_addr <= { load_tag, 6'b110000 };
+	      // Transfer data from main memory to cache, transition to next state
+	      if ( mem_resp_val ) begin
+		 data_sram3_in <= mem_resp_data;
+		 next_state = LOAD3;
+	      end
+	   end
+	end // case: LOAD3   
+   
    //////////
    // Modules
    //////////
