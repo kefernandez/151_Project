@@ -159,6 +159,8 @@ module cache #
       
       case ( current_state )
 	IDLE: begin
+	   // Set ready bit
+	   cpu_req_rdy = 1'b1;
 	   // Hit - read
 	   if ( hit & mem_req_rw ) next_state = READ;
 	   // Hit - write
@@ -190,9 +192,19 @@ module cache #
 
 	WRITE: begin
 	   // Set write mask, route data to proper SRAM
-	   write_mask <= cpu_req_write << (word_sel*4);
+	   write_mask <= cpu_req_write << ( word_sel * 4 );
+	   // Route input to proper SRAM
 	   case ( block_sel )
-	     0: data_sram0_in <= cpu
+	     0: data_sram0_in <= cpu_req_data << ( word_sel * 4 );
+	     1: data_sram1_in <= cpu_req_data << ( word_sel * 4 );
+	     2: data_sram2_in <= cpu_req_data << ( word_sel * 4 );
+	     3: data_sram3_in <= cpu_req_data << ( word_sel * 4 );
+	   endcase // case ( block_sel )
+	end // case: WRITE
+
+	LOAD0: begin
+	   //
+	   
 	   
    //////////
    // Modules
