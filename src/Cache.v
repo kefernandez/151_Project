@@ -68,17 +68,23 @@ module cache #
    /////////////////
    // FSM parameters
    /////////////////
-   localparam IDLE = 4;
-   localparam STATE0 = 0;
-   localparam STATE1 = 1;
-   localparam STATE2 = 2;
-   localparam STATE3 = 3;
+   localparam IDLE = 0;
+   localparam READ = 1;
+   localparam WRITE = 2;
+   localparam LOAD0 = 3;
+   localparam LOAD1 = 4;
+   localparam LOAD2 = 5;
+   localparam LOAD3 = 6;
+   localparam WRITE_BACK0 = 7;
+   localparam WRITE_BACK1 = 8;
+   localparam WRITE_BACK2 = 9;
+   localparam WRITE_BACK3 = 10;
+		      
    
    //////////////////
    // Internal wiring
    //////////////////
 
-   wire 		      set_dirty_bit;
    wire 		      write_enable_bar, write_enable_bar0, write_enable_bar1, write_enable_bar2, write_enable_bar3;
    wire [1:0] 		      block_sel, word_sel, byte_sel;
 
@@ -90,14 +96,13 @@ module cache #
    reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
    reg [31:0] 			write_mask;
 
-   // FSM connections
-   wire [2:0] 			current_state, next_state; 			
+   // FSM state registers
+   reg [3:0] 			current_state, next_state; 			
    
    //////////////////
    // Internal wiring
    //////////////////
 
-   wire 		      set_dirty_bit;
    wire 		      write_enable_bar, write_enable_bar0, write_enable_bar1, write_enable_bar2, write_enable_bar3;
    wire [1:0] 		      block_sel, word_sel, byte_sel;
 
@@ -109,10 +114,6 @@ module cache #
    reg [127:0] 			data_sram0_in, data_sram1_in, data_sram2_in, data_sram3_in;
    reg [31:0] 			write_mask;
 
-   // FSM connections
-   reg [2:0] 			current_state, next_state; 			
-   reg 				FSM_done;   
-   
    ////////////////////////////
    // Control signal assignment
    ////////////////////////////
@@ -120,16 +121,17 @@ module cache #
    assign mem_req_rw = ( 0 | cpu_req_write );
    assign cpu_req_fire = cpu_req_valid & cpu_req_rdy;
    assign mem_req_fire = mem_req_valid & mem_req_rdy;
-   assign hit = ( tag == ( cpu_req_addr >> ( 6+`ceilLog2(LINES) ) ) && ( tag_sram_out[31] == 1 ) );
+   assign hit = ( tag == ( cpu_req_addr >> ( 6+`ceilLog2(LINES) ) ) && ( tag_sram_out[31] == 1 ) && cpu_req_valid );
    assign dirty = ~( tag_sram_out[30:27] == 4'b0000 );
    assign tag = tag_sram_out[25-`ceilLog2(LINES):0];
 
-   
+   // Address connections
    assign sram_addr = cpu_req_addr[5+`ceilLog2(LINES):6];
    assign block_sel = cpu_req_addr[5:4];
    assign word_sel = cpu_req_addr[3:2];
    assign byte_sel = cpu_req_addr[1:0];
 
+   // SRAM write connections
    assign write_enable_bar = ~(cpu_req_valid & cpu_req_write);
    assign write_enable_bar0 = ~(~write_enable_bar && block_sel == 0);
    assign write_enable_bar1 = ~(~write_enable_bar && block_sel == 1);
@@ -140,135 +142,58 @@ module cache #
    // Internal logic
    /////////////////
 
-   // FSM logic
+   // FSM state transition (positive clock edge)
    always @ (posedge clk) begin
       current_state <= next_state;
    end
 
+   // FSM encoding
    always @ (*) begin
-      next_state = IDLE; // default state transition and output
-      FSM_done = 1'b0;
-      if ( ~hit ) begin
-	 // No dirty bits case
-	 if ( ~dirty ) begin
-	    case ( current_state )
-	      IDLE: begin
-		 // Set address for data block 0
-		 mem_req_addr <= {tag, 6'b0};
-		 // Signal main memory that we are ready for a transaction
-		 mem_req_valid = 1'b1;
-		 // Write data to SRAM0 when it is ready
-		 if ( mem_resp_val ) data_sram0_in <= mem_resp_data;
-		 // Progress to next state
-		 next_state = STATE0; end
-	      STATE0: begin
-		 // Set address for data block 1
-		 mem_req_addr <= {tag, 2'b01, 4'b0};
-		 // Signal main memory that we are ready for a transaction
-		 mem_req_valid = 1'b1;
-		 // Write data to SRAM1 when it is ready
-		 if ( mem_resp_val ) data_sram1_in <= mem_resp_data;
-		 // Progress to next state
-		 next_state = STATE1; end
-	      STATE1: begin
-		 // Set address for data block 2
-		 mem_req_addr <= {tag, 2'b10, 4'b0};
-		 // Signal main memory that we are ready for a transaction
-		 mem_req_valid = 1'b1;
-		 // Write data to SRAM2 when it is ready
-		 if ( mem_resp_val ) data_sram2_in <= mem_resp_data;
-		 // Progress to next state
-		 next_state = STATE2; end
-	      STATE2: begin
-		 // Set address for data block 3
-		 mem_req_addr <= {tag, 2'b11, 4'b0};
-		 // Signal main memory that we are ready for a transaction
-		 mem_req_valid = 1'b1;
-		 // Write data to SRAM3 when it is ready
-		 if ( mem_resp_val ) data_sram3_in <= mem_resp_data;
-		 // Progress to next state
-		 next_state = STATE2; end
-	      STATE3: begin
-		 // Signal transaction completion
-		 FSM_done = 1'b1;
-		 // Return to idle state
-		 next_state = IDLE; end
-	    endcase // case ( current_state )	      	       
-   
-   // Main logic
-   always @ (posedge clk) begin
-
-      // Set ready/valid outputs to zero (default)
+      // Default transition - return to IDLE state
+      next_state = IDLE;
+      // Default outputs - set all to zero
       cpu_req_rdy = 1'b0;
       cpu_resp_valid = 1'b0;
       mem_req_val = 1'b0;
       mem_req_data_valid = 1'b0;
       
-      // Read operations
-      if ( cpu_req_write == 4'b0000 && cpu_req_valid ) begin
-	 // Set CPU request ready
-	 cpu_req_rdy = 1'b1;
-	 // Hit
-	 if ( hit ) begin
-	    // Route output data to CPU
-	    if ( block_sel == 0 ) cpu_resp_data <= data_sram0_out[word_sel*32 +: 32];
-	    else if ( block_sel == 1 ) cpu_resp_data <= data_sram1_out[word_sel*32 +: 32];
-	    else if ( block_sel == 2 ) cpu_resp_data <= data_sram2_out[word_sel*32 +: 32];
-	    else if ( block_sel == 3 ) cpu_resp_data <= data_sram3_out[word_sel*32 +: 32];
-	    // Set CPU response valid
-	    cpu_resp_valid = 1'b1;
-	 end
-	 // Miss - not dirty
-	 if ( tag_sram_out[30:27] == 0 ) begin
-	    // Request main memory transaction
-	    mem_req_val = 1'b1;
-	    // Proceed when memory is ready
-	    if ( mem_req_fire ) begin
-	       
-	    end
-	 end
-	 // Miss - dirty
-	 else begin
-	    // DO SOME STUFF!
-	 end // else: !if( tag_sram_out[30:27] == 0 )
-      end // if ( cpu_req_write == 4'b0000 && cpu_req_valid )
-
-      // Write operations
-      else
-	if ( cpu_req_valid ) begin
-	   // Set CPU request ready
-	   cpu_req_rdy = 1'b1;
-	   // Set write mask
-	   write_mask <= cpu_req_write << (word_sel * 4);
-	   // Hit
-	   if ( hit ) begin
-	      // Route input data to appropriate SRAM
-	      if  ( block_sel == 0 ) data_sram0_in <= cpu_req_data << (word_sel * 4);
-	      else if ( block_sel == 1 ) data_sram1_in <= cpu_req_data << (word_sel * 4);
-	      else if ( block_sel == 2 ) data_sram2_in <= cpu_req_data << (word_sel * 4);
-	      else if ( block_sel == 3 ) data_sram3_in <= cpu_req_data << (word_sel * 4);
-	      // Set dirty bit
-	      dirty_bit_wire <= ( tag_sram_out & ( ~(1'b1 << (27 + block_sel) ) ) );
-	      tag_sram_in <= ( dirty_bit_wire | (1'b1 << (27 + block_sel) ) );
-	   end
+      case ( current_state )
+	IDLE: begin
+	   // Hit - read
+	   if ( hit & mem_req_rw ) next_state = READ;
+	   // Hit - write
+	   if ( hit & ~mem_req_rw ) next_state = WRITE;
 	   // Miss - not dirty
-	   if ( tag_sram_out[30:27] == 0 ) begin
-	      // Request main memory transaction
-	      mem_req_val = 1'b1;
-	      // Proceed when memory is ready
-	      if ( mem_req_rdy ) begin
-	       // DO SOME STUFF!
-	      end
-	   end
-	   // Miss - dirty
-	   else begin
-	      // DO SOME STUFF!
-	   end // else: !if( tag_sram_out[30:27] == 0 )
-	end // if ( cpu_req_valid )
-      
+	   if ( ~hit & ~dirty ) next_state = LOAD0;
+	   // Miss - dirty bit 0 set
+	   if ( ~hit & tag_sram_out[30:27] == 4'bxxx1 ) next_state = WRITE_BACK0;
+	   // Miss - dirty bit 1 set
+	   if ( ~hit & tag_sram_out[30:27] == 4'bxx10 ) next_state = WRITE_BACK1;
+	   // Miss - dirty bit 2 set
+	   if ( ~hit & tag_sram_out[30:27] == 4'bx100 ) next_state = WRITE_BACK2;
+	   // Miss - dirty bit 3 set
+	   if ( ~hit & tag_sram_out[30:27] == 4'b1000 ) next_state = WRITE_BACK3;
+	end // case: IDLE
 
-	 
-	      
+	READ: begin
+	   // Route proper SRAM to output
+	   case ( block_sel )
+	     0: cpu_resp_data <= data_sram0_out[word_sel*32 +: 32];
+	     1: cpu_resp_data <= data_sram1_out[word_sel*32 +: 32];
+	     2: cpu_resp_data <= data_sram2_out[word_sel*32 +: 32];
+	     3: cpu_resp_data <= data_sram3_out[word_sel*32 +: 32];
+	   endcase // case ( block_sel )
+	   // Set response as valid, transition back to IDLE
+	   cpu_resp_valid = 1'b1;
+	   next_state = IDLE;
+	end
+
+	WRITE: begin
+	   // Set write mask, route data to proper SRAM
+	   write_mask <= cpu_req_write << (word_sel*4);
+	   case ( block_sel )
+	     0: data_sram0_in <= cpu
+	   
    //////////
    // Modules
    //////////
