@@ -109,6 +109,7 @@ module cache #
    assign hit = ( tag == ( cpu_req_addr >> ( 6+`ceilLog2(LINES) ) ) && ( tag_sram_out[31] == 1 ) && cpu_req_valid );
    assign dirty = ~( tag_sram_out[30:27] == 4'b0000 );
    assign tag = tag_sram_out[25-`ceilLog2(LINES):0];
+   assign mem_req_data_mask = 16'hFFFF;
 
    // Address connections
    assign sram_addr = cpu_req_addr[5+`ceilLog2(LINES):6];
@@ -238,14 +239,83 @@ module cache #
 	   if ( mem_req_rdy ) begin
 	      mem_req_val = 1'b1;
 	      mem_req_addr <= { load_tag, 6'b110000 };
-	      // Transfer data from main memory to cache, transition to next state
+	      // Transfer data from main memory to cache, write tag with valid bit
 	      if ( mem_resp_val ) begin
 		 data_sram3_in <= mem_resp_data;
-		 next_state = LOAD3;
+		 tag_sram_in <= 32'h8000 + load_tag;
+		 // Determine next state
+		 if ( mem_req_rw ) next_state = WRITE;
+		 else if ( ~mem_req_rw ) next_state = READ;
 	      end
 	   end
 	end // case: LOAD3   
-   
+
+	WRITE_BACK0: begin
+	   // Request main memory transaction, proceed when ready
+	   if ( mem_req_rdy ) begin
+	      mem_req_val = 1'b1;
+	      mem_req_data_valid = 1'b1;
+	      mem_req_addr <= { tag, 6'b0 };
+	      // Transfer data from cache to main memory
+	      if ( mem_req_data_ready ) begin
+		 mem_req_data_bits <= data_sram0_out;
+		 // Determine next state
+		 if ( tag[30:28] == 3'bxx1 ) next_state = WRITE_BACK1;
+		 else if ( tag[30:29] == 2'bx1 ) next_state = WRITE_BACK2;
+		 else if ( tag[30] == 1'b1 ) next_state = WRITE_BACK3;
+		 else next_state = LOAD0;
+	      end
+	   end // if ( mem_req_rdy )
+	end // case: WRITE_BACK0
+
+	WRITE_BACK1: begin
+	   // Request main memory transaction, proceed when ready
+	   if ( mem_req_rdy ) begin
+	      mem_req_val = 1'b1;
+	      mem_req_data_valid = 1'b1;
+	      mem_req_addr <= { tag, 6'b010000 };
+	      // Transfer data from cache to main memory
+	      if ( mem_req_data_ready ) begin
+		 mem_req_data_bits <= data_sram1_out;
+		 // Determine next state
+		 if ( tag[30:29] == 2'bx1 ) next_state = WRITE_BACK2;
+		 else if ( tag[30] == 1'b1 ) next_state = WRITE_BACK3;
+		 else next_state = LOAD0;
+	      end
+	   end // if ( mem_req_rdy )
+	end // case: WRITE_BACK1
+	
+	WRITE_BACK2: begin
+	   // Request main memory transaction, proceed when ready
+	   if ( mem_req_rdy ) begin
+	      mem_req_val = 1'b1;
+	      mem_req_data_valid = 1'b1;
+	      mem_req_addr <= { tag, 6'b100000 };
+	      // Transfer data from cache to main memory
+	      if ( mem_req_data_ready ) begin
+		 mem_req_data_bits <= data_sram2_out;
+		 // Determine next state
+		 if ( tag[30] == 1'b1 ) next_state = WRITE_BACK3;
+		 else next_state = LOAD0;
+	      end
+	   end // if ( mem_req_rdy )
+	end // case: WRITE_BACK2
+
+	WRITE_BACK3: begin
+	   // Request main memory transaction, proceed when ready
+	   if ( mem_req_rdy ) begin
+	      mem_req_val = 1'b1;
+	      mem_req_data_valid = 1'b1;
+	      mem_req_addr <= { tag, 6'b110000 };
+	      // Transfer data from cache to main memory
+	      if ( mem_req_data_ready ) begin
+		 mem_req_data_bits <= data_sram3_out;
+		 // Set next state
+		 next_state = LOAD0;
+	      end
+	   end // if ( mem_req_rdy )
+	end // case: WRITE_BACK3
+	
    //////////
    // Modules
    //////////
