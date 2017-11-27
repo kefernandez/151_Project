@@ -104,9 +104,9 @@ module cache #
    ////////////////////////////
 
    assign mem_req_rw = ( 0 | cpu_req_write );
-   assign cpu_req_fire = cpu_req_valid & cpu_req_rdy;
-   assign mem_req_fire = mem_req_valid & mem_req_rdy;
-   assign hit = ( tag == ( cpu_req_addr >> ( 6+`ceilLog2(LINES) ) ) && ( tag_sram_out[31] == 1 ) && cpu_req_valid );
+//   assign cpu_req_fire = cpu_req_valid & cpu_req_rdy;
+//   assign mem_req_fire = mem_req_val & mem_req_rdy;
+   assign hit = ( tag == ( cpu_req_addr >> ( 6+`ceilLog2(LINES) ) ) && ( tag_sram_out[31] == 1 ) && cpu_req_val );
    assign dirty = ~( tag_sram_out[30:27] == 4'b0000 );
    assign tag = tag_sram_out[25-`ceilLog2(LINES):0];
    assign mem_req_data_mask = 16'hFFFF;
@@ -118,7 +118,7 @@ module cache #
    assign byte_sel = cpu_req_addr[1:0];
 
    // SRAM write connections
-   assign write_enable_bar = ~(cpu_req_valid & cpu_req_write);
+   assign write_enable_bar = ~(cpu_req_val & cpu_req_write);
    assign write_enable_bar0 = ~(~write_enable_bar && block_sel == 0);
    assign write_enable_bar1 = ~(~write_enable_bar && block_sel == 1);
    assign write_enable_bar2 = ~(~write_enable_bar && block_sel == 2);
@@ -139,7 +139,7 @@ module cache #
       next_state = IDLE;
       // Default outputs - set all to zero
       cpu_req_rdy = 1'b0;
-      cpu_resp_valid = 1'b0;
+      cpu_resp_val = 1'b0;
       mem_req_val = 1'b0;
       mem_req_data_valid = 1'b0;
       
@@ -172,7 +172,7 @@ module cache #
 	     3: cpu_resp_data <= data_sram3_out[word_sel*32 +: 32];
 	   endcase // case ( block_sel )
 	   // Set response as valid, transition back to IDLE
-	   cpu_resp_valid = 1'b1;
+	   cpu_resp_val = 1'b1;
 	   next_state = IDLE;
 	end
 
@@ -315,12 +315,14 @@ module cache #
 	      end
 	   end // if ( mem_req_rdy )
 	end // case: WRITE_BACK3
-	
+      endcase // case ( current_state )
+      end // always @ (*)
+   
    //////////
    // Modules
    //////////
 
-   way1_data0 SRAM1RW256x128(.CE(clk),
+   SRAM1RW256x128 way1_data0(.CE(clk),
 			     .OEB(ground),
 			     .CSB(ground),
 			     .WEB(write_enable_bar0),
@@ -330,7 +332,7 @@ module cache #
 			     .BYTEMASK(write_mask)
 			     );
 
-   way1_data1 SRAM1RW256x128(.CE(clk),
+   SRAM1RW256x128 way1_data1(.CE(clk),
 			     .OEB(ground),
 			     .CSB(ground),
 			     .WEB(write_enable_bar1),
@@ -340,7 +342,7 @@ module cache #
 			     .BYTEMASK(write_mask)
 			     );
 
-   way1_data2 SRAM1RW256x128(.CE(clk),
+   SRAM1RW256x128 way1_data2(.CE(clk),
 			     .OEB(ground),
 			     .CSB(ground),
 			     .WEB(write_enable_bar2),
@@ -350,7 +352,7 @@ module cache #
 			     .BYTEMASK(write_mask)
 			     );
 
-   way1_data3 SRAM1RW256x128(.CE(clk),
+   SRAM1RW256x128 way1_data3(.CE(clk),
 			     .OEB(ground),
 			     .CSB(ground),
 			     .WEB(write_enable_bar3),
@@ -360,7 +362,7 @@ module cache #
 			     .BYTEMASK(write_mask)
 			     );
    
-   way1_tag SRAM1RW256x46(.CE(clk),
+   SRAM1RW256x32 way1_tag(.CE(clk),
 			  .OEB(ground),
 			  .CSB(ground),
 			  .WEB(write_enable_bar),
@@ -368,5 +370,5 @@ module cache #
 			  .I(tag_sram_in),
 			  .O(tag_sram_out)
 			  );
-   */
+
 endmodule

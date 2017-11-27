@@ -1,3 +1,8 @@
+Warning : License for product VCSRuntime_Net(725) will expire within 23 days, on: 19-dec-2017.
+
+If you would like to temporarily disable this message, set 
+ the VCS_LIC_EXPIRE_WARNING environment variable to the number of days
+before expiration that you want this message to start (the minimum is 0).
 C64: 
 C65: 
 C66: 
