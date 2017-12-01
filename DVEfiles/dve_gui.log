@@ -1,0 +1,19 @@
+The file 'vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+Error: [DVAP037] 
+Errors while sourcing the file '/home/cc/eecs151/fa17/class/eecs151-aai/project/DVEfiles/session.tcl':
+
+ Line 106: [DVSG007] 
+Signal ' "rocketTestHarness.dut.mem.icache.load_tag"' cannot be found.
+ Line 182: gui_list_select: List item(s) given by "rocketTestHarness.dut.mem.icache.load_tag"  were not found.
+ Line 198: gui_list_set_insertion_bar: Cannot set the insertion bar, "rocketTestHarness.dut.mem.icache.load_tag[22:0]" was not found..
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
+The file '/home/cc/eecs151/fa17/class/eecs151-aai/project/vcs-sim-rtl/output/rv32ui-p-simple.vpd' was opened successfully.
