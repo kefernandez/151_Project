@@ -1,8 +1,17 @@
+<<<<<<< HEAD
 Warning : License for product VCSRuntime_Net(725) will expire within 19 days, on: 19-dec-2017.
+=======
+Warning : License for product VCSRuntime_Net(725) will expire within 18 days, on: 19-dec-2017.
+>>>>>>> 9e1547e844f74145b5c0632db3eb589a8296c481
 
 If you would like to temporarily disable this message, set 
  the VCS_LIC_EXPIRE_WARNING environment variable to the number of days
 before expiration that you want this message to start (the minimum is 0).
+<<<<<<< HEAD
+=======
+MB: rw=0 addr=00000000
+MB: rw=0 addr=00002000
+>>>>>>> 9e1547e844f74145b5c0632db3eb589a8296c481
 C64: 
 MB: rw=0 addr=00002000
 C65: 
@@ -13,6 +22,10 @@ MB: rw=0 addr=00002000
 C69: 
 C70: 
 C71: 
+<<<<<<< HEAD
+=======
+MB: rw=0 addr=00002000
+>>>>>>> 9e1547e844f74145b5c0632db3eb589a8296c481
 C72: 
 MB: rw=0 addr=00002040
 C73: 
@@ -21,6 +34,7 @@ C75:
 C76: 
 MB: rw=0 addr=00002080
 C77: 
+<<<<<<< HEAD
 C78: 
 C79: 
 C80: 
@@ -12427,3 +12441,6 @@ C10000:
 MB: rw=0 addr=000020c0
 C10001: 
 *** FAILED *** (timeout) after 10001 simulation cycles
+=======
+*** PASSED *** () after 77 simulation cycles
+>>>>>>> 9e1547e844f74145b5c0632db3eb589a8296c481
