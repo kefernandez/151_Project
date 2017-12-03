@@ -1,5 +1,5 @@
 module control (input clk,
-		
+		input stall,
 		//////////////
 		// Input ports
 		//////////////
@@ -46,60 +46,66 @@ module control (input clk,
    		reg [3:0] WByteEn_DM;
                 reg [6:0] prev_opcode, prev2_opcode;
                 reg [4:0] rd_prev, rd_2prev;
-		/////////////////
-		// Internal logic
-		/////////////////
 
-                //PC plus 4Mux control
-                assign PCplus4_Mux_ctrl = (last_opcode == 7'b1100111 || last_opcode == 7'b1101111 ) ? 1 : 0;
-   		// Write data mux control
-   		//assign WD_Mux[0] = WD_0;
-   		//assign WD_Mux[1] = WD_1;
-   		// Data cache mux control
-   		//assign DM_Mux[0] = DM_0;
-   		//assign DM_Mux[1] = DM_1;
-   		// Branch mux control
-   		//assign Branch_Mux[0] = Branch_0;
-   		//assign Branch_Mux[1] = Branch_1;
-		// PC mux control
-               
-                assign ALU_result_mux_ctrl = (last_opcode == 7'b1100111) ? 1 : 0;
-		// Register file write enable
-		assign WrEn_RF = ( last_opcode != 7'b1100011 && last_opcode != 7'b0100011 && rd != 5'b0);
-		// CSRW/I instruction mux control
-	
-		// Sign extension 2 control
-		assign SE2_Ctrl = ( last_opcode == 7'b1100011 );
-		// Read byte enable data cache control
-		//assign RByteEn_DM = funct3[1:0];
-		// ALU mux control
-		//assign ALU_Mux[0] = (/* ( opcode == 7'b0010011 && funct3[1:0] == 2'b01*/ ) ||*/ opcode[5:0] == 6'b100011 );
+                reg [6:0] opcode_reg;
+   		reg [2:0] funct3_reg;
+                reg [6:0] prev_opcode_reg, prev2_opcode_reg;
+                reg [4:0] rd_prev_reg, rd_2prev_reg;
+
+                assign PCplus4_Mux_ctrl = (last_opcode == 7'b1100111 || last_opcode == 7'b1101111 ) ? 1 : 0;     
+                assign ALU_result_mux_ctrl = (last_opcode == 7'b1100111) ? 1 : 0;	
+		assign WrEn_RF = ( last_opcode != 7'b1100011 && last_opcode != 7'b0100011 && rd != 5'b0);	
+		assign SE2_Ctrl = ( last_opcode == 7'b1100011 );	
                 assign ALU_Mux[0] = (opcode[5:0] == 6'b100011);
 		assign ALU_Mux[1] = ( opcode == 7'b1100111 || opcode == 7'b0000011 || opcode == 7'b0010011 || opcode[5:0] == 6'b100011 );
 
                 assign JALR_comparator_mux_ctrl = (last_opcode == 7'b1100111) ? 1'b1 : 1'b0;
 
-            
+                always @(negedge clk) begin
+		   opcode_reg <= opcode;
+		   funct3_reg <= funct3;
+		   rd_prev_reg <= rd_prev; 
+		   rd_2prev_reg <= rd_2prev;
+		   prev_opcode_reg <= prev_opcode;
+		   prev2_opcode_reg <= prev2_opcode;
+		end
+
+		   
                 always @(posedge clk) begin
-		   opcode = last_opcode;
-		   funct3 = last_funct3;
-		   //rd <= last_rd;
-		   rd_prev <= rd;
-		   rd_2prev <= rd_prev;
-		   prev_opcode <= last_opcode;
-		   prev2_opcode <= prev_opcode;
+
+		   if(~stall) begin
+		      opcode <= last_opcode;
+		      funct3 <= last_funct3;
+		      rd_prev <= rd;
+		      rd_2prev <= rd_prev;
+		      prev_opcode <= last_opcode;
+		      prev2_opcode <= prev_opcode;
 		   end
+		   
+		   
+		end // always @ (posedge clk)
+
+                always @(posedge stall) begin
+		   opcode <= opcode_reg;
+		   funct3 <= funct3_reg;
+		   rd_prev <= rd_prev_reg; 
+		   rd_2prev <= rd_2prev_reg;
+		   prev_opcode <= prev_opcode_reg;
+		   prev2_opcode <= prev2_opcode_reg;
+		end
    
        		// delay incoming opcode and funct3 blocks to match take_branch
 		always @ (*) begin
+		   
+		   //if(~stall) begin
+		   
+		      if(last_opcode == 7'b1101111 || (last_opcode == 7'b1100011 && take_branch )) PC_Mux <= 2'b01;
+		      else if( last_opcode == 7'b1100111) PC_Mux <= 2'b10;
+		      else PC_Mux <= 2'b00;
 
-		   if(last_opcode == 7'b1101111 || (last_opcode == 7'b1100011 && take_branch )) PC_Mux <= 2'b01;
-		   else if( last_opcode == 7'b1100111) PC_Mux <= 2'b10;
-		   else PC_Mux <= 2'b00;
 
-
-		   if(prev2_opcode == 7'b0000011) write_data_mux <= 1'b1;
-		   else write_data_mux <= 1'b0;
+		      if(prev2_opcode == 7'b0000011) write_data_mux <= 1'b1;
+		      else write_data_mux <= 1'b0;
 		   //if(funct3[1:0] == 2'b00)  
 		   
 		   if(opcode == 7'b1110011 && funct3 == 3'b101 ) CSRW_Mux = 2'b10;
@@ -249,7 +255,8 @@ module control (input clk,
 		   
 		     //******end hazard control************
 			 
-		     
+		   //end
+    
 		   
 		end
 

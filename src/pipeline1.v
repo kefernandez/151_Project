@@ -13,7 +13,8 @@ module pipeline1(
     //pipeline2
     input [31:0] PCplus4_imm_prime_ID,
     output reg [31:0] DM_write, PCplus4_imm_prime_EX,write_data_reg_ID, //PCplus4_imm_EX,
-    
+    //output reg icache_re,		 
+		 
     //csrw and PC pipeline
     input [31:0] PC, csrw_result,
     output reg [31:0] PCprime, PCprime_EX, tohost,	  
@@ -44,6 +45,30 @@ module pipeline1(
    reg WrEn_RF_EX;
    reg [31:0] WAddr_EX;
    reg [1:0]  DM_Mux_EX;
+   reg WrEn_RF_EX_reg;
+   reg [31:0] WAddr_EX_reg;
+   reg [1:0]  DM_Mux_EX_reg;
+  
+   
+   reg [31:0] RF_data1_EX_reg, RF_data2_EX_reg, RAddr2_EX_reg, immediate_branch_store_SE_EX_reg;
+   reg [4:0]  csrwi_imm_EX_reg, WAddr_WB_reg;
+   reg [31:0] ZE_data_EX_reg, immediate_load_SE_EX_reg, JAL_SE_EX_reg, PCplus4_EX_reg;
+   reg [31:0] dcache_addr_prev_reg;
+   reg [31:0] DM_write_reg, PCplus4_imm_prime_EX_reg,write_data_reg_ID_reg;
+   reg [31:0] PCprime_reg, PCprime_EX_reg, tohost_reg;
+   reg PC_Mux_IDplus1_reg, WrEn_RF_WB_reg;
+   reg [1:0]  WD_Mux_WB_reg, RByteEn_DM_WB_reg;
+   reg [3:0]  WByteEn_DM_WB_reg;
+   reg [1:0]  DM_Mux_WB_reg;
+   reg [1:0]  ALU_hazmux2_sel_EX_reg, ALU_hazmux1_sel_EX_reg,Branch_Mux_EX_reg;
+   reg  PCplus4_Mux_ctrl_EX_reg;
+   reg [6:0]  opcode_EX_reg;
+   reg [2:0]  funct_EX_reg, funct_WB_reg;
+   reg add_rshift_type_EX_reg, ALU_result_mux_ctrl_EX_reg;
+   reg [31:0] write_data_reg_ID_prev_reg;
+   
+   
+
 
    always @(posedge clk)begin
 
@@ -69,7 +94,10 @@ module pipeline1(
 	 //DM_ALU_data_EX <= DM_ALU_data_WB;
 	 tohost <= csrw_result;
 	 
-	 if (reset) PCprime <= 32'h2000;
+	 if (reset) begin
+	    PCprime <= 32'h2000;
+	    //icache_re <= 1'b0;
+	 end 
 	 else PCprime <= PC;
 	 
 	 PCprime_EX <= PCprime;
@@ -101,11 +129,129 @@ module pipeline1(
 	 PCplus4_Mux_ctrl_EX <= PCplus4_Mux_ctrl_ID;
 	 
 	 ALU_result_mux_ctrl_EX <= ALU_result_mux_ctrl_ID;
-	 
-      end
-   end // always @ (posedge clk)
+     
+	 //PCprime_reg <= PCprime;
 
-   always@ (negedge reset) PCprime <= 32'h1ffc;
+	 //~~~~~~Storing values for safety
+
+
+      end //if (!stall)
+      
+      
+	 
+
+      //~~~~~~~~~~~if stalling, need to reload values back into the registers
+      /*else if(stall) begin
+	   
+	 
+	
+
+
+	 
+	    
+      end*/
+
+	 
+     
+      
+   end // always @ (posedge clk)
+   
+
+   always @(negedge clk) begin
+      PCprime_reg = PCprime;
+      RF_data1_EX_reg = RF_data1_EX;
+      RF_data2_EX_reg <= RF_data2_EX;
+      RAddr2_EX_reg <= RAddr2_EX;
+      immediate_branch_store_SE_EX_reg <= immediate_branch_store_SE_EX;
+      csrwi_imm_EX_reg <=  csrwi_imm_EX;
+      WAddr_WB_reg <= WAddr_WB;
+      ZE_data_EX_reg <=  ZE_data_EX;
+      immediate_load_SE_EX_reg <= immediate_load_SE_EX;
+      JAL_SE_EX_reg <=  JAL_SE_EX;
+      PCplus4_EX_reg <= PCplus4_EX;
+      dcache_addr_prev_reg <= dcache_addr_prev;
+      DM_write_reg <= DM_write;
+      PCplus4_imm_prime_EX_reg <= PCplus4_imm_prime_EX;
+      write_data_reg_ID_reg <=  write_data_reg_ID;
+      //PCprime_reg <=  PCprime;
+      PCprime_EX_reg <= PCprime_EX;
+      //tohost_reg<= tohost;
+      PC_Mux_IDplus1_reg <= PC_Mux_IDplus1;
+      WrEn_RF_WB_reg<=  WrEn_RF_WB;
+      WD_Mux_WB_reg <= WD_Mux_WB;
+      RByteEn_DM_WB_reg <= RByteEn_DM_WB;
+      WByteEn_DM_WB_reg <=  WByteEn_DM_WB;
+      DM_Mux_WB_reg <=  DM_Mux_WB;
+      ALU_hazmux2_sel_EX_reg <=  ALU_hazmux2_sel_EX;
+      ALU_hazmux1_sel_EX_reg <= ALU_hazmux1_sel_EX;
+      Branch_Mux_EX_reg <= Branch_Mux_EX;
+      PCplus4_Mux_ctrl_EX_reg <=  PCplus4_Mux_ctrl_EX;
+      opcode_EX_reg <= opcode_EX;
+      funct_EX_reg <=  funct_EX;
+      funct_WB_reg <=  funct_WB;
+      add_rshift_type_EX_reg <= add_rshift_type_EX;
+      ALU_result_mux_ctrl_EX_reg <=  ALU_result_mux_ctrl_EX;
+      write_data_reg_ID_prev_reg <=  write_data_reg_ID_prev;
+      WrEn_RF_EX_reg <= WrEn_RF_EX;
+      WAddr_EX_reg <= WAddr_EX;
+      DM_Mux_EX_reg <= DM_Mux_EX;
+   end
+   
+   always@ (negedge reset) begin
+      PCprime <= 32'h1ffc;
+      //icache_re <= 1'b1;
+      end
+
+   always@(negedge stall) begin
+      //if(~clk) PCprime <= PC;
+      
+      
+      end
+
+   always@(posedge stall) begin
+      //PC <= PCprime;
+            
+      PCprime <= PCprime_reg;
+      RF_data1_EX <= RF_data1_EX_reg;
+      RF_data2_EX <= RF_data2_EX_reg;
+      RAddr2_EX <= RAddr2_EX_reg;
+      immediate_branch_store_SE_EX <= immediate_branch_store_SE_EX_reg;
+      csrwi_imm_EX <=  csrwi_imm_EX_reg;
+      WAddr_WB <= WAddr_WB_reg;
+      ZE_data_EX <=  ZE_data_EX_reg;
+      immediate_load_SE_EX <= immediate_load_SE_EX_reg;
+      JAL_SE_EX <=  JAL_SE_EX_reg;
+      PCplus4_EX <= PCplus4_EX_reg;
+      dcache_addr_prev <= dcache_addr_prev_reg;
+      DM_write <= DM_write_reg;
+      PCplus4_imm_prime_EX <= PCplus4_imm_prime_EX_reg;
+      write_data_reg_ID <=  write_data_reg_ID_reg;
+      //PCprime <=  PCprime_reg;
+      PCprime_EX <= PCprime_EX_reg;
+      //tohost<= tohost_reg;
+      PC_Mux_IDplus1 <= PC_Mux_IDplus1_reg;
+      WrEn_RF_WB<=  WrEn_RF_WB_reg;
+      WD_Mux_WB <= WD_Mux_WB_reg;
+      RByteEn_DM_WB <= RByteEn_DM_WB_reg;
+      WByteEn_DM_WB <=  WByteEn_DM_WB_reg;
+      DM_Mux_WB <=  DM_Mux_WB_reg;
+      ALU_hazmux2_sel_EX <=  ALU_hazmux2_sel_EX_reg;
+      ALU_hazmux1_sel_EX <= ALU_hazmux1_sel_EX_reg;
+      Branch_Mux_EX <= Branch_Mux_EX_reg;
+      PCplus4_Mux_ctrl_EX <=  PCplus4_Mux_ctrl_EX_reg;
+      opcode_EX <= opcode_EX_reg;
+      funct_EX <=  funct_EX_reg;
+      funct_WB <=  funct_WB_reg;
+      add_rshift_type_EX <= add_rshift_type_EX_reg;
+      ALU_result_mux_ctrl_EX <=  ALU_result_mux_ctrl_EX_reg;
+      write_data_reg_ID_prev <=  write_data_reg_ID_prev_reg;
+      WrEn_RF_EX <= WrEn_RF_EX_reg;
+      WAddr_EX <= WAddr_EX_reg;
+      DM_Mux_EX <= DM_Mux_EX_reg;
+   end
+      
+      
+   
 endmodule   
       
       

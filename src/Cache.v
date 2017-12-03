@@ -44,7 +44,7 @@ module cache #
   input reset,
 
   input                       cpu_req_val,
-  output reg                      cpu_req_rdy, //cache is ready for cpu memory transaction
+  output reg                     cpu_req_rdy, //cache is ready for cpu memory transaction
   input [WORD_ADDR_BITS-1:0]  cpu_req_addr, //[29:0]
   input [CPU_WIDTH-1:0]       cpu_req_data,
   input [3:0]                 cpu_req_write,
@@ -65,6 +65,8 @@ module cache #
   input [`MEM_DATA_BITS-1:0]  mem_resp_data //data that memory gives to cache [127:0]
 );
 
+   //HIIIIIIIIII
+   
    wire [7:0] cpu_req_cache_addr;
    reg [15:0] cache_byte_mask; //determined by cpu_req_write
    reg  RW_cache0, RW_cache1, RW_cache2, RW_cache3, RW_cache_tag, RW_cache_write; //1 = read, 0 = write
@@ -80,15 +82,18 @@ module cache #
    wire read;
    wire [2:0] IDLE, Read_Mem1, Read_Mem2, Read_Mem3, Read_Mem4, Write_to_Mem2, Write_to_Mem3, Write_to_Mem4;
    wire [31:0] read_data_cache_tag;
+   wire [22:0] cpu_tag_check, cache_tag_check;
+   
 	      
-   reg [2:0]  next_state, current_state;
+   reg [2:0]  next_state, current_state, prev_state;
    reg [2:0] cpu_set_offset_reg;
-   reg [3:0] cpu_word_offset_reg, cpu_req_write_reg;
+   reg [3:0] cpu_word_offset_reg, cpu_req_write_reg, cpu_word_offset_reg_reg, cpu_word_offset_case;
    reg [22:0] cpu_tag_reg;
    reg [7:0] cache_addr_reg, cache_addr;
-   reg [31:0] cpu_req_data_reg;
+   reg [31:0] cpu_req_data_reg, cpu_resp_data_reg;
    reg [2:0] stall;
    reg [29:0] cpu_req_addr_reg;
+   reg 	      reset_lag, test;
    
    assign cpu_req_cache_addr = {5'b0,cpu_req_addr[6:4]};
    assign valid_bit = read_data_cache_tag[31];
@@ -98,6 +103,10 @@ module cache #
    assign cpu_word_offset = cpu_req_addr[3:0];
    assign cpu_tag = cpu_req_addr[29:7];
 
+   assign cpu_tag_check = cpu_tag;
+   assign cache_tag_check =  read_data_cache_tag[25:3];
+			 
+   
    assign IDLE = 3'b000;
    assign Read_Mem1 = 3'b001;
    assign Read_Mem2 = 3'b010;
@@ -106,27 +115,39 @@ module cache #
    assign  Write_to_Mem2 = 3'b101;
    assign  Write_to_Mem3 = 3'b110;
    assign  Write_to_Mem4 = 3'b111;
-   
-   
+
+   //assign cpu_req_rdy = ( (((read_data_cache_tag[25:3] == cpu_tag_reg) && (valid_bit)) || (~cpu_req_val)) && (~reset)); 
 
  
 
    always @(*) begin
       
+      if(~cpu_req_val)
+	begin
+	 cpu_resp_data <= cpu_resp_data;
+	 cpu_req_rdy <= 1'b1;
+	 cpu_resp_val <= 1'b1;
+	 mem_req_val <= 1'b0;
+	 mem_req_rw <= 1'b0;
+	 mem_req_data_valid <= 1'b0;
+	end
 	 
-      if (~reset) begin
+      
+      else if (~reset && cpu_req_val) begin
       case(current_state)
 	
 	IDLE: begin
-
-	   if((read_data_cache_tag[25:3] == cpu_tag_reg[29:7]) && (valid_bit)) //hit!
+	   if(stall == 1'b0) cache_addr <= {5'b0,cpu_set_offset};
+	   else cache_addr <= {5'b0,cpu_set_offset_reg};
+	   
+	   if((read_data_cache_tag[25:3] == cpu_tag_reg) && (valid_bit)) //hit!
 	     begin
+		test <= 1'b1;
 		RW_cache0 = 1'b1;
 		RW_cache1 = 1'b1;
 		RW_cache2 = 1'b1;
-		RW_cache3 = 1'b1;
 		RW_cache_tag = 1'b1;
-
+		RW_cache3 <= 1'b1;
 		
 		cpu_req_rdy = 1'b1;
 		cpu_resp_val = 1'b1;
@@ -137,18 +158,21 @@ module cache #
 		
 		if(cpu_req_write_reg == 4'b0000) //read hit
 		  begin
-		     case(cpu_word_offset_reg[3:2])
-		       2'b00: read_data_cache = read_data_cache0;
-		       2'b01: read_data_cache = read_data_cache1;
-		       2'b10: read_data_cache = read_data_cache2;
-		       2'b11: read_data_cache = read_data_cache3;
+		     if(prev_state == Read_Mem2) cpu_word_offset_case <= cpu_word_offset_reg_reg;
+		     else cpu_word_offset_case <= cpu_word_offset_reg;
+		     
+		     case(cpu_word_offset_case[3:2])
+		       2'b00: read_data_cache <= read_data_cache0;
+		       2'b01: read_data_cache <= read_data_cache1;
+		       2'b10: read_data_cache <= read_data_cache2;
+		       2'b11: read_data_cache <= read_data_cache3;
 		     endcase
 
-		     case(cpu_word_offset_reg[1:0])
-		       2'b00: cpu_resp_data = read_data_cache[31:0];
-		       2'b01: cpu_resp_data = read_data_cache[63:32];
-		       2'b10: cpu_resp_data = read_data_cache[95:64];
-		       2'b11: cpu_resp_data = read_data_cache[127:96];
+		     case(cpu_word_offset_case[1:0])
+		       2'b00: cpu_resp_data <= read_data_cache[31:0];
+		       2'b01: cpu_resp_data <= read_data_cache[63:32];
+		       2'b10: cpu_resp_data <= read_data_cache[95:64];
+		       2'b11: cpu_resp_data <= read_data_cache[127:96];
 		     endcase
 		     
 		  end 
@@ -196,11 +220,17 @@ module cache #
 	     
 	     begin
 		
-		if ( ((read_data_cache_tag[25:3] != cpu_tag_reg[29:7]) && ~(dirty_bit)) || ~(valid_bit)) //no write to mem,read from mem
+		if ( (((read_data_cache_tag[25:3] != cpu_tag_reg[29:7]) && ~(dirty_bit)) || ~(valid_bit))) //no write to mem,read from mem
 		  begin
-		     if (stall != 3'b100)begin
-		     RW_cache0 <= 1'b0;
-		     RW_cache_tag <= 1'b0;
+		     cache_byte_mask = 16'hFFFF;
+		     RW_cache0 <= 1'b1; //
+		     RW_cache_tag <= 1'b1; //
+		     RW_cache1 <= 1'b1;
+		     RW_cache2 <= 1'b1;
+		     RW_cache3 <= 1'b1;
+		     
+		     //if(prev_state != Read_Mem4) RW_cache3 <= 1'b1;
+		     
 		     
 		     cpu_req_rdy = 1'b0;
 		     cpu_resp_val = 1'b0;
@@ -209,14 +239,22 @@ module cache #
 		     mem_req_data_valid = 1'b0;
 		     
 		     write_data_cache_tag <= {1'b1, 5'b0,cpu_req_addr[29:4]};
-		     mem_req_addr = {cpu_tag_reg,cpu_set_offset_reg,2'b00};
-		     write_data_cache <= mem_resp_data;
-		     next_state <= Read_Mem2;
-		     // if (stall= 2'b00)
-		     next_state <= IDLE;
-		     end
 		     
-		     else next_state = Read_Mem2;	     
+		     write_data_cache <= mem_resp_data;
+		     //next_state <= Read_Mem2;
+		     // if (stall= 2'b00)
+		     
+		     if (stall != 3'b100) begin
+			next_state <= IDLE;
+			if(stall == 3'b000)begin
+			   if(reset_lag) mem_req_addr <= {cpu_tag,cpu_set_offset,2'b00};	
+			   else mem_req_addr <= {cpu_tag_reg,cpu_set_offset_reg,2'b00};
+			   end
+		     end
+		     else begin
+			next_state = Read_Mem2;	    
+			//mem_req_addr <= {cpu_tag_reg,cpu_set_offset_reg,2'b01};
+			end
 		  end
 	     		
 		else if( (read_data_cache_tag[25:3] != cpu_tag_reg[29:7]) && (valid_bit) && (dirty_bit)) //need to write to mem
@@ -262,40 +300,80 @@ module cache #
 	end
 	
 	Read_Mem2: begin
-	   if(stall != 3'b011)
+	   write_data_cache <= mem_resp_data;
+	   if(stall == 3'b000) begin
+	      RW_cache0 <= 1'b0;
+	      RW_cache_tag <= 1'b0;
+	   end
+	   if(stall == 3'b001)begin
+	      RW_cache0 <= 1'b1;
+	      RW_cache_tag <= 1'b1;
+	      RW_cache1 <= 1'b0;
+	   end
+	   else if(stall == 3'b010)begin
+	      RW_cache1 <= 1'b1;
+	      RW_cache2 <= 1'b0;
+	   end
+	   else if(stall == 3'b011) begin
+	      RW_cache2 <= 1'b1;
+	      RW_cache3 <= 1'b0;
+	   end
+	   else if(stall == 3'b100) RW_cache3 <= 1'b1;
+
+	   if(stall == 3'b110) 
 	     begin
-		//RW_cache0 <= 1'b1;
-		//RW_cache_tag <= 1'b1;
-		RW_cache1 <= 1'b0;
-		mem_req_addr = {cpu_tag_reg,cpu_set_offset_reg,2'b01};
-		next_state <= Read_Mem2;
+	      next_state <= IDLE;
+	      cpu_req_rdy <= 1'b1;
+	      mem_req_val <= 1'b0;
 	     end
-	   else next_state <= Read_Mem3;
+	   else begin
+	     next_state <= Read_Mem2;
+	   end
+	   
+	   
 	end
 	
 	Read_Mem3: begin
-	   RW_cache0 <= 1'b1;
-	   RW_cache_tag <= 1'b1;
+	   write_data_cache <= mem_resp_data;
+	   //RW_cache0 <= 1'b1;
+	   //RW_cache_tag <= 1'b1;
+	   if(stall == 3'b001)begin
+	      RW_cache1 <= 1'b1;
+	   end
 	   if(stall != 3'b011)begin
 	      
-	   RW_cache1 <= 1'b1;
+	   //RW_cache1 <= 1'b1;
 	   RW_cache2 <= 1'b0;
 	   mem_req_addr = {cpu_tag_reg,cpu_set_offset_reg,2'b10};
 	   next_state = Read_Mem3;
 	      
 	   end
-	   else next_state <= Read_Mem4;
+	   else begin
+	      next_state <= Read_Mem4;
+	      mem_req_addr = {cpu_tag_reg,cpu_set_offset_reg,2'b11};
+	   end
 	   
 	end
 
 	Read_Mem4: begin
-	   if(stall != 3'b011)begin
+	   write_data_cache <= mem_resp_data;
+	   if(stall == 3'b001)begin
 	      RW_cache2 <= 1'b1;
+	   end
+	   else if(stall != 3'b110 && stall != 3'b101)begin
+	      //RW_cache2 <= 1'b1;
 	      RW_cache3 <= 1'b0;
 	      mem_req_addr = {cpu_tag_reg,cpu_set_offset_reg,2'b11};
 	      next_state <= Read_Mem4;
 	   end
-	   else next_state <= IDLE;
+	   else if(stall == 3'b101) RW_cache3 <= 1'b1;
+	   else begin
+	      next_state <= IDLE;
+	      cpu_req_rdy <= 1'b1;
+	      mem_req_val <= 1'b0;
+	      
+	      end
+	
 	end
 
 
@@ -334,7 +412,7 @@ module cache #
       end
    end
    
-      always @(posedge clk) begin
+   always @(posedge clk) begin
       
       if(reset)begin
 	 cpu_req_rdy <= 1'b0;
@@ -343,29 +421,50 @@ module cache #
 	 mem_req_rw <= 1'b0;
 	 mem_req_data_valid <= 1'b0;
 	 stall <= 2'b0;
+	 test <= 1'b0;
+	 cpu_resp_data <= 32'b0;
+	 
+	 
 	 
       end
 	 
       
       else begin
+	 prev_state <= current_state;
 	 current_state <= next_state;
+	 //reset_lag <= 1'b0;
 	 
 	 
-	 if(cpu_req_rdy || (current_state == IDLE && stall ==3'b001))
+	 if(cpu_req_rdy) 
+	    //|| (current_state == IDLE && stall == 3'b001))
 	   begin
+	      if(current_state == IDLE && prev_state == Read_Mem4) stall <= 1'b0;
+	      else if (current_state == IDLE && prev_state == IDLE && (!stall)) stall <= 1'b0;
+	      
 	      cpu_set_offset_reg <= cpu_set_offset;
 	      cpu_word_offset_reg <= cpu_word_offset;
+	      cpu_word_offset_reg_reg <= cpu_word_offset_reg;
 	      cpu_tag_reg <= cpu_tag;
 	      cache_addr_reg <= cache_addr;
 	      cpu_req_write_reg <= cpu_req_write;
 	      cpu_req_data_reg <= cpu_req_data;
 	      cpu_req_addr_reg <= cpu_req_addr;
-	      if(current_state == IDLE) stall = stall +3'b001;
+
+	      
+	      //if(current_state == IDLE) stall = stall +3'b001;
+	      if (current_state == Read_Mem2)begin
+		 if(stall == 3'b110) stall <= 3'b000;
+		 else stall <= stall + 3'b001;
+		 
+	      end
 	      
 	   end
 	 else begin
 	    if(current_state == IDLE)begin
 	       if(stall != 3'b100) stall <= stall + 3'b001;
+	       else stall <= 3'b000; end
+	    else if (current_state == Read_Mem2)begin
+	       if(stall != 3'b110) stall <= stall + 3'b001;
 	       else stall <= 3'b000; end
 	    else begin
 	       if(stall != 3'b011) stall <= stall +3'b001;
@@ -378,9 +477,33 @@ module cache #
       always @(negedge reset) begin
 	 next_state <= IDLE;
 	 stall <= 3'b000;
+	 reset_lag <= 1'b1;
+	
       end
       
-   
+   always @(negedge clk)begin
+      if(~reset) begin
+	 reset_lag <= 1'b0;
+	 if(cpu_req_rdy)begin
+	    cpu_resp_data_reg <= cpu_resp_data;
+	    
+	    /*cpu_set_offset_reg <= cpu_set_offset;
+	    cpu_word_offset_reg <= cpu_word_offset;
+	    cpu_word_offset_reg_reg <= cpu_word_offset_reg;
+	    cpu_tag_reg <= cpu_tag;
+	    cache_addr_reg <= cache_addr;
+	    cpu_req_write_reg <= cpu_req_write;
+	    cpu_req_data_reg <= cpu_req_data;
+	    cpu_req_addr_reg <= cpu_req_addr;*/
+	 end
+	 
+	 
+      end
+   end // always @ (negedge clk)
+
+   always@(negedge cpu_req_rdy)begin
+      cpu_resp_data <= cpu_resp_data_reg;
+      end
      
    SRAM1RW256x128 cache3(
 			 .CE(clk),

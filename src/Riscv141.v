@@ -92,7 +92,8 @@ module Riscv141(
    wire [0:0]  hazard_controls;
 
    assign dcache_we =  WByteEn_DM_EX;
-   assign dcache_re = 1'b1;
+   //assign dcache_re = 1'b1;
+   
    assign  icache_re = 1'b1;
 
    assign data_byte_in = ALU_mux_out;
@@ -284,6 +285,7 @@ module Riscv141(
    //18
    regfile regfile1(.clk(clk),
 		    .reset(reset),
+		    .stall(stall),
 		    .RAddr1_RF(RAddr1_ID), 
 		    .RAddr2_RF(RAddr2_ID), 
 		    .WAddr_RF(WAddr_WB), 
@@ -296,6 +298,7 @@ module Riscv141(
 
    //19
    control control1( .clk(clk),
+		     .stall(stall),
 		     .last_opcode(last_opcode),
 		     .last_funct3(last_funct3), 
 		     .take_branch(take_branch),
@@ -329,7 +332,9 @@ module Riscv141(
     );
     
    //20
-   pipeline1 pipeline(.clk(clk),
+   pipeline1 pipeline(
+		      //.icache_re(icache_re),
+		      .clk(clk),
 		      .reset(reset),
 		      .stall(stall),
 		      .csrwi_imm_ID(csrwi_imm_ID),
@@ -473,7 +478,16 @@ module Riscv141(
 		    .sel(write_data_mux),
 		    .out(data_write)
 			  
-    );  
+    );
+
+   //29
+   mux_2x1_1bit DM_cache_re_Mux(
+		    .in0(1'b0),
+		    .in1(1'b1),
+		    .sel((last_opcode == 7'b0000011)),
+		    .out(dcache_re)
+			  
+    ); 
 			  
    
 endmodule

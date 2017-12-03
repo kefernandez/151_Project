@@ -1,6 +1,6 @@
 module regfile(input clk,
 	       input reset,
-	       
+	       input stall,
 	       //////////////
 	       // Input ports
 	       //////////////
@@ -40,7 +40,9 @@ module regfile(input clk,
 	 end
       end 
       else begin
+	 if(~stall)begin
 	 if (WrEn_RF && WAddr_RF != 0) register_file[WAddr_RF] <= WD_RF;
+	    end
       end
    end	       
 endmodule
